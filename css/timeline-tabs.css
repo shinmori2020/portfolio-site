@@ -1,0 +1,785 @@
+/* 選ばれる理由セクション - 左右分割レイアウト */
+.reasons {
+    padding: 80px 0;
+    position: relative;
+    overflow: visible;
+    margin: 0;
+    min-height: auto;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.reasons::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #00ff88, transparent);
+    animation: shimmer 3s infinite;
+}
+
+.reasons__container {
+    display: flex;
+    gap: 60px;
+    width: 100%;
+}
+
+.reasons__image,
+.reasons__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.reasons__content {
+    width: 100%;
+    text-align: left;
+}
+
+.reasons__content h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+    line-height: 1.3;
+    color: #fff;
+}
+
+.reasons__content p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    color: #d0d0d0;
+}
+
+.reasons__list {
+    list-style: none;
+    margin: 40px 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.reasons__list li {
+    padding: 15px 0;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    color: #d0d0d0;
+    position: relative;
+}
+
+.reasons__list li:hover {
+    transform: translateX(10px);
+    color: #fff;
+    background-color: rgba(0, 255, 136, 0.05);
+    border-radius: 12px;
+    padding: 15px 20px 15px 10px;
+}
+
+.reasons__list li::before {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(135deg, #00ff88, #00cc6a);
+    border-radius: 0;
+    margin-right: 20px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 255, 136, 0.3);
+}
+
+.reasons__list li::after {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 50%;
+    width: 8px;
+    height: 4px;
+    border: 2px solid #fff;
+    border-top: none;
+    border-right: none;
+    transform: translateY(-50%) rotate(-45deg);
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.reasons__list li:hover::after {
+    left: 21px;
+}
+
+.reasons__button {
+    display: inline-block;
+    padding: 18px 40px;
+    background: rgba(0, 255, 136, 0.1);
+    color: white;
+    text-decoration: none;
+    border-radius: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    border: 2px solid rgba(0, 255, 136, 0.3);
+    backdrop-filter: blur(10px);
+    margin-top: 40px;
+}
+
+.reasons__button:hover {
+    background: rgba(0, 255, 136, 0.2);
+    border-color: #00ff88;
+    transform: translateY(-5px);
+}
+
+/* 画像エリア */
+.reasons__image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+}
+
+.reasons__image img {
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    border: 2px solid rgba(0, 255, 136, 0.3);
+    transition: all 0.3s ease;
+}
+
+.reasons__image img:hover {
+    border-color: #00ff88;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 255, 136, 0.2);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .reasons {
+        flex-direction: column;
+        padding: 60px 0;
+    }
+    
+    .reasons__container {
+        flex-direction: column;
+        gap: 40px;
+        padding: 0 30px;
+    }
+    
+    .reasons__image {
+        order: -1;
+    }
+    
+    .reasons__content h2 {
+        font-size: 2rem;
+        text-align: center;
+    }
+    
+    .reasons__content p {
+        text-align: center;
+    }
+}
+
+/* サービスガイドセクション - 全幅レイアウト */
+.service-guide {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    position: relative;
+    overflow: visible;
+    margin: 60px 0;
+}
+
+.service-guide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #00ff88, transparent);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+}
+
+.service-guide__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    min-height: auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.service-guide__container h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 50px;
+    line-height: 1.3;
+    color: #fff;
+    text-align: center;
+}
+
+/* サービスガイド専用のタブスタイル */
+.service-guide__tabs {
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid rgba(0, 255, 136, 0.3);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.service-guide__tab-button {
+    flex: 1;
+    width: calc(100% / 3);
+    padding: 18px 32px;
+    border: none;
+    background: transparent;
+    color: #a0a0a0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    position: relative;
+    text-align: center;
+}
+
+.service-guide__tab-button.service-guide__tab-button--active,
+.service-guide__tab-button:hover {
+    color: #00ff88;
+    border-bottom-color: #00ff88;
+    background: rgba(0, 255, 136, 0.05);
+}
+
+.service-guide__tab-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: left;
+    min-height: 400px;
+    display: none;
+    animation: tabFadeIn 0.4s ease;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px 30px;
+    border-radius: 0;
+}
+
+.service-guide__tab-content.service-guide__tab-content--active {
+    display: block;
+}
+
+.service-guide .timeline-cta-button {
+    display: inline-block;
+    padding: 18px 40px;
+    background: rgba(0, 255, 136, 0.1);
+    color: white;
+    text-decoration: none;
+    border-radius: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    border: 2px solid rgba(0, 255, 136, 0.3);
+    backdrop-filter: blur(10px);
+    margin-top: 40px;
+}
+
+.service-guide .timeline-cta-button:hover {
+    background: rgba(0, 255, 136, 0.2);
+    border-color: #00ff88;
+    transform: translateY(-5px);
+}
+
+/* サービスガイドのレスポンシブ対応 */
+@media (max-width: 1024px) {
+    .service-guide__container {
+        max-width: 90%;
+        padding: 0 20px;
+    }
+    
+    .service-guide__container h2 {
+        font-size: 2rem;
+    }
+    
+    .service-guide__tab-content {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .service-guide {
+        padding: 60px 0;
+    }
+    
+    .service-guide__container h2 {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+    
+    .service-guide__tabs {
+        flex-wrap: wrap;
+        gap: 5px;
+        max-width: 100%;
+    }
+    
+    .service-guide__tab-button {
+        padding: 14px 24px;
+        font-size: 1rem;
+        width: calc(100% / 3);
+    }
+    
+    .service-guide__tab-content {
+        min-height: 300px;
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .service-guide {
+        padding: 40px 0;
+    }
+    
+    .service-guide__container h2 {
+        font-size: 1.6rem;
+    }
+    
+    .service-guide__tab-button {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+        width: calc(100% / 3);
+    }
+    
+    .service-guide .timeline-cta-button {
+        padding: 16px 32px;
+        font-size: 1rem;
+    }
+}
+
+
+
+@keyframes shimmer {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+}
+
+.timeline-section-content h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 40px;
+    line-height: 1.3;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.company-timeline {
+    position: relative;
+    padding-left: 50px;
+    margin-bottom: 40px;
+}
+
+.company-timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, #00ff88, rgba(0, 255, 136, 0.3));
+    border-radius: 0;
+}
+
+.company-timeline-item {
+    position: relative;
+    margin-bottom: 50px;
+    padding-left: 50px;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.company-timeline-item.timeline-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.company-timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -36px;
+    /* top: -5px; */
+    width: 15px;
+    height: 15px;
+    background: #00ff88;
+    border-radius: 0;
+    border: 2px solid rgba(0, 255, 136, 0.3);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+.company-timeline-year {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    background: rgba(0, 255, 136, 0.1);
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 0;
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    backdrop-filter: blur(10px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.company-timeline-text {
+    opacity: 0.95;
+    line-height: 1.7;
+    font-size: 1.1rem;
+}
+
+.timeline-cta-button {
+    display: inline-block;
+    padding: 18px 40px;
+    background: rgba(0, 255, 136, 0.1);
+    color: white;
+    text-decoration: none;
+    border-radius: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    border: 2px solid rgba(0, 255, 136, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+
+/* Right Side - Tab Section - testimonialsスタイルに合わせる */
+.timeline-right-side {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.timeline-right-side::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #00ff88, transparent);
+    animation: shimmer 3s infinite;
+}
+
+.timeline-right-side h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+    line-height: 1.3;
+    color: #fff;
+}
+
+.service-content-tabs {
+    display: flex;
+    margin-bottom: 40px;
+    border-bottom: 2px solid rgba(0, 255, 136, 0.3);
+    overflow-x: auto;
+}
+
+.service-tab-button {
+    flex: 1;
+    padding: 16px 28px;
+    border: none;
+    background: transparent;
+    color: #a0a0a0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    position: relative;
+    text-align: center;
+}
+
+.service-tab-button.service-guide__tab-button--active,
+.service-tab-button:hover {
+    color: #00ff88;
+    border-bottom-color: #00ff88;
+    background: rgba(0, 255, 136, 0.05);
+}
+
+.service-tab-button::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #00ff88;
+    transform: scaleX(0);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.service-tab-button.service-guide__tab-button--active::after {
+    transform: scaleX(1);
+}
+
+.service-guide__tab-content {
+    display: none;
+    animation: tabFadeIn 0.4s ease;
+    min-height: 400px;
+}
+
+.service-guide__tab-content.service-guide__tab-content--active {
+    display: block;
+}
+
+@keyframes tabFadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+.service-guide__tab-content h3 {
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.service-guide__tab-content p {
+    color: #d0d0d0;
+    line-height: 1.8;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+}
+
+.service-guide__tab-content ol,
+.service-guide__tab-content ul {
+    padding-left: 0;
+    list-style: none;
+    line-height: 2;
+    color: #d0d0d0;
+}
+
+.service-guide__tab-content ul {
+    list-style: none;
+}
+
+.service-guide__tab-content .support-list li::before {
+    display: none;
+}
+
+.service-guide__tab-content ol li,
+.service-guide__tab-content ul li {
+    margin-bottom: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-left: 20px;
+}
+
+.service-guide__tab-content ol li::before,
+.service-guide__tab-content ul li::before {
+    content: '・';
+    position: absolute;
+    left: 0;
+    color: #00ff88;
+    font-weight: bold;
+}
+
+.service-guide__tab-content ol li:hover,
+.service-guide__tab-content ul li:hover {
+    color: #fff;
+    transform: translateX(5px);
+}
+
+.service-guide__price-card {
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 0;
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+}
+
+.service-guide__price-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(0, 255, 136, 0.8);
+    transform: translateY(-5px);
+}
+
+.service-guide__price-card:active {
+    transform: scale(0.98);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.service-guide__price-card strong {
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.service-guide__price-card small {
+    color: #a0a0a0;
+    display: block;
+    margin-top: 5px;
+    font-size: 0.9rem;
+}
+
+.timeline-right-side .timeline-cta-button {
+    background: rgba(0, 255, 136, 0.1);
+    color: white;
+    border: 2px solid rgba(0, 255, 136, 0.3);
+    border-radius: 0;
+    margin-top: 30px;
+    align-self: flex-start;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+}
+
+.timeline-right-side .timeline-cta-button:hover {
+    background: rgba(0, 255, 136, 0.2);
+    border-color: #00ff88;
+    transform: translateY(-5px);
+}
+
+.support-list {
+    list-style: none !important;
+    padding: 0 !important;
+    margin-top: 25px;
+}
+
+.support-list li {
+    margin: 20px 0 !important;
+    padding: 15px !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-radius: 0 !important;
+    border: 1px solid rgba(0, 255, 136, 0.3) !important;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    backdrop-filter: blur(10px) !important;
+    list-style: none !important;
+}
+
+.support-list li:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(0, 255, 136, 0.8) !important;
+    transform: translateY(-2px) !important;
+}
+
+.support-list li strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.support-list li small {
+    color: #a0a0a0;
+    font-size: 0.9rem;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 1024px) {
+    .timeline-left-side,
+    .timeline-right-side {
+        padding: 60px 40px;
+    }
+    
+    .timeline-section-content h2,
+    .timeline-right-side h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .timeline-split-section {
+        flex-direction: column;
+        min-height: auto;
+    }
+    
+    .timeline-left-side,
+    .timeline-right-side {
+        padding: 60px 30px;
+    }
+    
+    .timeline-section-content h2,
+    .timeline-right-side h2 {
+        font-size: 1.8rem;
+    }
+    
+    .company-timeline {
+        padding-left: 40px;
+    }
+    
+    .company-timeline-item {
+        padding-left: 40px;
+    }
+    
+    .company-timeline-item::before {
+        left: -28px;
+    }
+    
+    .service-content-tabs {
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    
+    .service-tab-button {
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+    
+    .service-guide__tab-content {
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .timeline-left-side,
+    .timeline-right-side {
+        padding: 40px 20px;
+    }
+    
+    .timeline-section-content h2,
+    .timeline-right-side h2 {
+        font-size: 1.6rem;
+    }
+    
+    .company-timeline-year {
+        font-size: 1.5rem;
+    }
+    
+    .company-timeline-text {
+        font-size: 1rem;
+    }
+    
+    .service-tab-button {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .timeline-cta-button {
+        padding: 16px 32px;
+        font-size: 1rem;
+    }
+}

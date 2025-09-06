@@ -1,0 +1,526 @@
+/* Contact Form Styles */
+
+.contact {
+    max-width: 1200px;
+    margin: 80px auto 0;
+    padding: 40px 20px;
+}
+
+.contact__title {
+    text-align: center;
+    color: #fff;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.contact__description {
+    text-align: center;
+    color: #ccc;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 50px;
+}
+
+.contact__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.contact__card {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.08) 100%);
+    border: 1px solid #333;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.contact__form-container {
+    padding: 40px;
+}
+
+.contact__form-group {
+    background: rgba(255, 255, 255, 0.02);
+    padding: 25px;
+    margin-bottom: 20px;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+/* Lower z-index for form groups when dropdown is open */
+.contact__form-container.dropdown-open .contact__form-group:not(.contact__form-group--dropdown) {
+    z-index: 0;
+}
+
+.contact__form-group:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Disable hover effects when dropdown is open */
+.contact__select-wrapper.dropdown-open ~ .contact__form-group:hover {
+    transform: none;
+    box-shadow: none;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.contact__form-container.dropdown-open .contact__form-group:hover {
+    transform: none;
+    box-shadow: none;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.contact__form-group:focus-within {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #333;
+}
+
+.contact__form-group::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: transparent;
+    transition: background 0.3s ease;
+}
+
+.contact__form-group:focus-within::before {
+    background: #00ff88;
+}
+
+.contact__label {
+    display: block;
+    margin-bottom: 12px;
+    font-weight: 600;
+    color: #fff;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    transition: all 0.3s ease;
+}
+
+.contact__required {
+    color: #00ff88;
+}
+
+.contact__input, .contact__textarea, .contact__select {
+    width: 100%;
+    padding: 16px 0;
+    border: none;
+    border-bottom: 2px solid #333;
+    font-size: 16px;
+    background: transparent;
+    transition: all 0.3s ease;
+    color: #fff;
+    font-family: inherit;
+}
+
+.contact__input:focus, .contact__textarea:focus, .contact__select:focus {
+    outline: none;
+    border-bottom-color: #333;
+    color: #fff;
+}
+
+.contact__input::placeholder, .contact__textarea::placeholder {
+    color: #666;
+    font-style: italic;
+}
+
+.contact__textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.6;
+}
+
+.contact__select {
+    cursor: pointer;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23fff" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg>');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 20px;
+    appearance: none;
+}
+
+/* Custom Select Styles */
+.contact__select-wrapper {
+    position: relative;
+    width: 100%;
+    isolation: isolate;
+    z-index: 1000;
+}
+
+.contact__select-button {
+    width: 100%;
+    padding: 16px 0;
+    border: none;
+    border-bottom: 2px solid #333;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.contact__select-button:focus,
+.contact__select-button.active {
+    outline: none;
+    border-bottom-color: #333;
+}
+
+.contact__select-text {
+    flex: 1;
+    text-align: left;
+    color: #666;
+}
+
+.contact__select-text.selected {
+    color: #fff;
+}
+
+.contact__select-arrow {
+    color: #fff;
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
+
+.contact__select-button.active .contact__select-arrow {
+    transform: rotate(180deg);
+}
+
+.contact__select-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #0a0a0a;
+    border: 1px solid #333;
+    border-top: none;
+    max-height: 0;
+    overflow: hidden;
+    z-index: 99999;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+    user-select: none;
+}
+
+.contact__select-dropdown.open {
+    max-height: 300px;
+    overflow-y: hidden;
+    pointer-events: auto;
+}
+
+/* Custom scrollbar styles (hidden) */
+.contact__select-dropdown::-webkit-scrollbar {
+    display: none;
+}
+
+.contact__select-dropdown {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.contact__option {
+    padding: 16px 20px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #333;
+    position: relative;
+    background: #0a0a0a;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.contact__option:last-child {
+    border-bottom: none;
+}
+
+.contact__option:hover {
+    background: rgba(255, 255, 255, 0.1);
+    padding-left: 24px;
+    z-index: 10000;
+}
+
+.contact__option:active {
+    background: rgba(0, 255, 136, 0.1);
+}
+
+/* Radio Button Styles */
+.contact__radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 16px;
+    margin-top: 8px;
+}
+
+.contact__radio-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    padding: 6px 8px;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+
+.contact__radio-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.contact__radio {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #333;
+    border-radius: 50%;
+    margin-right: 8px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: transparent;
+    flex-shrink: 0;
+}
+
+.contact__radio:focus {
+    outline: none;
+    border-color: #00ff88;
+    box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.2);
+}
+
+.contact__radio:checked {
+    border-color: #00ff88;
+    background: #0a0a0a;
+}
+
+.contact__radio:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #00ff88;
+}
+
+.contact__radio-label {
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+    user-select: none;
+}
+
+.contact__radio-item:hover .contact__radio-label {
+    color: #00ff88;
+}
+
+.contact__radio:checked + .contact__radio-label {
+    color: #00ff88;
+    font-weight: 500;
+}
+
+/* Focus and validation for radio group */
+.contact__form-group:has(.contact__radio:focus) {
+    border-color: #00ff88;
+}
+
+.contact__form-group:has(.contact__radio:focus)::before {
+    background: #00ff88;
+}
+
+/* Responsive design for radio buttons */
+@media (max-width: 768px) {
+    .contact__radio-group {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .contact__radio-item {
+        padding: 12px 0;
+    }
+    
+    .contact__radio-label {
+        font-size: 16px;
+    }
+}
+
+.contact__button {
+    background: #6c757d;
+    color: #fff;
+    border: 1px solid #555;
+    padding: 18px 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.contact__button:hover {
+    background: #00ff88;
+    color: #000;
+    border-color: #00ff88;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 255, 136, 0.3);
+}
+
+.contact__button:active {
+    transform: translateY(-1px);
+}
+
+.contact__message {
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    font-weight: 500;
+    display: none;
+    text-align: center;
+    animation: slideIn 0.3s ease-out;
+    border: 1px solid #333;
+}
+
+.contact__message--success {
+    background: rgba(0, 255, 136, 0.1);
+    color: #00ff88;
+    border-color: #00ff88;
+}
+
+.contact__message--error {
+    background: rgba(255, 0, 0, 0.1);
+    color: #ff4444;
+    border-color: #ff4444;
+}
+
+.contact__privacy-note {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid #333;
+    border-left: 4px solid #00ff88;
+}
+
+.contact__privacy-note p {
+    color: #ccc;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.contact__privacy-note a {
+    color: #00ff88;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.contact__privacy-note a:hover {
+    text-decoration: underline;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .contact {
+        padding: 40px 10px;
+    }
+    
+    .contact__container {
+        max-width: 100%;
+    }
+    
+    .contact__title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact__title {
+        font-size: 1.8rem;
+    }
+    
+    .contact__description {
+        font-size: 1rem;
+    }
+    
+    .contact__form-container {
+        padding: 25px 20px;
+    }
+    
+    .contact__form-group {
+        padding: 18px;
+    }
+}
+
+/* Focus and validation styles */
+.contact__form-group:focus-within .contact__label {
+    color: #fff;
+    transform: scale(1.02);
+}
+
+.contact__input:invalid:not(:placeholder-shown),
+.contact__textarea:invalid:not(:placeholder-shown) {
+    border-bottom-color: #ff4444;
+}
+
+.contact__input:valid:not(:placeholder-shown),
+.contact__textarea:valid:not(:placeholder-shown) {
+    border-bottom-color: #333;
+}
+
+@keyframes focusGlow {
+    0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+}
+
+.contact__form-group:focus-within {
+    animation: focusGlow 0.6s ease-out;
+}
+
+/* Character counter */
+.contact__char-counter {
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    font-size: 0.8rem;
+    color: #666;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 4px 8px;
+    transition: color 0.3s ease;
+    border: 1px solid #333;
+}
+
+/* Progress bar */
+.contact__progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #00ff88, #00ff88);
+    transition: width 0.3s ease;
+    z-index: 1000;
+}

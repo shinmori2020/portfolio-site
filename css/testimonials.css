@@ -1,0 +1,388 @@
+/* お客様の声セクション - カルーセル形式 */
+.testimonials {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonials::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #00ff88, transparent);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+}
+
+.testimonials__header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.testimonials__header h2 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.testimonials__header p {
+    color: #a0a0a0;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* カルーセルレイアウト */
+.testimonials__container {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Swiper用に削除 - .carousel-container */
+.testimonials__swiper {
+    position: relative;
+    overflow: hidden;
+    padding: 20px 0;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+}
+
+/* Swiper用に更新 - .carousel-track → .swiper-wrapper */
+.swiper-wrapper {
+    padding: 0 20px;
+    /* display: flex; gap; transition; will-change は Swiper が自動管理 */
+}
+
+/* Swiper用に更新 - .carousel-slide → .swiper-slide */
+.swiper-slide {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0;
+    padding: 40px 30px;
+    position: relative;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    /* flex は Swiper が自動管理 */
+    height: auto;
+    min-height: 320px; /* 最小高さを設定 */
+}
+
+.swiper-slide:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(0, 255, 136, 0.8);
+    transform: translateY(-5px);
+}
+
+.testimonials__card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.rating {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 20px;
+}
+
+.star {
+    color: #ffd700;
+    font-size: 18px;
+    transition: transform 0.2s ease;
+}
+
+.swiper-slide:hover .star {
+    transform: scale(1.1);
+}
+
+.testimonials__quote {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #d0d0d0;
+    font-style: italic;
+    margin-bottom: 30px;
+    flex-grow: 1;
+    position: relative;
+    padding: 0 20px;
+    min-height: 220px; /* 引用文の最小高さを設定 */
+    display: flex;
+    align-items: flex-start; /* 上詰めで配置 */
+}
+
+.testimonials__quote::before,
+.testimonials__quote::after {
+    content: '"';
+    position: absolute;
+    font-size: 3rem;
+    color: rgba(0, 255, 136, 0.15);
+    font-family: Georgia, serif;
+    font-weight: bold;
+}
+
+.testimonials__quote::before {
+    top: -10px;
+    left: -5px;
+}
+
+.testimonials__quote::after {
+    bottom: -30px;
+    right: -5px;
+    transform: rotate(180deg);
+}
+
+.testimonials__customer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.testimonials__avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00ff88, #00cc6a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    font-weight: 700;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+}
+
+.testimonials__details {
+    flex-grow: 1;
+}
+
+.testimonials__details h4 {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.testimonials__details p {
+    color: #a0a0a0;
+    font-size: 0.9rem;
+}
+
+/* Swiperナビゲーションコントロール */
+.testimonials__swiper .swiper-button-next,
+.testimonials__swiper .swiper-button-prev {
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    margin-top: 0;
+    width: 50px;
+    height: 50px;
+    border: 2px solid rgba(0, 255, 136, 0.3);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    color: #00ff88;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+}
+
+.testimonials__swiper .swiper-button-next {
+    right: 20px;
+}
+
+.testimonials__swiper .swiper-button-prev {
+    left: 20px;
+}
+
+.testimonials__swiper .swiper-button-next:after,
+.testimonials__swiper .swiper-button-prev:after {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* 既存の.carousel-btnスタイルをSwiperボタン用に移行済み */
+
+.testimonials__swiper .swiper-button-next:hover,
+.testimonials__swiper .swiper-button-prev:hover {
+    background: rgba(0, 255, 136, 0.1);
+    border-color: #00ff88;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+.testimonials__swiper .swiper-button-next:active,
+.testimonials__swiper .swiper-button-prev:active {
+    transform: scale(0.95);
+}
+
+/* Swiperページネーション */
+.testimonials__swiper .swiper-pagination {
+    position: relative;
+    margin-top: 30px;
+    bottom: auto;
+}
+
+.testimonials__swiper .swiper-pagination .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    opacity: 1;
+    margin: 0 6px;
+    transition: all 0.3s ease;
+}
+
+/* 旧.indicatorスタイルはswiper-pagination-bulletに移行済み */
+
+.testimonials__swiper .swiper-pagination .swiper-pagination-bullet-active {
+    background: #00ff88;
+    transform: scale(1.3);
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+}
+
+.testimonials__swiper .swiper-pagination .swiper-pagination-bullet:hover {
+    background: rgba(0, 255, 136, 0.5);
+    transform: scale(1.2);
+}
+
+/* レスポンシブ: デスクトップ (5枚表示) - Swiperの breakpoints で管理 */
+@media (min-width: 960px) {
+    /* Swiperが自動で幅を計算 */
+}
+
+/* レスポンシブ: タブレット (3枚表示) - Swiperの breakpoints で管理 */
+@media (min-width: 600px) and (max-width: 959px) {
+    .testimonials__header h2 {
+        font-size: 2rem;
+    }
+    
+    .testimonials__quote {
+        font-size: 0.95rem;
+        min-height: 180px; /* タブレットサイズに調整 */
+    }
+}
+
+/* レスポンシブ: モバイル (1枚表示) - Swiperの breakpoints で管理 */
+@media (max-width: 599px) {
+    .testimonials {
+        padding: 60px 0;
+    }
+    
+    .testimonials__header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .testimonials__header p {
+        font-size: 1rem;
+    }
+    
+    .testimonials__quote {
+        font-size: 0.9rem;
+        padding: 0 10px;
+        min-height: 160px; /* モバイルサイズに調整 */
+    }
+    
+    .testimonials__quote::before,
+    .testimonials__quote::after {
+        font-size: 2rem;
+    }
+    
+    .testimonials__avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .testimonials__details h4 {
+        font-size: 1rem;
+    }
+    
+    .testimonials__details p {
+        font-size: 0.85rem;
+    }
+    
+    .testimonials__swiper .swiper-button-next,
+    .testimonials__swiper .swiper-button-prev {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+    
+    .testimonials__swiper .swiper-button-next:after,
+    .testimonials__swiper .swiper-button-prev:after {
+        font-size: 14px;
+    }
+}
+
+/* アニメーション */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.swiper-slide {
+    animation: fadeInUp 0.6s ease-out;
+    animation-fill-mode: both;
+}
+
+.swiper-slide:nth-child(1) { animation-delay: 0.1s; }
+.swiper-slide:nth-child(2) { animation-delay: 0.2s; }
+.swiper-slide:nth-child(3) { animation-delay: 0.3s; }
+.swiper-slide:nth-child(4) { animation-delay: 0.4s; }
+.swiper-slide:nth-child(5) { animation-delay: 0.5s; }
+
+/* アクセシビリティ */
+.testimonials__swiper .swiper-button-next:focus,
+.testimonials__swiper .swiper-button-prev:focus,
+.testimonials__swiper .swiper-pagination .swiper-pagination-bullet:focus {
+    outline: 2px solid #00ff88;
+    outline-offset: 3px;
+}
+
+/* スクリーンリーダー用 */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* タッチデバイス最適化 */
+@media (hover: none) {
+    .swiper-slide {
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+    }
+}

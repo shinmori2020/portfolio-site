@@ -1,0 +1,203 @@
+/* ===== HERO SECTION - MAIN VISUAL ===== */
+
+/* Hero Container */
+.hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 70px 0 0 0; /* Account for fixed header */
+}
+
+.hero__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+}
+
+/* Left Side: Text Content */
+.hero__content {
+    z-index: 2;
+    position: relative;
+}
+
+.hero__subtitle {
+    font-size: 1.2rem;
+    color: #888;
+    margin: 0 0 16px 0;
+    font-weight: 400;
+}
+
+.hero__heading {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.1;
+    margin: 0 0 24px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero__typing {
+    font-size: 1.5rem;
+    color: #fff;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    align-items: center;
+    height: 2em;
+}
+
+/* Typing Cursor */
+.hero__cursor {
+    color: #fff;
+    animation: blink 1s infinite;
+    font-weight: 100;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Right Side: Geometric Shapes */
+.hero__shapes {
+    position: relative;
+    height: 500px;
+    z-index: 1;
+}
+
+.hero__shape {
+    position: absolute;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: transparent;
+}
+
+/* Shape 1: 220x220px */
+.hero__shape--1 {
+    width: 220px;
+    height: 220px;
+    top: 15%;
+    right: 10%;
+    animation: float1 6s ease-in-out infinite;
+}
+
+/* Shape 2: 280x280px */
+.hero__shape--2 {
+    width: 280px;
+    height: 280px;
+    top: 65%;
+    right: 50%;
+    animation: float2 6s ease-in-out infinite 2s;
+}
+
+/* Shape 3: 180x180px */
+.hero__shape--3 {
+    width: 180px;
+    height: 180px;
+    top: 5%;
+    right: 70%;
+    animation: float3 6s ease-in-out infinite 4s;
+}
+
+/* Floating Animations */
+@keyframes float1 {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(180deg);
+    }
+}
+
+@keyframes float2 {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(180deg);
+    }
+}
+
+@keyframes float3 {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(180deg);
+    }
+}
+
+/* Responsive Design - Hero Section */
+@media (max-width: 768px) {
+    .hero {
+        min-height: 100vh;
+        padding-top: 70px;
+    }
+    
+    .hero__container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .hero__heading {
+        font-size: 2.5rem;
+    }
+    
+    .hero__typing {
+        font-size: 1.2rem;
+        justify-content: center;
+    }
+    
+    .hero__shapes {
+        height: 300px;
+        order: -1;
+    }
+    
+    .hero__shape--1 {
+        width: 140px;
+        height: 140px;
+        top: 25%;
+        right: 5%;
+    }
+    
+    .hero__shape--2 {
+        width: 180px;
+        height: 180px;
+        top: 75%;
+        right: 45%;
+    }
+    
+    .hero__shape--3 {
+        width: 120px;
+        height: 120px;
+        top: 10%;
+        right: 65%;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero__subtitle {
+        font-size: 1rem;
+    }
+    
+    .hero__heading {
+        font-size: 2rem;
+    }
+    
+    .hero__typing {
+        font-size: 1rem;
+    }
+    
+    .hero__shapes {
+        height: 200px;
+    }
+}
+

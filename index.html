@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/destyle.css@4.0.0/destyle.min.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/faq.css">
+    <link rel="stylesheet" href="css/workflow.css">
+    <link rel="stylesheet" href="css/contact.css">
+    <link rel="stylesheet" href="css/services.css">
+    <link rel="stylesheet" href="css/testimonials.css">
+    <link rel="stylesheet" href="css/split-layout.css">
+    <link rel="stylesheet" href="css/timeline-tabs.css">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+</head>
+<body>
+<header class="header">
+    <div class="header__container">
+        <div class="header__logo">
+            LOGO
+        </div>
+        <button class="header__hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="header__nav" id="nav">
+            <div class="header__overlay"></div>
+            <ul class="header__menu">
+                <li class="header__menu-item"><a href="#works" class="header__menu-link">Works</a></li>
+                <li class="header__menu-item"><a href="#skills" class="header__menu-link">Skills</a></li>
+                <li class="header__menu-item"><a href="#about" class="header__menu-link">About</a></li>
+                <li class="header__menu-item"><a href="#contact" class="header__menu-link">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- メインビジュアルセクション - ヒーロー領域（タイピングアニメーション・図形要素含む） -->
+<main class="hero">
+    <div class="hero__container">
+        <!-- Left Side: Text Content -->
+        <div class="hero__content">
+            <h1 class="hero__heading">あなたのビジネスを<br>次のレベルへ</h1>
+            <p class="hero__subtitle">革新的なWebソリューションで、お客様のビジネス成長を加速させます。プロフェッショナルなデザインと最新技術を組み合わせて、競合他社に差をつけましょう。</p>
+            <div class="hero__typing">
+                <span id="typing-text"></span>
+                <span class="hero__cursor" id="cursor">|</span>
+            </div>
+        </div>
+        
+        <!-- Right Side: Geometric Shapes -->
+        <div class="hero__shapes">
+            <div class="hero__shape hero__shape--1"></div>
+            <div class="hero__shape hero__shape--2"></div>
+            <div class="hero__shape hero__shape--3"></div>
+        </div>
+    </div>
+</main>
+
+<!-- 選ばれる理由セクション - 左右分割レイアウト（画像＋テキスト・リスト・ボタン） -->
+<section class="reasons">
+    <div class="reasons__container">
+        <div class="reasons__image">
+            <img src="images/business-team.svg" alt="プロフェッショナルチーム" />
+        </div>
+        
+        <div class="reasons__content">
+            <h2>選ばれる理由</h2>
+            <p>私たちは単なるWeb制作会社ではありません。お客様のビジネス成功を第一に考え、結果にコミットするパートナーです。</p>
+            <ul class="reasons__list">
+                <li>10年以上の豊富な実績</li>
+                <li>最新技術への対応</li>
+                <li>24時間サポート体制</li>
+                <li>成果保証制度</li>
+                <li>継続的な改善提案</li>
+                <li>透明性のある料金体系</li>
+            </ul>
+            <button class="reasons__button" onclick="handleHeroClick(event, '詳細確認')">
+                詳細を確認
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- サービスガイドセクション - タブ切り替え式（制作の流れ・料金プラン・サポート） -->
+<section class="service-guide">
+    <div class="service-guide__container">
+            <h2>サービスガイド</h2>
+            <div class="service-guide__tabs">
+                <button class="service-guide__tab-button service-guide__tab-button--active" onclick="showServiceTab(1)">制作の流れ</button>
+                <button class="service-guide__tab-button" onclick="showServiceTab(2)">料金プラン</button>
+                <button class="service-guide__tab-button" onclick="showServiceTab(3)">サポート</button>
+            </div>
+            
+            <div id="service-tab1" class="service-guide__tab-content service-guide__tab-content--active">
+                <h3>制作の流れ</h3>
+                <p>お客様のご要望を丁寧にヒアリングし、最適なソリューションをご提案いたします。</p>
+                <ol>
+                    <li>ヒアリング・要件定義（1週間）</li>
+                    <li>企画・設計・ワイヤーフレーム作成（1週間）</li>
+                    <li>デザイン制作・デザインカンプ作成（2週間）</li>
+                    <li>開発・実装・コーディング（2-3週間）</li>
+                    <li>テスト・検証・品質確認（1週間）</li>
+                    <li>納品・公開・運用開始（1週間）</li>
+                </ol>
+                <p style="margin-top: 20px; font-size: 0.95rem; color: #718096;">
+                    ※プロジェクトの規模により期間は変動いたします。お急ぎの場合はご相談ください。
+                </p>
+            </div>
+            
+            <div id="service-tab2" class="service-guide__tab-content">
+                <h3>料金プラン</h3>
+                <p>透明性のある料金体系で、お客様のご予算に合わせたプランをご提案いたします。</p>
+                
+                <div class="service-guide__price-card">
+                    <strong>ベーシックプラン: ¥300,000〜</strong>
+                    <small>基本的なコーポレートサイト（5-10ページ）</small>
+                </div>
+                
+                <div class="service-guide__price-card">
+                    <strong>スタンダードプラン: ¥500,000〜</strong>
+                    <small>CMS付きWebサイト（10-20ページ）</small>
+                </div>
+                
+                <div class="service-guide__price-card">
+                    <strong>プレミアムプラン: ¥800,000〜</strong>
+                    <small>ECサイト・Webアプリケーション</small>
+                </div>
+                
+                <div class="service-guide__price-card">
+                    <strong>エンタープライズ: お見積もり</strong>
+                    <small>大規模システム・カスタム開発</small>
+                </div>
+                
+                <p style="margin-top: 20px; font-size: 0.95rem; color: #718096;">
+                    ※すべて税別価格です。詳細な機能や要件により金額は変動いたします。
+                </p>
+            </div>
+            
+            <div id="service-tab3" class="service-guide__tab-content">
+                <h3>サポート体制</h3>
+                <p>制作後も安心してご利用いただけるよう、充実したサポートをご提供します。</p>
+                
+                <ul class="support-list">
+                    <li>
+                        <strong>緊急サポート</strong>
+                        <small>24時間365日の緊急時対応サービス</small>
+                    </li>
+                    <li>
+                        <strong>定期メンテナンス</strong>
+                        <small>月次レポートとシステム最適化</small>
+                    </li>
+                    <li>
+                        <strong>セキュリティ対策</strong>
+                        <small>定期的なセキュリティアップデートとバックアップ</small>
+                    </li>
+                    <li>
+                        <strong>操作研修</strong>
+                        <small>管理画面の使い方や更新方法の研修サービス</small>
+                    </li>
+                    <li>
+                        <strong>コンサルティング</strong>
+                        <small>Webマーケティング戦略のご相談・改善提案</small>
+                    </li>
+                </ul>
+                
+                <p style="margin-top: 25px; font-size: 0.95rem; color: #718096;">
+                    サポート内容は契約プランにより異なります。詳細はお問い合わせください。
+                </p>
+            </div>
+        </div>
+</section>
+
+<!-- サービス内容セクション - 3カラムグリッドレイアウト（LP制作・WEB制作・WordPress） -->
+<section class="services">
+    <div class="services__container">
+        <h2 class="services__title">サービス内容</h2>
+        
+        <div class="services__grid">
+            <!-- LP制作 -->
+            <div class="services__card">
+                <div class="services__header">
+                    <h3 class="services__card-title">LP制作</h3>
+                    <div class="services__card-subtitle">コンバージョン率を最大化するランディングページ</div>
+                </div>
+                <ul class="services__features">
+                    <li>レスポンシブデザイン対応</li>
+                    <li>SEO最適化済み</li>
+                    <li>高速ローディング</li>
+                    <li>A/Bテスト設計</li>
+                    <li>アクセス解析設定</li>
+                    <li>3回まで修正対応</li>
+                </ul>
+                <div class="services__price-info">
+                    <div class="services__price">
+                        <span class="services__price-amount">¥180,000</span>
+                        <span class="services__price-period">〜（税別・制作期間：2週間）</span>
+                </div>
+            </div>
+                <button class="services__button">LP制作を依頼する</button>
+            </div>
+
+            <!-- WEBサイト制作 -->
+            <div class="services__card">
+                <div class="services__header">
+                    <h3 class="services__card-title">WEBサイト制作</h3>
+                    <div class="services__card-subtitle">企業の魅力を伝えるコーポレートサイト</div>
+                </div>
+                <ul class="services__features">
+                    <li>独自デザイン設計</li>
+                    <li>CMS機能搭載</li>
+                    <li>多言語対応可能</li>
+                    <li>セキュリティ対策</li>
+                    <li>SSL証明書設定</li>
+                    <li>運用サポート付き</li>
+                </ul>
+                <div class="services__price-info">
+                    <div class="services__price">
+                        <span class="services__price-amount">¥350,000</span>
+                        <span class="services__price-period">〜（税別・制作期間：1ヶ月）</span>
+                </div>
+            </div>
+                <button class="services__button">WEBサイト制作を相談</button>
+            </div>
+
+            <!-- WordPress制作 -->
+            <div class="services__card">
+                <div class="services__header">
+                    <h3 class="services__card-title">WordPress制作</h3>
+                    <div class="services__card-subtitle">更新しやすいWordPressサイト構築</div>
+                </div>
+                <ul class="services__features">
+                    <li>カスタムテーマ開発</li>
+                    <li>プラグイン最適化</li>
+                    <li>管理画面カスタマイズ</li>
+                    <li>バックアップ設定</li>
+                    <li>セキュリティ強化</li>
+                    <li>操作説明書付き</li>
+                </ul>
+                <div class="services__price-info">
+                    <div class="services__price">
+                        <span class="services__price-amount">¥280,000</span>
+                        <span class="services__price-period">〜（税別・制作期間：3週間）</span>
+                </div>
+            </div>
+                <button class="services__button">WordPress制作を依頼</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 制作フローセクション - 7段階のカード形式表示（番号付きタイムライン・完了状態表示） -->
+<section class="workflow">
+    <div class="workflow__container">
+        <h2 class="workflow__title">制作フロー</h2>
+    
+        <!-- カード1: 要件定義・ヒアリング -->
+        <div class="workflow__card workflow__card--completed">
+            <div class="workflow__header">
+                <div class="workflow__number">01</div>
+                <div class="workflow__info">
+                    <h3>要件定義・ヒアリング</h3>
+                </div>
+            </div>
+            <div class="workflow__description">
+                お客様のご要望やビジネス目標を詳しくお聞きし、どのようなWebサイトを作るべきかを決める最初のステップです。技術的な専門用語を使わず、分かりやすく整理してプロジェクトの方向性を固めます。
+            </div>
+            <ul class="workflow__tasks">
+                <li>初回ミーティング</li>
+                <li>要件定義書作成</li>
+                <li>技術制約確認</li>
+            </ul>
+        </div>
+
+        <!-- カード2: 競合分析・市場調査 -->
+        <div class="workflow__card workflow__card--completed">
+            <div class="workflow__header">
+                <div class="workflow__number">02</div>
+                <div class="workflow__info">
+                    <h3>競合分析・市場調査</h3>
+                </div>
+            </div>
+            <div class="workflow__description">
+                業界のベストプラクティスを調査し、競合他社との差別化ポイントを明確にします。最新のデザイントレンドと技術動向も併せて分析します。
+            </div>
+            <ul class="workflow__tasks">
+                <li>競合サイト分析</li>
+                <li>業界トレンド調査</li>
+                <li>差別化戦略策定</li>
+            </ul>
+        </div>
+
+        <!-- カード3: 技術選定・アーキテクチャ設計 -->
+        <div class="workflow__card">
+            <div class="workflow__header">
+                <div class="workflow__number">03</div>
+                <div class="workflow__info">
+                    <h3>技術選定・アーキテクチャ設計</h3>
+                </div>
+            </div>
+            <div class="workflow__description">
+                プロジェクトに最適な技術スタックを選定し、拡張性と保守性を考慮したアーキテクチャを設計します。パフォーマンスと開発効率のバランスを重視します。
+            </div>
+            <ul class="workflow__tasks">
+                <li>フレームワーク選定</li>
+                <li>システム構成設計</li>
+                <li>開発環境構築</li>
+            </ul>
+        </div>
+
+        <!-- カード4: ワイヤーフレーム・情報設計 -->
+        <div class="workflow__card">
+            <div class="workflow__header">
+                <div class="workflow__number">04</div>
+                <div class="workflow__info">
+                    <h3>ワイヤーフレーム・情報設計</h3>
+                </div>
+            </div>
+            <div class="workflow__description">
+                サイト全体の構造と各ページのレイアウトを設計します。ユーザビリティを重視し、情報の優先順位と導線を最適化した設計を行います。
+            </div>
+            <ul class="workflow__tasks">
+                <li>サイトマップ作成</li>
+                <li>ワイヤーフレーム設計</li>
+                <li>ユーザーフロー設計</li>
+            </ul>
+        </div>
+
+        <!-- カード5: UIデザイン・ビジュアル設計 -->
+        <div class="workflow__card">
+            <div class="workflow__header">
+                <div class="workflow__number">05</div>
+                <div class="workflow__info">
+                    <h3>UIデザイン・ビジュアル設計</h3>
+                </div>
+            </div>
+            <div class="workflow__description">
+                ブランドイメージに合った美しいビジュアルデザインを作成します。カラーパレット、タイポグラフィ、コンポーネントデザインを統一感を持って設計します。
+            </div>
+            <ul class="workflow__tasks">
+                <li>デザインシステム構築</li>
+                <li>カラーパレット策定</li>
+                <li>UIコンポーネント作成</li>
+            </ul>
+        </div>
+
+        <!-- カード6: フロントエンド実装 -->
+        <div class="workflow__card">
+            <div class="workflow__header">
+                <div class="workflow__number">06</div>
+                <div class="workflow__info">
+                    <h3>フロントエンド実装</h3>
+                </div>
+            </div>
+            <div class="workflow__description">
+                設計に基づいてクリーンで保守性の高いコードを実装します。モダンな技術スタックを使用し、パフォーマンスとアクセシビリティを重視した開発を行います。
+            </div>
+            <ul class="workflow__tasks">
+                <li>コンポーネント実装</li>
+                <li>レスポンシブ対応</li>
+                <li>パフォーマンス最適化</li>
+            </ul>
+        </div>
+
+        <!-- カード7: テスト・品質保証 -->
+        <div class="workflow__card">
+            <div class="workflow__header">
+                <div class="workflow__number">07</div>
+                <div class="workflow__info">
+                    <h3>テスト・品質保証</h3>
+                </div>
+            </div>
+            <div class="workflow__description">
+                徹底的なテストにより、安定した動作を保証します。様々なデバイスやブラウザでの互換性を確認し、最高品質の成果物を提供します。
+            </div>
+            <ul class="workflow__tasks">
+                <li>クロスブラウザテスト</li>
+                <li>レスポンシブテスト</li>
+                <li>パフォーマンステスト</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- お客様の声セクション - Swiperスライダー形式（動的生成・ページネーション付き） -->
+<section class="testimonials">
+    <div class="testimonials__header">
+        <h2>お客様の声</h2>
+        <p>スライド形式で1つずつお客様の声をじっくりご覧いただけます</p>
+    </div>
+    
+    <div class="testimonials__container">
+        <!-- Swiper -->
+        <div class="swiper testimonials__swiper">
+            <div class="swiper-wrapper" id="carouselTrack">
+                <!-- スライドはJavaScriptで動的に生成 -->
+            </div>
+            
+            <!-- ナビゲーションボタン -->
+            <div class="swiper-button-next carousel-btn"></div>
+            <div class="swiper-button-prev carousel-btn"></div>
+            
+            <!-- ページネーション -->
+            <div class="swiper-pagination carousel-indicators"></div>
+        </div>
+    </div>
+</section>
+
+<!-- よくある質問セクション - アコーディオン形式（クリック展開・アイコンアニメーション付き） -->
+<section class="faq">
+    <h2 class="faq__title">よくある質問</h2>
+    
+    <div class="faq__container">
+        <div class="faq__item" onclick="toggleFaq(this)">
+            <div class="faq__question" tabindex="0">
+                <span class="faq__question-text">どのような技術スタックを使用していますか？</span>
+                <div class="faq__expand-icon"></div>
+            </div>
+            <div class="faq__answer">
+                <div class="faq__answer-text">主にReact、Vue.js、TypeScript、Node.jsを使用して開発を行っています。また、最新のWeb標準やフレームワークにも継続的に対応しています。プロジェクトに応じて最適な技術選択を行い、保守性と拡張性を重視した開発を心がけています。</div>
+            </div>
+        </div>
+
+        <div class="faq__item" onclick="toggleFaq(this)">
+            <div class="faq__question" tabindex="0">
+                <span class="faq__question-text">プロジェクトの期間はどの程度ですか？</span>
+                <div class="faq__expand-icon"></div>
+            </div>
+            <div class="faq__answer">
+                <div class="faq__answer-text">プロジェクトの規模により異なりますが、小規模なサイトで2-4週間、中規模なWebアプリケーションで2-3ヶ月程度を目安としています。事前に詳細な要件定義を行い、適切なスケジュール管理で品質の高い成果物をお届けします。</div>
+            </div>
+        </div>
+
+        <div class="faq__item" onclick="toggleFaq(this)">
+            <div class="faq__question" tabindex="0">
+                <span class="faq__question-text">レスポンシブデザインに対応していますか？</span>
+                <div class="faq__expand-icon"></div>
+            </div>
+            <div class="faq__answer">
+                <div class="faq__answer-text">はい、すべてのプロジェクトでモバイルファーストのレスポンシブデザインを採用し、様々なデバイスでの最適な表示を保証します。タブレット、スマートフォン、デスクトップすべてで快適なユーザー体験を提供できるよう設計しています。</div>
+            </div>
+        </div>
+
+        <div class="faq__item" onclick="toggleFaq(this)">
+            <div class="faq__question" tabindex="0">
+                <span class="faq__question-text">保守・運用サポートは提供していますか？</span>
+                <div class="faq__expand-icon"></div>
+            </div>
+            <div class="faq__answer">
+                <div class="faq__answer-text">はい、サイト公開後も継続的な保守・運用サポートを提供しています。セキュリティアップデートや機能追加、パフォーマンス改善にも対応可能です。月次レポートによる分析結果の共有も行い、サイトの継続的な改善をサポートします。</div>
+            </div>
+        </div>
+
+        <div class="faq__item" onclick="toggleFaq(this)">
+            <div class="faq__question" tabindex="0">
+                <span class="faq__question-text">料金体系について教えてください</span>
+                <div class="faq__expand-icon"></div>
+            </div>
+            <div class="faq__answer">
+                <div class="faq__answer-text">プロジェクトの規模と要件に応じて柔軟に対応いたします。事前にしっかりとヒアリングを行い、透明性のある見積もりを提示します。追加費用が発生する場合は必ず事前にご相談し、予算内での最適なソリューションをご提案します。</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+<!-- お問い合わせセクション - 多機能フォーム（カスタムセレクト・ラジオボタン・バリデーション付き） -->
+<section class="contact" id="contact">
+    <h2 class="contact__title">お問い合わせ</h2>
+    <p class="contact__description">ご不明な点やご相談がございましたら、お気軽にお問い合わせください。<br>専門スタッフが迅速にご対応いたします。</p>
+    
+    <div class="contact__container">
+        <div class="contact__card">
+            <div class="contact__form-container">
+                <div class="contact__message contact__message--success" id="contactSuccessMessage">
+                    お問い合わせを送信しました。ありがとうございます。
+                </div>
+                
+                <div class="contact__message contact__message--error" id="contactErrorMessage">
+                    送信に失敗しました。もう一度お試しください。
+                </div>
+
+                <form id="contactForm">
+                    <div class="contact__form-group">
+                        <label for="contactName" class="contact__label">お名前 <span class="contact__required">*</span></label>
+                        <input type="text" id="contactName" name="name" class="contact__input" required placeholder="山田 太郎">
+                    </div>
+
+                    <div class="contact__form-group">
+                        <label for="contactEmail" class="contact__label">メールアドレス <span class="contact__required">*</span></label>
+                        <input type="email" id="contactEmail" name="email" class="contact__input" required placeholder="example@company.com">
+                    </div>
+
+                    <div class="contact__form-group">
+                        <label for="contactCompany" class="contact__label">会社名・団体名</label>
+                        <input type="text" id="contactCompany" name="company" class="contact__input" placeholder="株式会社サンプル">
+                    </div>
+
+                    <div class="contact__form-group">
+                        <label for="contactPhone" class="contact__label">電話番号</label>
+                        <input type="tel" id="contactPhone" name="phone" class="contact__input" placeholder="03-1234-5678">
+                    </div>
+
+                    <div class="contact__form-group contact__form-group--dropdown">
+                        <label for="contactSubject" class="contact__label">お問い合わせ種別 <span class="contact__required">*</span></label>
+                        <select id="contactSubject" name="subject" class="contact__select" required style="display: none;">
+                            <option value="">お問い合わせ内容を選択してください</option>
+                            <option value="service">サービスについて</option>
+                            <option value="pricing">料金について</option>
+                            <option value="support">サポートについて</option>
+                            <option value="partnership">パートナーシップについて</option>
+                            <option value="other">その他</option>
+                        </select>
+                        
+                        <div class="contact__select-wrapper">
+                            <div class="contact__select-button" id="customSelectButton">
+                                <span class="contact__select-text">お問い合わせ内容を選択してください</span>
+                                <span class="contact__select-arrow">▼</span>
+                            </div>
+                            <div class="contact__select-dropdown" id="customSelectDropdown">
+                                <div class="contact__option" data-value="service">サービスについて</div>
+                                <div class="contact__option" data-value="pricing">料金について</div>
+                                <div class="contact__option" data-value="support">サポートについて</div>
+                                <div class="contact__option" data-value="partnership">パートナーシップについて</div>
+                                <div class="contact__option" data-value="other">その他</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact__form-group">
+                        <label class="contact__label">ご予算 <span class="contact__required">*</span></label>
+                        <div class="contact__radio-group">
+                            <div class="contact__radio-item">
+                                <input type="radio" id="budget1" name="budget" value="under-5" class="contact__radio" required>
+                                <label for="budget1" class="contact__radio-label">5万円未満</label>
+                            </div>
+                            <div class="contact__radio-item">
+                                <input type="radio" id="budget2" name="budget" value="5-10" class="contact__radio" required>
+                                <label for="budget2" class="contact__radio-label">5万円～10万円</label>
+                            </div>
+                            <div class="contact__radio-item">
+                                <input type="radio" id="budget3" name="budget" value="10-20" class="contact__radio" required>
+                                <label for="budget3" class="contact__radio-label">10万円～20万円</label>
+                            </div>
+                            <div class="contact__radio-item">
+                                <input type="radio" id="budget4" name="budget" value="20-30" class="contact__radio" required>
+                                <label for="budget4" class="contact__radio-label">20万円～30万円</label>
+                            </div>
+                            <div class="contact__radio-item">
+                                <input type="radio" id="budget5" name="budget" value="30-50" class="contact__radio" required>
+                                <label for="budget5" class="contact__radio-label">30万円～50万円</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact__form-group">
+                        <label for="contactMessage" class="contact__label">メッセージ <span class="contact__required">*</span></label>
+                        <textarea id="contactMessage" name="message" class="contact__textarea" required placeholder="お問い合わせ内容を詳しくご記入ください。ご希望の予算や納期などがございましたら、合わせてお知らせください。"></textarea>
+                    </div>
+
+                    <button type="submit" class="contact__button">
+                        送信する
+                    </button>
+
+                    <div class="contact__privacy-note">
+                        <p>
+                            ご入力いただいた個人情報は、お問い合わせへの対応以外の目的では使用いたしません。
+                            詳しくは<a href="#" onclick="return false;">プライバシーポリシー</a>をご確認ください。
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+    
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

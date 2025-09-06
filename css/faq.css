@@ -1,0 +1,180 @@
+/* FAQ Styles */
+.faq {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 20px;
+}
+
+.faq__title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 50px;
+    color: #fff;
+}
+
+/* メインのFAQコンテナ */
+.faq__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid #333;
+}
+
+/* 各FAQアイテム */
+.faq__item {
+    border-bottom: 1px solid #333;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.08) 100%);
+    transition: background 0.3s ease;
+}
+
+.faq__item:last-child {
+    border-bottom: none;
+}
+
+/* アクティブ状態のFAQアイテム */
+.faq__item--active {
+    background: linear-gradient(90deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 255, 136, 0.05) 100%);
+}
+
+/* 質問部分 */
+.faq__question {
+    padding: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* 左端のアクセントライン */
+.faq__question::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: transparent;
+    transition: background 0.3s ease;
+}
+
+.faq__item--active .faq__question::before {
+    background: #00ff88;
+}
+
+/* 質問テキスト */
+.faq__question-text {
+    font-size: 1.1rem;
+    font-weight: 500;
+    flex: 1;
+    margin-left: 20px;
+}
+
+/* 右側の展開アイコン */
+.faq__expand-icon {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.faq__item--active .faq__expand-icon {
+    border-color: #00ff88;
+    background: #00ff88;
+}
+
+/* アイコン内のプラス記号 */
+.faq__expand-icon::before,
+.faq__expand-icon::after {
+    content: '';
+    position: absolute;
+    background: #666;
+    transition: all 0.3s ease;
+}
+
+/* 横線（常に表示） */
+.faq__expand-icon::before {
+    width: 12px;
+    height: 2px;
+}
+
+/* 縦線（アクティブ時に非表示） */
+.faq__expand-icon::after {
+    width: 2px;
+    height: 12px;
+}
+
+.faq__item--active .faq__expand-icon::before,
+.faq__item--active .faq__expand-icon::after {
+    background: #000;
+}
+
+.faq__item--active .faq__expand-icon::after {
+    opacity: 0;
+    transform: scale(0);
+}
+
+/* 回答部分 */
+.faq__answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.faq__item--active .faq__answer {
+    max-height: 300px;
+}
+
+/* 回答テキスト */
+.faq__answer-text {
+    padding: 0 30px 30px 54px;
+    color: #ccc;
+    line-height: 1.7;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .faq__title {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+
+    .faq__question-text {
+        font-size: 1rem;
+    }
+
+    .faq__answer-text {
+        padding-left: 30px;
+        font-size: 0.9rem;
+    }
+
+    .faq__question {
+        padding: 25px 20px;
+    }
+
+    .faq__question-text {
+        margin-left: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 20px 10px;
+    }
+
+    .faq__title {
+        font-size: 1.8rem;
+    }
+
+    .faq__question {
+        padding: 20px 15px;
+    }
+
+    .faq__answer-text {
+        padding: 0 15px 20px 30px;
+    }
+}
+

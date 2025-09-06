@@ -1,0 +1,250 @@
+/* Services Section Styles - Matching existing design patterns */
+.services {
+    max-width: 1200px;
+    margin: 120px auto 0;
+    padding: 40px 20px;
+}
+
+.services__title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 60px;
+    color: #fff;
+}
+
+/* Services Container - 3 Column Grid */
+.services__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Individual Service Card - Similar to workflow cards */
+.services__card {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.08) 100%);
+    border: 1px solid #333;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    min-height: 450px;
+}
+
+.services__card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: transparent;
+    transition: background 0.3s ease;
+}
+
+.services__card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.services__card:hover::before {
+    background: #00ff88;
+}
+
+/* Featured Card */
+.services__card--featured {
+    background: linear-gradient(90deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 255, 136, 0.05) 100%);
+    border-color: #00ff88;
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 255, 136, 0.2);
+}
+
+.services__card--featured::before {
+    background: #00ff88;
+}
+
+/* Service Badge */
+.services__badge {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    background: #00ff88;
+    color: #000;
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Service Header */
+.services__header {
+    margin-bottom: 25px;
+}
+
+.services__card-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.services__card-subtitle {
+    color: #ccc;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Service Price Info */
+.services__price-info {
+    margin-top: auto;
+    margin-bottom: 25px;
+}
+
+.services__price {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.services__price-amount {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #00ff88;
+}
+
+.services__price-period {
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+/* Service Description */
+.services__description {
+    color: #ccc;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+    flex-grow: 1;
+}
+
+/* Service Features List - Similar to workflow card tasks */
+.services__features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 25px 0;
+    flex-grow: 1;
+}
+
+.services__features li {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #555;
+    color: #ccc;
+    font-size: 0.85rem;
+    padding: 8px 16px;
+    margin-bottom: 8px;
+    transition: all 0.2s ease;
+    position: relative;
+    padding-left: 35px;
+}
+
+.services__features li::before {
+    content: '';
+    position: absolute;
+    left: 12px;
+    width: 12px;
+    height: 7px;
+    border: 2px solid #00ff88;
+    border-top: none;
+    border-right: none;
+    transform: rotate(-45deg);
+    top: 50%;
+    margin-top: -5px;
+}
+
+.services__features li:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #777;
+}
+
+/* Service Button - Similar to contact form button */
+.services__button {
+    background: #6c757d;
+    color: #fff;
+    border: 1px solid #555;
+    padding: 18px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: auto;
+}
+
+.services__button:hover {
+    background: #00ff88;
+    color: #000;
+    border-color: #00ff88;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 255, 136, 0.3);
+}
+
+.services__button:active {
+    transform: translateY(-1px);
+}
+
+/* Featured Button */
+.services__button-featured {
+    background: #00ff88;
+    color: #000;
+    border-color: #00ff88;
+}
+
+.services__button-featured:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .services__grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .services__card--featured {
+        transform: none;
+        order: -1;
+    }
+    
+    .services__card {
+        min-height: auto;
+    }
+    
+    .services__title {
+        font-size: 2rem;
+        margin-bottom: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .services {
+        padding: 40px 15px;
+    }
+    
+    .services__card {
+        padding: 25px 20px;
+    }
+    
+    .services__card-title {
+        font-size: 1.2rem;
+    }
+    
+    .services__price-amount {
+        font-size: 1.6rem;
+    }
+}
