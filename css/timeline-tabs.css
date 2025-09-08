@@ -7,6 +7,7 @@
     min-height: auto;
     max-width: 1200px;
     margin: 0 auto;
+    z-index: 10;
 }
 
 .reasons::before {
@@ -190,10 +191,10 @@
 /* サービスガイドセクション - 全幅レイアウト */
 .service-guide {
     padding: 80px 0;
-    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    background: transparent;
     position: relative;
     overflow: visible;
-    margin: 60px 0;
+    margin: 0;
 }
 
 .service-guide::before {
@@ -207,10 +208,7 @@
     animation: shimmer 3s infinite;
 }
 
-@keyframes shimmer {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.8; }
-}
+/* shimmer animation moved to base.css */
 
 .service-guide__container {
     max-width: 1200px;
@@ -371,10 +369,7 @@
 
 
 
-@keyframes shimmer {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.8; }
-}
+/* shimmer animation moved to base.css */
 
 .timeline-section-content h2 {
     font-size: 2.5rem;
@@ -384,159 +379,7 @@
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.company-timeline {
-    position: relative;
-    padding-left: 50px;
-    margin-bottom: 40px;
-}
-
-.company-timeline::before {
-    content: '';
-    position: absolute;
-    left: 20px;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background: linear-gradient(180deg, #00ff88, rgba(0, 255, 136, 0.3));
-    border-radius: 0;
-}
-
-.company-timeline-item {
-    position: relative;
-    margin-bottom: 50px;
-    padding-left: 50px;
-    opacity: 0;
-    transform: translateX(-30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.company-timeline-item.timeline-visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.company-timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -36px;
-    /* top: -5px; */
-    width: 15px;
-    height: 15px;
-    background: #00ff88;
-    border-radius: 0;
-    border: 2px solid rgba(0, 255, 136, 0.3);
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-
-.company-timeline-year {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 12px;
-    background: rgba(0, 255, 136, 0.1);
-    display: inline-block;
-    padding: 8px 16px;
-    border-radius: 0;
-    border: 1px solid rgba(0, 255, 136, 0.3);
-    backdrop-filter: blur(10px);
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.company-timeline-text {
-    opacity: 0.95;
-    line-height: 1.7;
-    font-size: 1.1rem;
-}
-
-.timeline-cta-button {
-    display: inline-block;
-    padding: 18px 40px;
-    background: rgba(0, 255, 136, 0.1);
-    color: white;
-    text-decoration: none;
-    border-radius: 0;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    text-align: center;
-    border: 2px solid rgba(0, 255, 136, 0.3);
-    backdrop-filter: blur(10px);
-}
-
-
-/* Right Side - Tab Section - testimonialsスタイルに合わせる */
-.timeline-right-side {
-    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-    color: #fff;
-    position: relative;
-    overflow: hidden;
-}
-
-.timeline-right-side::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #00ff88, transparent);
-    animation: shimmer 3s infinite;
-}
-
-.timeline-right-side h2 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    margin-bottom: 30px;
-    line-height: 1.3;
-    color: #fff;
-}
-
-.service-content-tabs {
-    display: flex;
-    margin-bottom: 40px;
-    border-bottom: 2px solid rgba(0, 255, 136, 0.3);
-    overflow-x: auto;
-}
-
-.service-tab-button {
-    flex: 1;
-    padding: 16px 28px;
-    border: none;
-    background: transparent;
-    color: #a0a0a0;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    border-bottom: 3px solid transparent;
-    white-space: nowrap;
-    position: relative;
-    text-align: center;
-}
-
-.service-tab-button.service-guide__tab-button--active,
-.service-tab-button:hover {
-    color: #00ff88;
-    border-bottom-color: #00ff88;
-    background: rgba(0, 255, 136, 0.05);
-}
-
-.service-tab-button::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: #00ff88;
-    transform: scaleX(0);
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.service-tab-button.service-guide__tab-button--active::after {
-    transform: scaleX(1);
-}
+/* Unused timeline and service-content-tabs styles removed */
 
 .service-guide__tab-content {
     display: none;
@@ -647,22 +490,7 @@
     font-size: 0.9rem;
 }
 
-.timeline-right-side .timeline-cta-button {
-    background: rgba(0, 255, 136, 0.1);
-    color: white;
-    border: 2px solid rgba(0, 255, 136, 0.3);
-    border-radius: 0;
-    margin-top: 30px;
-    align-self: flex-start;
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(10px);
-}
-
-.timeline-right-side .timeline-cta-button:hover {
-    background: rgba(0, 255, 136, 0.2);
-    border-color: #00ff88;
-    transform: translateY(-5px);
-}
+/* Unused timeline-right-side button styles removed */
 
 .support-list {
     list-style: none !important;
@@ -698,88 +526,4 @@
     font-size: 0.9rem;
 }
 
-/* レスポンシブデザイン */
-@media (max-width: 1024px) {
-    .timeline-left-side,
-    .timeline-right-side {
-        padding: 60px 40px;
-    }
-    
-    .timeline-section-content h2,
-    .timeline-right-side h2 {
-        font-size: 2rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .timeline-split-section {
-        flex-direction: column;
-        min-height: auto;
-    }
-    
-    .timeline-left-side,
-    .timeline-right-side {
-        padding: 60px 30px;
-    }
-    
-    .timeline-section-content h2,
-    .timeline-right-side h2 {
-        font-size: 1.8rem;
-    }
-    
-    .company-timeline {
-        padding-left: 40px;
-    }
-    
-    .company-timeline-item {
-        padding-left: 40px;
-    }
-    
-    .company-timeline-item::before {
-        left: -28px;
-    }
-    
-    .service-content-tabs {
-        flex-wrap: wrap;
-        gap: 5px;
-    }
-    
-    .service-tab-button {
-        padding: 12px 20px;
-        font-size: 1rem;
-    }
-    
-    .service-guide__tab-content {
-        min-height: 300px;
-    }
-}
-
-@media (max-width: 480px) {
-    .timeline-left-side,
-    .timeline-right-side {
-        padding: 40px 20px;
-    }
-    
-    .timeline-section-content h2,
-    .timeline-right-side h2 {
-        font-size: 1.6rem;
-    }
-    
-    .company-timeline-year {
-        font-size: 1.5rem;
-    }
-    
-    .company-timeline-text {
-        font-size: 1rem;
-    }
-    
-    .service-tab-button {
-        padding: 10px 16px;
-        font-size: 0.9rem;
-    }
-    
-    .timeline-cta-button {
-        padding: 16px 32px;
-        font-size: 1rem;
-    }
-}
+/* Unused responsive styles for timeline elements removed */

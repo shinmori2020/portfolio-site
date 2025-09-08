@@ -7,17 +7,21 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/destyle.css@4.0.0/destyle.min.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/hero.css">
-    <link rel="stylesheet" href="css/faq.css">
-    <link rel="stylesheet" href="css/workflow.css">
-    <link rel="stylesheet" href="css/contact.css">
-    <link rel="stylesheet" href="css/services.css">
-    <link rel="stylesheet" href="css/testimonials.css">
     <link rel="stylesheet" href="css/split-layout.css">
     <link rel="stylesheet" href="css/timeline-tabs.css">
+    <link rel="stylesheet" href="css/services.css">
+    <link rel="stylesheet" href="css/workflow.css">
+    <link rel="stylesheet" href="css/testimonials.css">
+    <link rel="stylesheet" href="css/faq.css">
+    <link rel="stylesheet" href="css/contact.css">
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="css/background-squares.css">
 </head>
 <body>
+    <!-- 固定背景の四角形 -->
+    <div id="square-small"></div>
+    <div id="square-large"></div>
 <header class="header">
     <div class="header__container">
         <div class="header__logo">
@@ -177,13 +181,13 @@
 </section>
 
 <!-- サービス内容セクション - 3カラムグリッドレイアウト（LP制作・WEB制作・WordPress） -->
-<section class="services">
+<section class="services section-background">
     <div class="services__container">
-        <h2 class="services__title">サービス内容</h2>
+        <h2 class="services__title section-title">サービス内容</h2>
         
         <div class="services__grid">
             <!-- LP制作 -->
-            <div class="services__card">
+            <div class="services__card card-background accent-line card-hover">
                 <div class="services__header">
                     <h3 class="services__card-title">LP制作</h3>
                     <div class="services__card-subtitle">コンバージョン率を最大化するランディングページ</div>
@@ -206,7 +210,7 @@
             </div>
 
             <!-- WEBサイト制作 -->
-            <div class="services__card">
+            <div class="services__card card-background accent-line card-hover">
                 <div class="services__header">
                     <h3 class="services__card-title">WEBサイト制作</h3>
                     <div class="services__card-subtitle">企業の魅力を伝えるコーポレートサイト</div>
@@ -229,7 +233,7 @@
             </div>
 
             <!-- WordPress制作 -->
-            <div class="services__card">
+            <div class="services__card card-background accent-line card-hover">
                 <div class="services__header">
                     <h3 class="services__card-title">WordPress制作</h3>
                     <div class="services__card-subtitle">更新しやすいWordPressサイト構築</div>
@@ -255,12 +259,12 @@
 </section>
 
 <!-- 制作フローセクション - 7段階のカード形式表示（番号付きタイムライン・完了状態表示） -->
-<section class="workflow">
+<section class="workflow section-background">
     <div class="workflow__container">
-        <h2 class="workflow__title">制作フロー</h2>
+        <h2 class="workflow__title section-title">制作フロー</h2>
     
         <!-- カード1: 要件定義・ヒアリング -->
-        <div class="workflow__card workflow__card--completed">
+        <div class="workflow__card workflow__card--completed card-background accent-line card-hover">
             <div class="workflow__header">
                 <div class="workflow__number">01</div>
                 <div class="workflow__info">
@@ -477,6 +481,7 @@
 
 
 
+
 <!-- お問い合わせセクション - 多機能フォーム（カスタムセレクト・ラジオボタン・バリデーション付き） -->
 <section class="contact" id="contact">
     <h2 class="contact__title">お問い合わせ</h2>
@@ -589,6 +594,7 @@
     
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

@@ -1,8 +1,9 @@
 /**
- * Modern Hamburger Menu Implementation
- * Features: Circular clip-path animation, staggered menu items, smooth transitions
+ * MAIN INITIALIZATION - All DOMContentLoaded events consolidated
  */
 document.addEventListener('DOMContentLoaded', function() {
+    
+    // ===== HAMBURGER MENU INITIALIZATION =====
     // Get DOM elements
     const hamburger = document.getElementById('hamburger');
     const nav = document.getElementById('nav');
@@ -79,6 +80,32 @@ document.addEventListener('DOMContentLoaded', function() {
             closeMenu();
         }
     });
+    
+    // ===== HERO ANIMATIONS INITIALIZATION =====
+    setTimeout(initHeroAnimations, 500);
+    
+    // ===== FAQ KEYBOARD ACCESSIBILITY =====
+    try {
+        const faqQuestions = document.querySelectorAll('.faq__question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const faqItem = this.closest('.faq__item');
+                    if (faqItem) {
+                        toggleFaq(faqItem);
+                    }
+                }
+            });
+        });
+    } catch (error) {
+        console.error('FAQ initialization error:', error);
+    }
+    
+    // ===== OTHER INITIALIZATIONS =====
+    // Note: Other initializations remain as separate DOMContentLoaded events
+    // for easier maintenance and to avoid conflicts
 });
 
 /**
@@ -138,11 +165,7 @@ function initHeroAnimations() {
     }
 }
 
-// Initialize hero animations when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // Small delay to ensure everything is rendered
-    setTimeout(initHeroAnimations, 500);
-});
+// Hero animations initialization moved to main DOMContentLoaded
 
 /**
  * FAQ Toggle Functionality
@@ -169,27 +192,7 @@ function toggleFaq(item) {
     }
 }
 
-// キーボードアクセシビリティ対応
-document.addEventListener('DOMContentLoaded', function() {
-    try {
-        const faqQuestions = document.querySelectorAll('.faq__question');
-        
-        faqQuestions.forEach(question => {
-            // Enterキーでも開閉できるようにする
-            question.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    const faqItem = this.closest('.faq__item');
-                    if (faqItem) {
-                        toggleFaq(faqItem);
-                    }
-                }
-            });
-        });
-    } catch (error) {
-        console.error('FAQ initialization error:', error);
-    }
-});
+// FAQ keyboard accessibility moved to main DOMContentLoaded
 
 /**
  * Swiper.js実装 - お客様の声セクション
@@ -337,20 +340,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // 後方互換性のためのグローバル関数
-        window.nextSlide = function() {
-            swiper.slideNext();
-        };
-        
-        window.prevSlide = function() {
-            swiper.slidePrev();
-        };
-        
-        window.goToSlide = function(slideNumber) {
-            // 複製されたスライドを考慮してインデックスを調整
-            const realIndex = slideNumber % testimonialsData.length;
-            swiper.slideToLoop(realIndex);
-        };
+        // Global functions for swiper control (if needed externally)
     }
 });
 
@@ -499,62 +489,10 @@ function showServiceTab(tabNumber) {
     }
 }
 
-// CTAボタンクリック処理
-function handleTimelineClick(event, actionType) {
-    const button = event.target;
-    const originalText = button.textContent;
-    const originalBg = button.style.background;
-    
-    // ボタンアニメーション
-    button.style.transform = 'scale(0.95)';
-    button.textContent = '処理中...';
-    button.style.opacity = '0.8';
-    
-    setTimeout(() => {
-        button.style.transform = 'scale(1)';
-        button.textContent = '完了！';
-        if (button.classList.contains('timeline-cta-button')) {
-            if (button.style.background.includes('rgba')) {
-                button.style.background = 'rgba(72, 187, 120, 0.3)';
-                button.style.color = '#2d5016';
-            } else {
-                button.style.background = 'linear-gradient(135deg, #48bb78, #38a169)';
-            }
-        }
-        
-        setTimeout(() => {
-            button.textContent = originalText;
-            button.style.opacity = '1';
-            button.style.background = originalBg;
-            button.style.color = '';
-        }, 2500);
-    }, 1200);
-    
-    console.log(`${actionType}のアクションが実行されました`);
-}
+// Unused timeline functions removed
 
-// タイムラインアイテムのスクロールアニメーション
-const timelineObserverOptions = {
-    threshold: 0.3,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const timelineObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('timeline-visible');
-        }
-    });
-}, timelineObserverOptions);
-
-// タイムライン関連の初期化
+// タブ機能とUI効果の初期化
 document.addEventListener('DOMContentLoaded', function() {
-    // タイムラインアイテムを監視対象に追加
-    document.querySelectorAll('.company-timeline-item').forEach((item, index) => {
-        item.style.transitionDelay = `${index * 0.2}s`;
-        timelineObserver.observe(item);
-    });
-
     // キーボードナビゲーション
     document.addEventListener('keydown', (e) => {
         if (e.key >= '1' && e.key <= '3') {
@@ -574,19 +512,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!this.classList.contains('service-guide__tab-button--active')) {
                 this.style.background = 'transparent';
             }
-        });
-    });
-
-    // 価格カードのアニメーション効果
-    document.querySelectorAll('.service-price-card').forEach(card => {
-        card.addEventListener('click', function() {
-            this.style.transform = 'scale(1.02)';
-            this.style.background = 'rgba(69, 183, 209, 0.15)';
-            
-            setTimeout(() => {
-                this.style.transform = 'scale(1)';
-                this.style.background = 'rgba(69, 183, 209, 0.05)';
-            }, 200);
         });
     });
 
@@ -624,26 +549,6 @@ document.addEventListener('DOMContentLoaded', function() {
             toggleAutoServiceTabSwitch();
             toggleAutoServiceTabSwitch(); // 再開
         }
-    });
-
-    // タイムラインアイテムを順次表示
-    const timelineItems = document.querySelectorAll('.company-timeline-item');
-    timelineItems.forEach((item, index) => {
-        setTimeout(() => {
-            item.classList.add('timeline-visible');
-        }, index * 500);
-    });
-
-    // フォーカス管理（アクセシビリティ）
-    document.querySelectorAll('.service-tab-button, .timeline-cta-button').forEach(element => {
-        element.addEventListener('focus', function() {
-            this.style.outline = '2px solid #45b7d1';
-            this.style.outlineOffset = '2px';
-        });
-        
-        element.addEventListener('blur', function() {
-            this.style.outline = 'none';
-        });
     });
 });
 
@@ -931,4 +836,104 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+/**
+ * GSAP背景四角形アニメーション（スクロール連動 + 自動無限回転）
+ */
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof gsap !== 'undefined') {
+        let animationActive = false;
+        let animationFrame;
+        let startTime = Date.now();
+        
+        function animateSquares() {
+            if (!animationActive) return;
+            
+            const currentTime = Date.now();
+            const elapsedTime = (currentTime - startTime) / 1000; // 秒に変換
+            
+            // スクロール連動回転の計算
+            const scrollY = window.pageYOffset;
+            const windowHeight = window.innerHeight;
+            const docHeight = document.documentElement.scrollHeight - windowHeight;
+            const scrollProgress = scrollY / docHeight;
+            
+            // 自動回転（時間ベース）の計算
+            const autoRotationLarge = elapsedTime * 18; // 大きい四角：18度/秒（20秒で1回転）
+            const autoRotationSmall = elapsedTime * 30; // 小さい四角：30度/秒（12秒で1回転）
+            
+            // スクロール連動回転の計算
+            const scrollRotationLarge = scrollProgress * 360; // 大きい四角：1回転
+            const scrollRotationSmall = scrollProgress * 720; // 小さい四角：2回転
+            
+            // 2つの回転を合成
+            const totalRotationLarge = autoRotationLarge + scrollRotationLarge;
+            const totalRotationSmall = autoRotationSmall + scrollRotationSmall;
+            
+            // GSAPでアニメーション適用
+            gsap.set("#square-large", {
+                rotation: totalRotationLarge
+            });
+            
+            gsap.set("#square-small", {
+                rotation: totalRotationSmall
+            });
+            
+            animationFrame = requestAnimationFrame(animateSquares);
+        }
+        
+        function startAnimation() {
+            if (!animationActive) {
+                animationActive = true;
+                startTime = Date.now(); // アニメーション開始時間をリセット
+                animateSquares();
+            }
+        }
+        
+        function stopAnimation() {
+            animationActive = false;
+            if (animationFrame) {
+                cancelAnimationFrame(animationFrame);
+            }
+        }
+        
+        // Intersection Observer で可視性を監視
+        const squareObserver = new IntersectionObserver((entries) => {
+            const hasVisibleSquare = entries.some(entry => entry.isIntersecting);
+            
+            if (hasVisibleSquare) {
+                startAnimation();
+            } else {
+                stopAnimation();
+            }
+        }, {
+            root: null,
+            rootMargin: '50px',
+            threshold: 0
+        });
+        
+        // 四角形を監視対象に追加
+        const squares = document.querySelectorAll('#square-large, #square-small');
+        squares.forEach(square => {
+            if (square) {
+                squareObserver.observe(square);
+            }
+        });
+        
+        // ページ可視性変更時の処理
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                stopAnimation();
+            } else if (squares.length > 0) {
+                startAnimation();
+            }
+        });
+        
+        console.log('GSAP背景四角形アニメーション初期化完了（スクロール連動 + 自動無限回転）');
+    } else {
+        console.warn('GSAP not loaded - background squares animation disabled');
+    }
+});
+
+
 

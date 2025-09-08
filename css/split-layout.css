@@ -36,10 +36,7 @@
     animation: shimmer 3s infinite;
 }
 
-@keyframes shimmer {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.8; }
-}
+/* shimmer animation moved to base.css */
 
 .hero__floating-elements {
     position: absolute;

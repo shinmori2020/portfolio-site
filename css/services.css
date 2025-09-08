@@ -1,8 +1,8 @@
 /* Services Section Styles - Matching existing design patterns */
 .services {
     max-width: 1200px;
-    margin: 120px auto 0;
-    padding: 40px 20px;
+    margin: 0 auto;
+    padding: 80px 0;
 }
 
 .services__title {
@@ -24,7 +24,7 @@
 
 /* Individual Service Card - Similar to workflow cards */
 .services__card {
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.08) 100%);
+    background: #1a1a1a;
     border: 1px solid #333;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     padding: 30px;
@@ -55,29 +55,7 @@
     background: #00ff88;
 }
 
-/* Featured Card */
-.services__card--featured {
-    background: linear-gradient(90deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 255, 136, 0.05) 100%);
-    border-color: #00ff88;
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0, 255, 136, 0.2);
-}
-
-.services__card--featured::before {
-    background: #00ff88;
-}
-
-/* Service Badge */
-.services__badge {
-    position: absolute;
-    top: -1px;
-    right: -1px;
-    background: #00ff88;
-    color: #000;
-    padding: 8px 16px;
-    font-size: 0.8rem;
-    font-weight: 600;
-}
+/* Unused featured card and badge styles removed */
 
 /* Service Header */
 .services__header {
@@ -195,19 +173,7 @@
     transform: translateY(-1px);
 }
 
-/* Featured Button */
-.services__button-featured {
-    background: #00ff88;
-    color: #000;
-    border-color: #00ff88;
-}
-
-.services__button-featured:hover {
-    background: #fff;
-    color: #000;
-    border-color: #fff;
-    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.3);
-}
+/* Unused featured button styles removed */
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -216,10 +182,7 @@
         gap: 25px;
     }
     
-    .services__card--featured {
-        transform: none;
-        order: -1;
-    }
+    /* Unused featured card responsive styles removed */
     
     .services__card {
         min-height: auto;

@@ -217,3 +217,127 @@ body {
     min-height: 100vh;
 }
 
+/* ===== COMMON STYLES ===== */
+
+/* Common Section Title */
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 60px;
+    color: #fff;
+}
+
+/* Common Card Background */
+.card-background {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.08) 100%);
+    border: 1px solid #333;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* Common Accent Line */
+.accent-line::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: transparent;
+    transition: background 0.3s ease;
+}
+
+.accent-line:hover::before {
+    background: #00ff88;
+}
+
+/* Common Card Hover Effect */
+.card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Common Button Base Style */
+.btn-base {
+    display: inline-block;
+    padding: 18px 40px;
+    background: rgba(0, 255, 136, 0.1);
+    color: white;
+    text-decoration: none;
+    border-radius: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    border: 2px solid rgba(0, 255, 136, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.btn-base:hover {
+    background: rgba(0, 255, 136, 0.2);
+    border-color: #00ff88;
+    transform: translateY(-5px);
+}
+
+/* Common Section Background */
+.section-background {
+    background: transparent;
+}
+
+/* ===== COMMON ANIMATIONS ===== */
+
+/* Shimmer Animation */
+@keyframes shimmer {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+}
+
+/* Common Shimmer Line */
+.shimmer-line::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #00ff88, transparent);
+    animation: shimmer 3s infinite;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* ===== COMMON RESPONSIVE BREAKPOINTS ===== */
+
+/* Mobile First Breakpoints */
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 40px;
+    }
+    
+    .btn-base {
+        padding: 16px 32px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 50px;
+    }
+}
+

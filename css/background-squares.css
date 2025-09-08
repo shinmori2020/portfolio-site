@@ -1,0 +1,87 @@
+/* 固定背景の四角形スタイル */
+
+/* 大きい四角形（右上） */
+#square-large {
+    position: fixed;
+    top: 15%;
+    right: 8%;
+    width: min(22vw, 220px);
+    height: min(22vw, 220px);
+    max-width: 220px;
+    max-height: 220px;
+    min-width: 80px;
+    min-height: 80px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: transparent;
+    z-index: -1;
+    will-change: transform;
+}
+
+/* 小さい四角形（左下） */
+#square-small {
+    position: fixed;
+    bottom: 20%;
+    left: 8%;
+    width: min(18vw, 160px);
+    height: min(18vw, 160px);
+    max-width: 160px;
+    max-height: 160px;
+    min-width: 70px;
+    min-height: 70px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: transparent;
+    z-index: -1;
+    will-change: transform;
+}
+
+/* レスポンシブ調整 */
+@media (max-width: 768px) {
+    #square-large {
+        top: 12%;
+        right: 6%;
+        width: min(25vw, 140px);
+        height: min(25vw, 140px);
+    }
+    
+    #square-small {
+        bottom: 15%;
+        left: 6%;
+        width: min(22vw, 110px);
+        height: min(22vw, 110px);
+    }
+}
+
+@media (max-width: 480px) {
+    #square-large {
+        top: 10%;
+        right: 4%;
+        width: min(28vw, 100px);
+        height: min(28vw, 100px);
+        min-width: 60px;
+        min-height: 60px;
+    }
+    
+    #square-small {
+        bottom: 12%;
+        left: 4%;
+        width: min(25vw, 85px);
+        height: min(25vw, 85px);
+        min-width: 50px;
+        min-height: 50px;
+    }
+}
+
+/* 極小画面対応 */
+@media (max-width: 320px) {
+    #square-large {
+        right: 3%;
+        width: min(30vw, 80px);
+        height: min(30vw, 80px);
+    }
+    
+    #square-small {
+        left: 3%;
+        width: min(27vw, 70px);
+        height: min(27vw, 70px);
+    }
+}

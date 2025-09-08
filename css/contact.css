@@ -2,8 +2,8 @@
 
 .contact {
     max-width: 1200px;
-    margin: 80px auto 0;
-    padding: 40px 20px;
+    margin: 0 auto;
+    padding: 80px 0;
 }
 
 .contact__title {
@@ -28,19 +28,16 @@
 }
 
 .contact__card {
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.08) 100%);
-    border: 1px solid #333;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     position: relative;
     transition: all 0.3s ease;
 }
 
 .contact__form-container {
-    padding: 40px;
+    padding: 0;
 }
 
 .contact__form-group {
-    background: rgba(255, 255, 255, 0.02);
+    background: #1a1a1a;
     padding: 25px;
     margin-bottom: 20px;
     border: 1px solid #333;
@@ -49,29 +46,9 @@
     z-index: 1;
 }
 
-/* Lower z-index for form groups when dropdown is open */
-.contact__form-container.dropdown-open .contact__form-group:not(.contact__form-group--dropdown) {
-    z-index: 0;
-}
+/* Unused dropdown-open styles removed */
 
-.contact__form-group:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-    background: rgba(255, 255, 255, 0.05);
-}
-
-/* Disable hover effects when dropdown is open */
-.contact__select-wrapper.dropdown-open ~ .contact__form-group:hover {
-    transform: none;
-    box-shadow: none;
-    background: rgba(255, 255, 255, 0.02);
-}
-
-.contact__form-container.dropdown-open .contact__form-group:hover {
-    transform: none;
-    box-shadow: none;
-    background: rgba(255, 255, 255, 0.02);
-}
+/* Hover effects removed for contact form groups */
 
 .contact__form-group:focus-within {
     transform: translateY(-2px);
@@ -514,13 +491,4 @@
     border: 1px solid #333;
 }
 
-/* Progress bar */
-.contact__progress-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #00ff88, #00ff88);
-    transition: width 0.3s ease;
-    z-index: 1000;
-}
+/* Unused progress bar styles removed */

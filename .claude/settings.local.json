@@ -67,7 +67,12 @@
       "Read(/C:\\Users\\kiyos_000\\Desktop\\新しくポートフォリオにするプロフィールサイト\\html\\css/**)",
       "Bash(git init:*)",
       "Bash(gh:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "WebFetch(domain:gsap.com)"
     ],
     "deny": [],
     "ask": []

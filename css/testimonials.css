@@ -1,7 +1,7 @@
 /* お客様の声セクション - カルーセル形式 */
 .testimonials {
     padding: 80px 0;
-    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    background: transparent;
     position: relative;
     overflow: hidden;
 }
@@ -17,10 +17,7 @@
     animation: shimmer 3s infinite;
 }
 
-@keyframes shimmer {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.8; }
-}
+/* shimmer animation moved to base.css */
 
 .testimonials__header {
     text-align: center;
