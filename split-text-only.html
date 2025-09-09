@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文字のみ左右対称デザイン</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+            min-height: 200vh;
+        }
+
+        /* 基本の2分割レイアウト */
+        .split-container {
+            display: flex;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .split-left,
+        .split-right {
+            flex: 1;
+            padding: 80px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* 中央ライン（削除） */
+
+        /* 左側スタイル */
+        .split-left {
+            text-align: right;
+            padding-right: 60px;
+            background: #0a0a0a;
+        }
+
+        /* 右側スタイル */
+        .split-right {
+            text-align: left;
+            padding-left: 60px;
+            background: #0a0a0a;
+        }
+
+        /* メインタイトル */
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 40px;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .main-title-left {
+            color: #fff;
+        }
+
+        .main-title-right {
+            color: #fff;
+        }
+
+        /* サブタイトル */
+        .sub-title {
+            font-size: 0.9rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .sub-title-left {
+            color: #00ff88;
+        }
+
+        .sub-title-right {
+            color: #8800ff;
+        }
+
+        /* 説明テキスト */
+        .description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #999;
+            margin-bottom: 60px;
+        }
+
+        /* 文字ギミック */
+        .text-animation {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin: 40px 0;
+            line-height: 1.2;
+            overflow: hidden;
+        }
+
+        /* 文字分解用 */
+        .split-char {
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        /* ウェーブエフェクト */
+        .wave-text {
+            cursor: pointer;
+        }
+
+        .wave-text .split-char {
+            animation: wave 2s ease-in-out infinite;
+            animation-delay: calc(var(--char-index) * 0.1s);
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* タイプライター効果 */
+        .typewriter-text {
+            border-right: 2px solid;
+            border-color: inherit;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: typing 3s steps(30, end) forwards, blink 1s infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            0%, 50% { border-color: transparent; }
+            51%, 100% { border-color: inherit; }
+        }
+
+        /* 文字回転エフェクト */
+        .rotate-text .split-char {
+            transition: all 0.4s ease;
+        }
+
+        .rotate-text:hover .split-char {
+            transform: rotateY(360deg);
+            transition-delay: calc(var(--char-index) * 0.1s);
+        }
+
+        /* 文字拡散エフェクト */
+        .scatter-text .split-char {
+            transition: all 0.6s ease;
+        }
+
+        .scatter-text:hover .split-char {
+            transform: translate(
+                calc((var(--char-index) - 5) * 10px),
+                calc(sin(var(--char-index)) * 20px)
+            ) scale(1.2);
+            transition-delay: calc(var(--char-index) * 0.05s);
+        }
+
+        /* カラー左右 */
+        .text-animation-left {
+            color: #00ff88;
+        }
+
+        .text-animation-right {
+            color: #8800ff;
+        }
+
+        /* アニメーション用クラス */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .slide-left {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        .slide-right {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        /* タイポグラフィックな装飾（削除） */
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .split-container {
+                flex-direction: column;
+                min-height: auto;
+            }
+
+            .split-left,
+            .split-right {
+                padding: 40px 20px;
+                text-align: center;
+            }
+
+            .split-left {
+                border-right: none;
+                border-bottom: 2px solid #333;
+                padding-right: 20px;
+            }
+
+            .split-right {
+                padding-left: 20px;
+            }
+
+            .center-line {
+                display: none;
+            }
+
+            .main-title {
+                font-size: 2.5rem;
+            }
+
+            .sub-title {
+                font-size: 1.3rem;
+                letter-spacing: 2px;
+            }
+
+            .number-display {
+                font-size: 4rem;
+            }
+
+            .typo-decoration {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .number-display {
+                font-size: 3rem;
+            }
+
+            .quote {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* セクション（統一デザイン） */
+        .section-2, .section-3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- セクション1 -->
+    <div class="split-container" id="section1">
+        <!-- 左側 -->
+        <div class="split-left">
+            <h2 class="sub-title sub-title-left fade-in">Innovation</h2>
+            <h1 class="main-title main-title-left slide-left">革新的な<br>アプローチ</h1>
+            <p class="description fade-in">
+                創造性とテクノロジーの融合により、
+                従来の枠を超えた価値を創造します。
+                お客様のビジネスを次のレベルへ。
+            </p>
+            
+            <div class="text-animation text-animation-left wave-text fade-in">
+                Creative Solutions
+            </div>
+        </div>
+
+        <!-- 右側 -->
+        <div class="split-right">
+            <h2 class="sub-title sub-title-right fade-in">Quality</h2>
+            <h1 class="main-title main-title-right slide-right">品質への<br>こだわり</h1>
+            <p class="description fade-in">
+                妥協のない品質管理プロセスで、
+                最高水準のサービスを提供。
+                お客様の成功が私たちの使命です。
+            </p>
+            
+            <div class="text-animation text-animation-right typewriter-text fade-in">
+                Excellence Standards
+            </div>
+        </div>
+    </div>
+
+    <!-- セクション2 -->
+    <div class="split-container section-2" id="section2">
+        <div class="split-left">
+            <h2 class="sub-title sub-title-left fade-in">Technology</h2>
+            <h1 class="main-title main-title-left slide-left">最先端<br>テクノロジー</h1>
+            <p class="description fade-in">
+                AI、機械学習、クラウド技術を駆使し、
+                スケーラブルで持続可能な
+                ソリューションを構築します。
+            </p>
+            
+            <div class="text-animation text-animation-left rotate-text fade-in">
+                Advanced Systems
+            </div>
+        </div>
+
+        <div class="split-right">
+            <h2 class="sub-title sub-title-right fade-in">Performance</h2>
+            <h1 class="main-title main-title-right slide-right">圧倒的<br>パフォーマンス</h1>
+            <p class="description fade-in">
+                高速で安定したシステム基盤により、
+                ビジネスの成長を力強くサポート。
+                信頼性の高いサービスを実現します。
+            </p>
+            
+            <div class="text-animation text-animation-right scatter-text fade-in">
+                Optimized Speed
+            </div>
+        </div>
+    </div>
+
+    <!-- セクション3 -->
+    <div class="split-container section-3" id="section3">
+        <div class="split-left">
+            <h2 class="sub-title sub-title-left fade-in">Results</h2>
+            <h1 class="main-title main-title-left slide-left">確実な<br>成果創出</h1>
+            <p class="description fade-in">
+                データに基づいた戦略的アプローチで、
+                測定可能な成果を実現。
+                ROIの最大化を追求します。
+            </p>
+            
+            <div class="text-animation text-animation-left wave-text fade-in">
+                Measurable Impact
+            </div>
+        </div>
+
+        <div class="split-right">
+            <h2 class="sub-title sub-title-right fade-in">Partnership</h2>
+            <h1 class="main-title main-title-right slide-right">長期的<br>パートナーシップ</h1>
+            <p class="description fade-in">
+                単なるサービス提供者ではなく、
+                お客様のビジネス成功を共に目指す
+                真のパートナーとして伴走します。
+            </p>
+            
+            <div class="text-animation text-animation-right typewriter-text fade-in">
+                Trusted Relations
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // GSAP読み込み確認
+        if (typeof gsap === 'undefined') {
+            console.error('GSAP library not loaded');
+            // フォールバック: すべての要素を表示
+            document.querySelectorAll('.fade-in, .slide-left, .slide-right, .scale-in').forEach(el => {
+                el.style.opacity = '1';
+                el.style.transform = 'none';
+            });
+        } else {
+
+        // GSAP基本設定
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 即座にコンテンツを表示（フォールバック）
+        function showContentImmediately() {
+            gsap.set('.fade-in, .slide-left, .slide-right, .scale-in', { 
+                opacity: 1, 
+                x: 0, 
+                y: 0, 
+                scale: 1 
+            });
+        }
+
+        // 文字分解関数
+        function splitTextToChars(element) {
+            const text = element.innerText;
+            const chars = text.split('');
+            element.innerHTML = chars.map((char, index) => 
+                char === ' ' ? '<span class="split-char">&nbsp;</span>' : 
+                `<span class="split-char" style="--char-index: ${index}">${char}</span>`
+            ).join('');
+        }
+
+        // アニメーション初期化
+        function initTextOnlyAnimations() {
+            console.log('Initializing text-only animations...');
+
+            // 各セクション毎にアニメーション
+            gsap.utils.toArray('.split-container').forEach((section, sectionIndex) => {
+                
+                // フェードインアニメーション
+                gsap.from(section.querySelectorAll('.fade-in'), {
+                    opacity: 0,
+                    y: 30,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 70%",
+                        toggleActions: "play none none reverse"
+                    },
+                    delay: sectionIndex * 0.1
+                });
+
+                // 左からスライド
+                gsap.from(section.querySelectorAll('.slide-left'), {
+                    opacity: 0,
+                    x: -50,
+                    duration: 1,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 70%",
+                        toggleActions: "play none none reverse"
+                    },
+                    delay: 0.2 + (sectionIndex * 0.1)
+                });
+
+                // 右からスライド
+                gsap.from(section.querySelectorAll('.slide-right'), {
+                    opacity: 0,
+                    x: 50,
+                    duration: 1,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 70%",
+                        toggleActions: "play none none reverse"
+                    },
+                    delay: 0.2 + (sectionIndex * 0.1)
+                });
+
+                // スケールイン
+                gsap.from(section.querySelectorAll('.scale-in'), {
+                    opacity: 0,
+                    scale: 0.8,
+                    duration: 1.2,
+                    ease: "back.out(1.7)",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 70%",
+                        toggleActions: "play none none reverse"
+                    },
+                    delay: 0.5 + (sectionIndex * 0.1)
+                });
+            });
+
+            // 文字ギミックの初期化
+            initTextAnimations();
+
+            console.log('Text-only animations initialized');
+        }
+
+        // 文字アニメーションの初期化
+        function initTextAnimations() {
+            // ウェーブテキストを分解
+            gsap.utils.toArray('.wave-text').forEach(element => {
+                splitTextToChars(element);
+            });
+
+            // 回転テキストを分解
+            gsap.utils.toArray('.rotate-text').forEach(element => {
+                splitTextToChars(element);
+            });
+
+            // 拡散テキストを分解
+            gsap.utils.toArray('.scatter-text').forEach(element => {
+                splitTextToChars(element);
+            });
+
+            // タイプライターエフェクトのトリガー
+            gsap.utils.toArray('.typewriter-text').forEach((element, index) => {
+                ScrollTrigger.create({
+                    trigger: element.closest('.split-container'),
+                    start: "top 60%",
+                    onEnter: () => {
+                        element.style.animationDelay = (index * 0.5) + 's';
+                        element.style.animationPlayState = 'running';
+                    }
+                });
+            });
+
+            console.log('Text animations initialized');
+        }
+
+        // DOMContentLoaded後に実行
+        document.addEventListener('DOMContentLoaded', function() {
+            // まず即座にコンテンツを表示
+            showContentImmediately();
+            
+            setTimeout(() => {
+                try {
+                    initTextOnlyAnimations();
+                } catch (error) {
+                    console.error('Animation failed:', error);
+                }
+            }, 200);
+        });
+
+        // フォールバック
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                const hiddenElements = document.querySelectorAll('[style*="opacity: 0"]');
+                if (hiddenElements.length > 0) {
+                    console.log('Fallback: showing content');
+                    showContentImmediately();
+                }
+            }, 500);
+        });
+
+        } // GSAP確認終了
+    </script>
+</body>
+</html>

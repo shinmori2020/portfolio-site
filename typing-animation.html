@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>タイピングアニメーション 2分割デザイン</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #0a0a0a;
+            --secondary-bg: #111111;
+            --accent-1: #00d4aa;
+            --accent-2: #7c3aed;
+            --accent-3: #f59e0b;
+            --accent-4: #ff6b6b;
+            --text-primary: #ffffff;
+            --text-secondary: #a3a3a3;
+            --text-muted: #525252;
+            --gradient-1: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+            --gradient-2: linear-gradient(135deg, var(--accent-2), var(--accent-3));
+            --gradient-3: linear-gradient(135deg, var(--accent-1), var(--accent-4));
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --spacing-xl: 6rem;
+            --glow: 0 0 20px rgba(0, 212, 170, 0.3);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background: radial-gradient(ellipse at top, #1a1a1a 0%, var(--primary-bg) 100%);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.7;
+            min-height: 300vh;
+            font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+            font-weight: 600;
+        }
+
+        /* モダンな2分割レイアウト - 縦幅対応 */
+        .split-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 60vh;
+            position: relative;
+            gap: 0;
+        }
+
+        .split-left,
+        .split-right {
+            padding: var(--spacing-lg) var(--spacing-md);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            position: relative;
+            background: var(--primary-bg);
+        }
+
+        .split-left {
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+
+        .split-left::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, var(--accent-1), transparent);
+            opacity: 0.3;
+        }
+
+        /* 洗練されたタイポグラフィ */
+        .category {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: var(--spacing-sm);
+            position: relative;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .category.typing-text::after {
+            display: none !important;
+        }
+
+        .category::after {
+            content: '';
+            position: absolute;
+            bottom: -0.25rem;
+            left: 0;
+            width: 2rem;
+            height: 1px;
+            background: currentColor;
+        }
+
+        .category-left {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .category-right {
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-title {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-sm);
+            letter-spacing: -0.02em;
+            position: relative;
+            vertical-align: top;
+        }
+
+        .hero-title::before,
+        .hero-title::after {
+            display: none !important;
+        }
+
+        .hero-title span {
+            display: block;
+        }
+
+        .hero-title .highlight {
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: var(--glow);
+            position: relative;
+        }
+
+        .hero-title-right .highlight {
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+        }
+
+        .description {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-sm);
+            max-width: 28rem;
+            font-weight: 500;
+            vertical-align: top;
+        }
+
+        .description::before {
+            display: none !important;
+        }
+        
+        .description {
+            position: relative;
+        }
+        
+        .description::after {
+            display: none !important;
+        }
+
+        .feature-text {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: var(--spacing-md);
+            padding: var(--spacing-sm) 0;
+            padding-left: var(--spacing-sm);
+            position: relative;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            vertical-align: top;
+        }
+
+        .feature-text::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0.25rem;
+            height: 100%;
+            background: var(--accent-1);
+            opacity: 0.6;
+        }
+
+        .feature-text-right::before {
+            background: var(--accent-2);
+        }
+
+
+        /* カーソルは使用しない */
+
+        @keyframes blink {
+            0%, 45% { opacity: 1; }
+            46%, 100% { opacity: 0; }
+        }
+
+        .typing-text {
+            min-height: 1em;
+            position: relative;
+            vertical-align: top;
+            display: inline-block;
+            line-height: 1.2;
+            opacity: 0;
+        }
+
+        /* セクション間の区切り */
+        .section-divider {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 4rem;
+            background: linear-gradient(to bottom, transparent, var(--accent-1), transparent);
+            opacity: 0.3;
+        }
+
+        /* モダンなレスポンシブデザイン */
+        @media (max-width: 1024px) {
+            .split-container {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+            }
+
+            .split-left,
+            .split-right {
+                padding: var(--spacing-lg) var(--spacing-md);
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            .split-right {
+                border-bottom: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .split-left,
+            .split-right {
+                padding: var(--spacing-md) var(--spacing-sm);
+            }
+
+            .hero-title {
+                font-size: clamp(2rem, 10vw, 3rem);
+            }
+
+            .description {
+                font-size: 1rem;
+                max-width: none;
+            }
+
+            .category {
+                font-size: 0.7rem;
+            }
+        }
+
+        /* セクション特有のスタイル */
+        .section-2 {
+            background: var(--secondary-bg);
+        }
+
+        .section-3 .split-left,
+        .section-3 .split-right {
+            background: var(--primary-bg);
+        }
+
+        /* 微細なアニメーション */
+        .typing-text {
+            transition: none;
+        }
+
+        .typing-text:hover {
+            /* ホバー時の動きを無効化 */
+        }
+
+        /* アクセント要素 */
+        .accent-dot {
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            position: absolute;
+            top: -0.75rem;
+            right: 2rem;
+            opacity: 0.8;
+            box-shadow: var(--glow);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .accent-dot-right {
+            background: var(--gradient-2);
+            box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+        }
+
+        /* WEBスキルタグデザイン */
+        .skill-tags-container {
+            margin: var(--spacing-sm) 0;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            margin: 0.2rem 0.3rem 0.2rem 0;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(124, 58, 237, 0.05));
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(124, 58, 237, 0.1);
+            line-height: 1.5rem;
+            vertical-align: baseline;
+        }
+
+        .skill-tag:hover {
+            /* ホバー時の動きを無効化 */
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.2);
+            border-color: rgba(124, 58, 237, 0.5);
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(124, 58, 237, 0.08));
+        }
+
+        .skill-category-section {
+            margin-bottom: var(--spacing-sm);
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 0.5rem;
+            align-items: start;
+            min-height: 2.5rem;
+        }
+
+        .skill-category-title {
+            font-size: 1rem;
+            font-weight: 700;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            white-space: nowrap;
+            line-height: 2rem;
+            grid-column: 1;
+            width: 100px;
+            position: relative;
+        }
+
+        .skill-tags-row {
+            grid-column: 2;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            align-items: flex-start;
+        }
+        
+        .skill-category-section .skill-tag {
+            display: inline-block;
+            margin: 0;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+
+        /* モダンな装飾線 */
+        .decorative-line {
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background: var(--gradient-1);
+            margin-bottom: var(--spacing-sm);
+            opacity: 0.7;
+            border-radius: 2px;
+        }
+
+        .decorative-line-right {
+            background: var(--gradient-2);
+        }
+
+        /* フローティング要素 */
+        .floating-shape {
+            position: absolute;
+            background: linear-gradient(45deg, var(--accent-1), transparent);
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .floating-shape-1 {
+            width: 100px;
+            height: 100px;
+            top: 20%;
+            right: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-shape-2 {
+            width: 60px;
+            height: 60px;
+            top: 60%;
+            right: 20%;
+            animation-delay: 2s;
+            background: linear-gradient(45deg, var(--accent-2), transparent);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.6; }
+        }
+    </style>
+</head>
+<body>
+    <!-- セクション1 -->
+    <div class="split-container" id="section1">
+        <!-- 左側 -->
+        <div class="split-left">
+            <div class="accent-dot"></div>
+            <div class="category category-left typing-text" data-text="Innovation" data-speed="180"></div>
+            <h1 class="hero-title typing-text" data-text="革新的な アプローチ" data-speed="150" data-delay="600">
+            </h1>
+            <p class="description typing-text" data-text="創造性とテクノロジーの融合により、従来の枠を超えた価値を創造します。" data-speed="80" data-delay="1800">
+            </p>
+            
+            <!-- フローティング要素 -->
+            <div class="floating-shape floating-shape-1"></div>
+            <div class="floating-shape floating-shape-2"></div>
+        </div>
+
+        <!-- 右側 - WEBスキルタグ -->
+        <div class="split-right">
+            <div class="accent-dot accent-dot-right"></div>
+            
+            <div class="skill-tags-container">
+                <div class="skill-category-section">
+                    <div class="skill-category-title typing-text" data-text="Frontend" data-speed="90" data-delay="700"></div>
+                    <div class="skill-tags-row">
+                        <div class="skill-tag typing-text" data-text="HTML5" data-speed="70" data-delay="1400"></div>
+                        <div class="skill-tag typing-text" data-text="CSS3" data-speed="70" data-delay="1700"></div>
+                        <div class="skill-tag typing-text" data-text="JavaScript" data-speed="70" data-delay="2000"></div>
+                        <div class="skill-tag typing-text" data-text="React" data-speed="70" data-delay="2300"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-category-section">
+                    <div class="skill-category-title typing-text" data-text="Design" data-speed="90" data-delay="2700"></div>
+                    <div class="skill-tags-row">
+                        <div class="skill-tag typing-text" data-text="UI/UX" data-speed="70" data-delay="3300"></div>
+                        <div class="skill-tag typing-text" data-text="Figma" data-speed="70" data-delay="3600"></div>
+                        <div class="skill-tag typing-text" data-text="Photoshop" data-speed="70" data-delay="3900"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-category-section">
+                    <div class="skill-category-title typing-text" data-text="Backend" data-speed="90" data-delay="4400"></div>
+                    <div class="skill-tags-row">
+                        <div class="skill-tag typing-text" data-text="Node.js" data-speed="70" data-delay="5000"></div>
+                        <div class="skill-tag typing-text" data-text="PHP" data-speed="70" data-delay="5300"></div>
+                        <div class="skill-tag typing-text" data-text="WordPress" data-speed="70" data-delay="5600"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-divider"></div>
+    </div>
+
+    <!-- セクション2 -->
+    <div class="split-container section-2" id="section2">
+        <div class="split-left">
+            <div class="accent-dot"></div>
+            <div class="category category-left typing-text" data-text="Technology" data-speed="170"></div>
+            <h1 class="hero-title typing-text" data-text="最先端 テクノロジー" data-speed="145" data-delay="525">
+            </h1>
+            <p class="description typing-text" data-text="AI、機械学習、クラウド技術を駆使したスケーラブルなソリューションを構築します。" data-speed="70" data-delay="1500">
+            </p>
+            <div class="feature-text typing-text" data-text="Advanced Systems" data-speed="115" data-delay="2700"></div>
+        </div>
+
+        <div class="split-right">
+            <div class="accent-dot accent-dot-right"></div>
+            <div class="category category-right typing-text" data-text="Performance" data-speed="170" data-delay="260"></div>
+            <h1 class="hero-title hero-title-right typing-text" data-text="圧倒的 パフォーマンス" data-speed="145" data-delay="785">
+            </h1>
+            <p class="description typing-text" data-text="高速で安定したシステム基盤により、ビジネスの成長を力強くサポートします。" data-speed="70" data-delay="1760">
+            </p>
+            <div class="feature-text feature-text-right typing-text" data-text="Optimized Speed" data-speed="115" data-delay="2960"></div>
+        </div>
+        <div class="section-divider"></div>
+    </div>
+
+    <!-- セクション3 -->
+    <div class="split-container section-3" id="section3">
+        <div class="split-left">
+            <div class="accent-dot"></div>
+            <div class="category category-left typing-text" data-text="Results" data-speed="175"></div>
+            <h1 class="hero-title typing-text" data-text="確実な 成果創出" data-speed="155" data-delay="450">
+            </h1>
+            <p class="description typing-text" data-text="データに基づいた戦略的アプローチで、測定可能な成果を実現します。" data-speed="75" data-delay="1425">
+            </p>
+            <div class="feature-text typing-text" data-text="Measurable Impact" data-speed="105" data-delay="2400"></div>
+        </div>
+
+        <div class="split-right">
+            <div class="accent-dot accent-dot-right"></div>
+            <div class="category category-right typing-text" data-text="Partnership" data-speed="175" data-delay="225"></div>
+            <h1 class="hero-title hero-title-right typing-text" data-text="長期的 パートナーシップ" data-speed="155" data-delay="675">
+            </h1>
+            <p class="description typing-text" data-text="お客様のビジネス成功を共に目指す真のパートナーとして伴走します。" data-speed="75" data-delay="1650">
+            </p>
+            <div class="feature-text feature-text-right typing-text" data-text="Trusted Relations" data-speed="105" data-delay="2625"></div>
+        </div>
+    </div>
+
+    <script>
+        // GSAP読み込み確認
+        if (typeof gsap === 'undefined') {
+            console.error('GSAP library not loaded');
+            // フォールバック: タイピングアニメーションなしで最終表示
+            setTimeout(() => {
+                document.querySelectorAll('.typing-text').forEach(el => {
+                    el.style.opacity = '1';
+                    const text = el.getAttribute('data-text') || '';
+                    if (text) el.innerHTML = text;
+                });
+            }, 2000);
+        } else {
+
+        // GSAP基本設定
+        gsap.registerPlugin(ScrollTrigger);
+
+        // タイピングアニメーション関数
+        function typeText(element, text, speed = 100, delay = 0) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    element.innerHTML = '';
+                    let index = 0;
+                    
+                    const typeInterval = setInterval(() => {
+                        if (index === 0) {
+                            // 最初の文字表示と同時に要素を表示
+                            element.style.opacity = '1';
+                        }
+                        if (index < text.length) {
+                            element.innerHTML = text.substring(0, index + 1);
+                            index++;
+                        } else {
+                            element.innerHTML = text;
+                            clearInterval(typeInterval);
+                            resolve();
+                        }
+                    }, speed);
+                }, delay);
+            });
+        }
+
+        // 順次タイピング実行関数
+        async function sequentialTyping(elements) {
+            // カテゴリ別にグループ化
+            const categories = {
+                frontend: [],
+                design: [],
+                backend: []
+            };
+            
+            elements.forEach(element => {
+                const text = element.getAttribute('data-text') || '';
+                if (text === 'Frontend') {
+                    categories.frontend.push(element);
+                } else if (text === 'Design') {
+                    categories.design.push(element);
+                } else if (text === 'Backend') {
+                    categories.backend.push(element);
+                } else {
+                    // スキルタグを適切なカテゴリに振り分け
+                    const prevCategory = findPreviousCategory(element);
+                    if (prevCategory) {
+                        categories[prevCategory].push(element);
+                    }
+                }
+            });
+            
+            // カテゴリごとに順次実行
+            await typeCategory(categories.frontend, 700); // Frontend開始遅延
+            await typeCategory(categories.design, 500);   // カテゴリ間の間隔
+            await typeCategory(categories.backend, 500);  // カテゴリ間の間隔
+        }
+        
+        // カテゴリ内の要素を順次タイピング
+        async function typeCategory(elements, initialDelay = 0) {
+            if (elements.length === 0) return;
+            
+            // 最初の遅延
+            await new Promise(resolve => setTimeout(resolve, initialDelay));
+            
+            // 要素を順番に実行
+            for (let i = 0; i < elements.length; i++) {
+                const element = elements[i];
+                const text = element.getAttribute('data-text') || '';
+                const speed = parseInt(element.getAttribute('data-speed')) || 100;
+                
+                // 前の要素完了を待ってから次を開始
+                await typeText(element, text, speed, 0);
+                
+                // 要素間の短い間隔（次がスキルタグの場合）
+                if (i < elements.length - 1 && !isCategory(elements[i + 1])) {
+                    await new Promise(resolve => setTimeout(resolve, 200));
+                }
+            }
+        }
+        
+        // カテゴリタイトルかどうか判定
+        function isCategory(element) {
+            const text = element.getAttribute('data-text') || '';
+            return ['Frontend', 'Design', 'Backend'].includes(text);
+        }
+        
+        // 前のカテゴリを見つける
+        function findPreviousCategory(element) {
+            const allElements = Array.from(element.closest('.split-container').querySelectorAll('.typing-text'));
+            const currentIndex = allElements.indexOf(element);
+            
+            for (let i = currentIndex - 1; i >= 0; i--) {
+                const prevText = allElements[i].getAttribute('data-text') || '';
+                if (prevText === 'Frontend') return 'frontend';
+                if (prevText === 'Design') return 'design';
+                if (prevText === 'Backend') return 'backend';
+            }
+            return 'frontend'; // デフォルト
+        }
+
+        // セクション内のタイピングアニメーション初期化
+        function initTypingAnimation(container) {
+            const typingElements = container.querySelectorAll('.typing-text');
+            
+            // 最初にすべての要素を非表示にして内容をクリア
+            typingElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transition = 'none';
+                element.innerHTML = '';
+            });
+
+            // ScrollTriggerでセクションが表示されたらタイピング開始
+            ScrollTrigger.create({
+                trigger: container,
+                start: "top 80%",
+                onEnter: () => {
+                    // 順次タイピング実行
+                    sequentialTyping(typingElements);
+                }
+            });
+        }
+
+        // 高速タイピング効果（文字ごとの遅延を短縮）
+        function typeTextFast(element, text, baseSpeed = 50) {
+            element.innerHTML = '';
+            element.style.opacity = '1';
+            
+            const chars = text.split('');
+            let index = 0;
+            
+            const typeInterval = setInterval(() => {
+                if (index < chars.length) {
+                    const char = chars[index];
+                    const currentSpeed = char === ' ' ? baseSpeed * 0.5 : 
+                                       char.match(/[。、！？]/) ? baseSpeed * 2 : baseSpeed;
+                    
+                    element.innerHTML = text.substring(0, index + 1) + 
+                        '<span class="cursor">|</span>';
+                    index++;
+                } else {
+                    setTimeout(() => {
+                        element.innerHTML = text;
+                    }, 300);
+                    clearInterval(typeInterval);
+                }
+            }, baseSpeed);
+        }
+
+        // 波紋タイピング効果（中央から外側へ）
+        function typeTextWave(element, text, speed = 80) {
+            element.innerHTML = '';
+            element.style.opacity = '1';
+            
+            const words = text.split(' ');
+            const centerIndex = Math.floor(words.length / 2);
+            let typedWords = new Array(words.length).fill('');
+            let completedWords = 0;
+            
+            words.forEach((word, index) => {
+                const distance = Math.abs(index - centerIndex);
+                const delay = distance * speed;
+                
+                setTimeout(() => {
+                    let charIndex = 0;
+                    const wordInterval = setInterval(() => {
+                        if (charIndex <= word.length) {
+                            typedWords[index] = word.substring(0, charIndex);
+                            
+                            // 配列を結合して表示
+                            const displayText = typedWords.join(' ');
+                            element.innerHTML = displayText + 
+                                (completedWords < words.length ? '<span class="cursor">|</span>' : '');
+                            
+                            if (charIndex === word.length) {
+                                completedWords++;
+                                clearInterval(wordInterval);
+                                
+                                if (completedWords === words.length) {
+                                    setTimeout(() => {
+                                        element.innerHTML = text;
+                                    }, 300);
+                                }
+                            }
+                            charIndex++;
+                        }
+                    }, 60);
+                }, delay);
+            });
+        }
+
+        // すべてのセクションにタイピングアニメーションを適用
+        function initAllTypingAnimations() {
+            const sections = document.querySelectorAll('.split-container');
+            
+            sections.forEach((section, sectionIndex) => {
+                initTypingAnimation(section);
+            });
+            
+            console.log('All typing animations initialized!');
+        }
+
+        // DOMContentLoaded後に実行
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                try {
+                    initAllTypingAnimations();
+                } catch (error) {
+                    console.error('Typing animation failed:', error);
+                    // エラー時のフォールバック
+                    console.error('タイピングアニメーションの初期化に失敗しました');
+                }
+            }, 100);
+        });
+
+        // 最終フォールバック（GSAP完全失敗時のみ）
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                // タイピング要素のみをチェック（他の要素は除外）
+                const typingElements = document.querySelectorAll('.typing-text[style*="opacity: 0"]');
+                // GSAPが読み込まれている場合はフォールバック無効
+                if (typeof gsap !== 'undefined' && typingElements.length > 0) {
+                    console.log('GSAP読み込み済みのため、フォールバック処理をスキップ');
+                    return;
+                }
+                // GSAP未読み込み時のみ実行
+                if (typeof gsap === 'undefined' && typingElements.length > 0) {
+                    console.log('GSAP未読み込み - 最終フォールバック実行');
+                    typingElements.forEach(el => {
+                        el.style.opacity = '1';
+                        if (el.hasAttribute('data-text')) {
+                            el.innerHTML = el.getAttribute('data-text');
+                        }
+                    });
+                }
+            }, 5000); // 5秒に延長
+        });
+
+        } // GSAP確認終了
+    </script>
+</body>
+</html>

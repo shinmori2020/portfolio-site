@@ -72,7 +72,10 @@
       "Bash(git remote add:*)",
       "Bash(git branch:*)",
       "Bash(git push:*)",
-      "WebFetch(domain:gsap.com)"
+      "WebFetch(domain:gsap.com)",
+      "Bash(start C:Userskiyos_000Desktop新しくポートフォリオにするプロフィールサイトhtmlsplit-gsap-text-reveal.html)",
+      "Bash(start \"\" \"C:\\Users\\kiyos_000\\Desktop\\新しくポートフォリオにするプロフィールサイト\\html\\split-gsap-text-reveal.html\")",
+      "Bash(start \"\" \"C:\\Users\\kiyos_000\\Desktop\\新しくポートフォリオにするプロフィールサイト\\html\\typing-animation.html\")"
     ],
     "deny": [],
     "ask": []
