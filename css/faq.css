@@ -136,7 +136,17 @@
 }
 
 /* レスポンシブ対応 */
+@media (max-width: 1200px) {
+    .faq {
+        padding: 0 20px;
+    }
+}
+
 @media (max-width: 768px) {
+    .faq {
+        padding: 80px 30px;
+    }
+    
     .faq__title {
         font-size: 2rem;
         margin-bottom: 30px;
@@ -161,10 +171,10 @@
 }
 
 @media (max-width: 480px) {
-    body {
-        padding: 20px 10px;
+    .faq {
+        padding: 0 15px;
     }
-
+    
     .faq__title {
         font-size: 1.8rem;
     }

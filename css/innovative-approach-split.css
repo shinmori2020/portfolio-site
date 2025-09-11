@@ -1,0 +1,393 @@
+/* 革新的なアプローチ - スプリットデザイン */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap');
+
+:root {
+    --innovative-primary-bg: #0a0a0a;
+    --innovative-secondary-bg: #111111;
+    --innovative-accent-1: #00d4aa;
+    --innovative-accent-2: #7c3aed;
+    --innovative-accent-3: #f59e0b;
+    --innovative-accent-4: #ff6b6b;
+    --innovative-text-primary: #ffffff;
+    --innovative-text-secondary: #a3a3a3;
+    --innovative-text-muted: #525252;
+    --innovative-gradient-1: linear-gradient(135deg, var(--innovative-accent-1), var(--innovative-accent-2));
+    --innovative-gradient-2: linear-gradient(135deg, var(--innovative-accent-2), var(--innovative-accent-3));
+    --innovative-gradient-3: linear-gradient(135deg, var(--innovative-accent-1), var(--innovative-accent-4));
+    --innovative-spacing-xs: 0.5rem;
+    --innovative-spacing-sm: 1rem;
+    --innovative-spacing-md: 2rem;
+    --innovative-spacing-lg: 4rem;
+    --innovative-spacing-xl: 6rem;
+    --innovative-glow: 0 0 20px rgba(0, 212, 170, 0.3);
+}
+
+/* モダンな2分割レイアウト - 縦幅対応 */
+.innovative-split-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    gap: 0;
+    max-width: 1200px;
+    margin: var(--innovative-spacing-lg) auto;
+}
+
+.innovative-split-left,
+.innovative-split-right {
+    padding: var(--innovative-spacing-lg) var(--innovative-spacing-md);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+    background: transparent;
+}
+
+.innovative-split-left {
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+}
+
+.innovative-split-left::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, var(--innovative-accent-1), transparent);
+    opacity: 0.3;
+}
+
+/* 洗練されたタイポグラフィ */
+.innovative-category {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--innovative-spacing-sm);
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.innovative-category.innovative-typing-text::after {
+    display: none !important;
+}
+
+.innovative-category::after {
+    content: '';
+    position: absolute;
+    bottom: -0.25rem;
+    left: 0;
+    width: 2rem;
+    height: 1px;
+    background: currentColor;
+}
+
+.innovative-category-left {
+    color: #00ff88;
+    font-weight: 700;
+}
+
+.innovative-category-right {
+    background: var(--innovative-gradient-2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.innovative-hero-title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: var(--innovative-spacing-sm);
+    letter-spacing: -0.02em;
+    position: relative;
+    vertical-align: top;
+}
+
+.innovative-hero-title::before,
+.innovative-hero-title::after {
+    display: none !important;
+}
+
+.innovative-hero-title span {
+    display: block;
+}
+
+.innovative-hero-title .innovative-highlight {
+    font-weight: 700;
+    background: var(--innovative-gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: var(--innovative-glow);
+    position: relative;
+}
+
+.innovative-hero-title-right .innovative-highlight {
+    background: var(--innovative-gradient-2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+}
+
+.innovative-description {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--innovative-text-secondary);
+    margin-bottom: var(--innovative-spacing-sm);
+    max-width: 28rem;
+    font-weight: 500;
+    vertical-align: top;
+}
+
+.innovative-description::before {
+    display: none !important;
+}
+
+.innovative-description {
+    position: relative;
+}
+
+.innovative-description::after {
+    display: none !important;
+}
+
+.innovative-feature-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: var(--innovative-spacing-md);
+    padding: var(--innovative-spacing-sm) 0;
+    padding-left: var(--innovative-spacing-sm);
+    position: relative;
+    color: var(--innovative-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    vertical-align: top;
+}
+
+.innovative-feature-text::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0.25rem;
+    height: 100%;
+    background: var(--innovative-accent-1);
+    opacity: 0.6;
+}
+
+.innovative-feature-text-right::before {
+    background: var(--innovative-accent-2);
+}
+
+.innovative-typing-text {
+    min-height: 1em;
+    position: relative;
+    vertical-align: top;
+    display: inline-block;
+    line-height: 1.2;
+    opacity: 0;
+}
+
+/* セクション間の区切り */
+.innovative-section-divider {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 4rem;
+    background: linear-gradient(to bottom, transparent, var(--innovative-accent-1), transparent);
+    opacity: 0.3;
+}
+
+/* WEBスキルタグデザイン */
+.innovative-skill-tags-container {
+    margin: var(--innovative-spacing-sm) 0;
+}
+
+.innovative-skill-tag {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    margin: 0.2rem 0.3rem 0.2rem 0;
+    background: transparent;
+    border: 1px solid #333;
+    border-radius: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--innovative-text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    box-shadow: none;
+    line-height: 1.5rem;
+    vertical-align: baseline;
+}
+
+.innovative-skill-tag:hover {
+    box-shadow: none;
+    border-color: #333;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.innovative-skill-category-section {
+    margin-bottom: var(--innovative-spacing-sm);
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 0.5rem;
+    align-items: start;
+    min-height: 2.5rem;
+}
+
+.innovative-skill-category-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #00ff88;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    line-height: 2rem;
+    grid-column: 1;
+    width: 100px;
+    position: relative;
+}
+
+.innovative-skill-tags-row {
+    grid-column: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    align-items: flex-start;
+}
+
+.innovative-skill-category-section .innovative-skill-tag {
+    display: inline-block;
+    margin: 0;
+}
+
+/* アクセント要素 */
+
+
+/* モダンな装飾線 */
+.innovative-decorative-line {
+    position: absolute;
+    width: 60px;
+    height: 2px;
+    background: var(--innovative-gradient-1);
+    margin-bottom: var(--innovative-spacing-sm);
+    opacity: 0.7;
+    border-radius: 2px;
+}
+
+.innovative-decorative-line-right {
+    background: var(--innovative-gradient-2);
+}
+
+/* フローティング要素 - メインビジュアルと同じデザイン（ボーダー濃く） */
+.innovative-floating-shape {
+    position: absolute;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: transparent;
+    opacity: 0.5;
+    animation: innovative-float 6s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.innovative-floating-shape-1 {
+    width: 100px;
+    height: 100px;
+    top: 20%;
+    right: 10%;
+    animation-delay: 0s;
+}
+
+.innovative-floating-shape-2 {
+    width: 60px;
+    height: 60px;
+    top: 60%;
+    right: 20%;
+    animation-delay: 2s;
+}
+
+@keyframes innovative-float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.5; }
+    50% { transform: translateY(-20px) rotate(180deg); opacity: 0.6; }
+}
+
+/* モダンなレスポンシブデザイン */
+@media (max-width: 1200px) {
+    .innovative-split-container {
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .innovative-split-container {
+        grid-template-columns: 1fr;
+        gap: var(--innovative-spacing-lg);
+    }
+
+    .innovative-split-left,
+    .innovative-split-right {
+        padding: var(--innovative-spacing-lg) var(--innovative-spacing-md);
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .innovative-split-right {
+        border-bottom: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .innovative-split-container {
+        gap: 0;
+    }
+    
+    .innovative-split-left,
+    .innovative-split-right {
+        padding: var(--innovative-spacing-md) var(--innovative-spacing-sm);
+    }
+
+    .innovative-hero-title {
+        font-size: clamp(2rem, 10vw, 3rem);
+    }
+
+    .innovative-description {
+        font-size: 1rem;
+        max-width: none;
+    }
+
+    .innovative-category {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .innovative-split-container {
+        padding: 0 15px;
+    }
+}
+
+/* セクション特有のスタイル */
+.innovative-section-2 {
+    background: var(--innovative-secondary-bg);
+}
+
+.innovative-section-3 .innovative-split-left,
+.innovative-section-3 .innovative-split-right {
+    background: transparent;
+}
+
+/* 微細なアニメーション */
+.innovative-typing-text {
+    transition: none;
+}
+
+.innovative-typing-text:hover {
+    /* ホバー時の動きを無効化 */
+}

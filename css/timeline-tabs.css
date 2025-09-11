@@ -162,16 +162,22 @@
 }
 
 /* レスポンシブ対応 */
+@media (max-width: 1200px) {
+    .reasons {
+        padding: 80px 20px;
+    }
+}
+
 @media (max-width: 768px) {
     .reasons {
         flex-direction: column;
-        padding: 60px 0;
+        padding: 60px 30px;
     }
     
     .reasons__container {
         flex-direction: column;
         gap: 40px;
-        padding: 0 30px;
+        padding: 0;
     }
     
     .reasons__image {
@@ -180,11 +186,17 @@
     
     .reasons__content h2 {
         font-size: 2rem;
-        text-align: center;
+        text-align: left;
     }
     
     .reasons__content p {
-        text-align: center;
+        text-align: left;
+    }
+}
+
+@media (max-width: 480px) {
+    .reasons {
+        padding: 60px 15px;
     }
 }
 
@@ -216,7 +228,7 @@
     text-align: center;
     width: 100%;
     min-height: auto;
-    padding: 0 20px;
+    padding: 0;
     box-sizing: border-box;
 }
 
@@ -303,10 +315,15 @@
 }
 
 /* サービスガイドのレスポンシブ対応 */
+@media (max-width: 1200px) {
+    .service-guide {
+        padding: 80px 20px;
+    }
+}
+
 @media (max-width: 1024px) {
     .service-guide__container {
-        max-width: 90%;
-        padding: 0 20px;
+        padding: 0;
     }
     
     .service-guide__container h2 {
@@ -320,7 +337,7 @@
 
 @media (max-width: 768px) {
     .service-guide {
-        padding: 60px 0;
+        padding: 60px 30px;
     }
     
     .service-guide__container h2 {
@@ -342,13 +359,13 @@
     
     .service-guide__tab-content {
         min-height: 300px;
-        padding: 0 10px;
+        padding: 30px 20px;
     }
 }
 
 @media (max-width: 480px) {
     .service-guide {
-        padding: 40px 0;
+        padding: 40px 15px;
     }
     
     .service-guide__container h2 {
@@ -488,6 +505,17 @@
     display: block;
     margin-top: 5px;
     font-size: 0.9rem;
+}
+
+/* サービスガイド注記スタイル */
+.service-guide__note {
+    margin-top: 20px;
+    font-size: 0.95rem;
+    color: #718096;
+}
+
+.service-guide__note--large-margin {
+    margin-top: 25px;
 }
 
 /* Unused timeline-right-side button styles removed */

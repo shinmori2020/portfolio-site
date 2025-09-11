@@ -126,6 +126,9 @@
     transition: all 0.2s ease;
     position: relative;
     padding-left: 35px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    line-height: 1.4;
 }
 
 .services__features li::before {
@@ -176,7 +179,28 @@
 /* Unused featured button styles removed */
 
 /* Responsive Design */
+@media (max-width: 1200px) {
+    .services {
+        padding: 0 20px 80px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .services {
+        padding: 80px 10px;
+    }
+    .services__grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        max-width: none;
+    }
+}
+
 @media (max-width: 768px) {
+    .services {
+        padding: 80px 30px;
+    }
+    
     .services__grid {
         grid-template-columns: 1fr;
         gap: 25px;

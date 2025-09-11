@@ -107,7 +107,17 @@
 }
 
 /* レスポンシブ */
+@media (max-width: 1200px) {
+    .workflow {
+        padding: 0 20px 80px;
+    }
+}
+
 @media (max-width: 768px) {
+    .workflow {
+        padding: 80px 30px;
+    }
+    
     .workflow__title {
         font-size: 2rem;
     }
@@ -123,6 +133,12 @@
     .workflow__tasks li {
         font-size: 0.8rem;
         padding: 6px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .workflow {
+        padding: 0 15px 40px;
     }
 }
 
