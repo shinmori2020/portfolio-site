@@ -155,7 +155,7 @@ function initHeroAnimations() {
     const typingElement = document.getElementById('typing-text');
     
     if (typingElement) {
-        const typingText = 'Frontend Developer';
+        const typingText = 'Frontend Engineer';
         const typing = new TypingAnimation(typingElement, typingText, {
             typeSpeed: 100,
             startDelay: 1500 // Wait a bit after page load
@@ -201,33 +201,51 @@ document.addEventListener('DOMContentLoaded', function() {
     // お客様の声データ
     const testimonialsData = [
         {
-            name: "田中 健太郎",
-            title: "株式会社ABC商事 代表取締役",
-            quote: "制作いただいたホームページのおかげで、売上が30%向上しました。デザインが素晴らしく、お客様からも「見やすい」と好評です。レスポンシブ対応も完璧で、スマートフォンからのアクセスも増えています。",
+            name: "K.S",
+            title: "整体院経営",
+            quote: "サーバーのことなど全く分からない初心者でしたが、丁寧に教えてくださり本当に助かりました。LPの構成や文章も整えてくれて、SEO設定まで対応していただけました。おかげで集客に繋がっています。",
             rating: 5
         },
         {
-            name: "佐藤 美香", 
-            title: "XYZマーケティング マーケティング部長",
-            quote: "LP制作をお願いしましたが、期待以上の仕上がりでした。コンバージョン率が以前の3倍になり、ROIが大幅に改善されました。プロフェッショナルなサポートにも感謝しています。",
+            name: "T.M", 
+            title: "IT企業代表",
+            quote: "2度目の利用です。いつも迅速で丁寧な対応をしていただき、制作に関しても多くの配慮を賜りました。プロならではの目線でアドバイスもいただけて、安心してお任せできます。",
             rating: 5
         },
         {
-            name: "山田 拓也",
-            title: "DEF企画 クリエイティブディレクター", 
-            quote: "WordPress制作では、管理画面のカスタマイズが特に素晴らしかったです。非技術者でも簡単に更新できるようになり、運用コストが大幅に削減されました。継続的なサポートも心強いです。",
+            name: "H.Y",
+            title: "コンサルタント業", 
+            quote: "初めてのWEB制作で不安でしたが、辛抱強く対応していただきました。希望やイメージを丁寧にヒアリングし、的確なアドバイスで不安なく進められました。仕上がりにも大変満足しています。",
             rating: 5
         },
         {
-            name: "鈴木 雅子",
-            title: "GHIデザイン事務所 代表",
-            quote: "デザインセンスが抜群で、ブランドイメージを完璧に表現していただきました。お客様からの反応も非常に良く、問い合わせ件数が倍増しています。本当にありがとうございました。",
+            name: "R.A",
+            title: "デザイン事務所",
+            quote: "何度もリピートでお願いしています。対応スピードが早く、提案内容も分かりやすいため、いつもスムーズに進めることができます。無理なスケジュールにも快く対応していただき感謝しています。",
             rating: 5
         },
         {
-            name: "高橋 誠",
-            title: "JKL商店 店長",
-            quote: "短納期でしたが、品質を落とすことなく対応していただきました。SEO対策もしっかりとしていただき、検索順位が大幅に向上しました。アクセス数が3倍になり、新規顧客の獲得に成功しています。",
+            name: "N.S",
+            title: "医療関係",
+            quote: "ホームページの修正依頼でしたが、こちらのイメージ通りの内容を作成していただきました。やり取りも終始丁寧で、安心してお任せできました。技術的な説明も分かりやすかったです。",
+            rating: 5
+        },
+        {
+            name: "M.K",
+            title: "ECサイト運営",
+            quote: "かなり抽象的な要件でしたが、満足度の高い成果物を作成していただきました。情報共有もスムーズで、とても仕事がしやすいクリエイターさんです。GitHubでの対応もありがたかったです。",
+            rating: 5
+        },
+        {
+            name: "S.T",
+            title: "広告代理店",
+            quote: "迅速かつ丁寧なご対応で、相談も快く引き受けてくださりとても助かりました。10年の経験に基づく確実な技術力を感じました。今後も継続してお願いしたいと思います。",
+            rating: 5
+        },
+        {
+            name: "A.I",
+            title: "個人事業主",
+            quote: "自分が初めてのWEB制作依頼で不安もありましたが、不慣れな私にも丁寧にお知らせくださり、思っていた以上の仕事をしていただき大満足です。コミュニケーションがとても取りやすかったです。",
             rating: 5
         }
     ];
@@ -835,6 +853,177 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
+});
+
+/**
+ * 革新的アプローチ - タイピングアニメーション機能
+ */
+
+// タイピングアニメーション関数
+function innovativeTypeText(element, text, speed = 100, delay = 0) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            element.innerHTML = '';
+            let index = 0;
+            
+            const typeInterval = setInterval(() => {
+                if (index === 0) {
+                    // 最初の文字表示と同時に要素を表示
+                    element.style.opacity = '1';
+                }
+                if (index < text.length) {
+                    element.innerHTML = text.substring(0, index + 1);
+                    index++;
+                } else {
+                    element.innerHTML = text;
+                    clearInterval(typeInterval);
+                    resolve();
+                }
+            }, speed);
+        }, delay);
+    });
+}
+
+// 順次タイピング実行関数
+async function innovativeSequentialTyping(elements) {
+    // カテゴリ別にグループ化
+    const categories = {
+        frontend: [],
+        design: [],
+        backend: []
+    };
+    
+    elements.forEach(element => {
+        const text = element.getAttribute('data-text') || '';
+        if (text === 'Frontend') {
+            categories.frontend.push(element);
+        } else if (text === 'Design') {
+            categories.design.push(element);
+        } else if (text === 'Backend') {
+            categories.backend.push(element);
+        } else {
+            // スキルタグを適切なカテゴリに振り分け
+            const prevCategory = innovativeFindPreviousCategory(element);
+            if (prevCategory) {
+                categories[prevCategory].push(element);
+            }
+        }
+    });
+    
+    // カテゴリごとに順次実行
+    await innovativeTypeCategory(categories.frontend, 700); // Frontend開始遅延
+    await innovativeTypeCategory(categories.design, 500);   // カテゴリ間の間隔
+    await innovativeTypeCategory(categories.backend, 500);  // カテゴリ間の間隔
+}
+
+// カテゴリ内の要素を順次タイピング
+async function innovativeTypeCategory(elements, initialDelay = 0) {
+    if (elements.length === 0) return;
+    
+    // 最初の遅延
+    await new Promise(resolve => setTimeout(resolve, initialDelay));
+    
+    // 要素を順番に実行
+    for (let i = 0; i < elements.length; i++) {
+        const element = elements[i];
+        const text = element.getAttribute('data-text') || '';
+        const speed = parseInt(element.getAttribute('data-speed')) || 100;
+        
+        // 前の要素完了を待ってから次を開始
+        await innovativeTypeText(element, text, speed, 0);
+        
+        // 要素間の短い間隔（次がスキルタグの場合）
+        if (i < elements.length - 1 && !innovativeIsCategory(elements[i + 1])) {
+            await new Promise(resolve => setTimeout(resolve, 200));
+        }
+    }
+}
+
+// カテゴリタイトルかどうか判定
+function innovativeIsCategory(element) {
+    const text = element.getAttribute('data-text') || '';
+    return ['Frontend', 'Design', 'Backend'].includes(text);
+}
+
+// 前のカテゴリを見つける
+function innovativeFindPreviousCategory(element) {
+    const allElements = Array.from(element.closest('.innovative-split-container').querySelectorAll('.innovative-typing-text'));
+    const currentIndex = allElements.indexOf(element);
+    
+    for (let i = currentIndex - 1; i >= 0; i--) {
+        const prevText = allElements[i].getAttribute('data-text') || '';
+        if (prevText === 'Frontend') return 'frontend';
+        if (prevText === 'Design') return 'design';
+        if (prevText === 'Backend') return 'backend';
+    }
+    return 'frontend'; // デフォルト
+}
+
+// セクション内のタイピングアニメーション初期化
+function innovativeInitTypingAnimation(container) {
+    const typingElements = container.querySelectorAll('.innovative-typing-text');
+    
+    // 最初にすべての要素を非表示にして内容をクリア
+    typingElements.forEach(element => {
+        element.style.opacity = '0';
+        element.style.transition = 'none';
+        element.innerHTML = '';
+    });
+
+    // ScrollTriggerまたは代替手段でセクションが表示されたらタイピング開始
+    if (typeof gsap !== 'undefined' && gsap.registerPlugin) {
+        gsap.registerPlugin(ScrollTrigger);
+        ScrollTrigger.create({
+            trigger: container,
+            start: "top 80%",
+            once: true,
+            onEnter: () => {
+                // 順次タイピング実行
+                innovativeSequentialTyping(typingElements);
+            }
+        });
+    } else {
+        // GSAPがない場合のフォールバック - Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    innovativeSequentialTyping(typingElements);
+                    observer.unobserve(entry.target); // 一度実行したら監視停止
+                }
+            });
+        }, { threshold: 0.3 });
+        
+        observer.observe(container);
+    }
+}
+
+// 革新的アプローチセクションの初期化
+function initInnovativeApproachSection() {
+    const innovativeContainers = document.querySelectorAll('.innovative-split-container');
+    
+    innovativeContainers.forEach((container, index) => {
+        innovativeInitTypingAnimation(container);
+    });
+    
+    console.log('革新的アプローチセクションのタイピングアニメーション初期化完了');
+}
+
+// DOMContentLoaded後に革新的アプローチセクションを初期化
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(() => {
+        try {
+            initInnovativeApproachSection();
+        } catch (error) {
+            console.error('革新的アプローチセクションの初期化に失敗:', error);
+            // エラー時のフォールバック
+            const typingElements = document.querySelectorAll('.innovative-typing-text');
+            typingElements.forEach(el => {
+                el.style.opacity = '1';
+                const text = el.getAttribute('data-text') || '';
+                if (text) el.innerHTML = text;
+            });
+        }
+    }, 1000);
 });
 
 /**

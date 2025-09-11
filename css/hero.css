@@ -135,6 +135,12 @@
 }
 
 /* Responsive Design - Hero Section */
+@media (max-width: 1200px) {
+    .hero__container {
+        padding: 0 20px;
+    }
+}
+
 @media (max-width: 768px) {
     .hero {
         min-height: 100vh;
@@ -184,6 +190,10 @@
 }
 
 @media (max-width: 480px) {
+    .hero__container {
+        padding: 0 15px;
+    }
+    
     .hero__subtitle {
         font-size: 1rem;
     }
