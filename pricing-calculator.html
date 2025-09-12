@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>料金自動計算機 - Webサイト制作</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            font-size: 16px;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* BEMブロック: pricing-calculator */
+        .pricing-calculator {
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* pricing-calculator__header */
+        .pricing-calculator__header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 80px 20px 0;
+        }
+
+        .pricing-calculator__title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .pricing-calculator__subtitle {
+            color: #a0a0a0;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* pricing-calculator__content */
+        .pricing-calculator__content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        /* pricing-calculator__form */
+        .pricing-calculator__form {
+            padding: 0;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* pricing-calculator__result */
+        .pricing-calculator__result {
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: stretch;
+            text-align: left;
+        }
+
+        /* pricing-calculator__form-group */
+        .pricing-calculator__form-group {
+            background: #1a1a1a;
+            padding: 25px;
+            margin-bottom: 0;
+            border: 1px solid #333;
+            border-bottom: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-calculator__form-group:last-child {
+            border-bottom: 1px solid #333;
+        }
+
+        .pricing-calculator__form-title {
+            color: #00ff88;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        /* pricing-calculator__options */
+        .pricing-calculator__options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+
+        /* pricing-calculator__option */
+        .pricing-calculator__option {
+            position: relative;
+        }
+
+        .pricing-calculator__option-input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .pricing-calculator__option-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-calculator__option:first-child .pricing-calculator__option-label {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .pricing-calculator__option-label:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        .pricing-calculator__option-input:checked + .pricing-calculator__option-label {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #333;
+        }
+
+        .pricing-calculator__option-input:checked + .pricing-calculator__option-label::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #00ff88;
+        }
+
+        .pricing-calculator__option-content {
+            flex: 1;
+        }
+
+        .pricing-calculator__option-title {
+            font-weight: 500;
+            color: #fff;
+        }
+
+        .pricing-calculator__option-description {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-top: 2px;
+        }
+
+        .pricing-calculator__option-price {
+            font-weight: 600;
+            color: #00ff88;
+            font-size: 1.1rem;
+        }
+
+        /* pricing-calculator__price-display */
+        .pricing-calculator__price-display {
+            background: transparent;
+            color: #00ff88;
+            padding: 40px;
+            margin-bottom: 30px;
+            width: 100%;
+            border: 1px solid #00ff88;
+        }
+
+        .pricing-calculator__price-label {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        .pricing-calculator__total-price {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            transition: all 0.5s ease;
+        }
+
+        .pricing-calculator__tax-note {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* pricing-calculator__breakdown */
+        .pricing-calculator__breakdown {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .pricing-calculator__breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .pricing-calculator__breakdown-item:last-child {
+            border-bottom: none;
+            font-weight: 600;
+            color: #00ff88;
+            font-size: 1.1rem;
+        }
+
+        /* pricing-calculator__actions */
+        .pricing-calculator__actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            width: 100%;
+        }
+
+        .pricing-calculator__button {
+            padding: 18px 40px;
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: inline-block;
+            flex: 1;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .pricing-calculator__button:hover {
+            background: rgba(0, 255, 136, 0.2);
+            border-color: #00ff88;
+            transform: translateY(-5px);
+        }
+
+        .pricing-calculator__button--secondary {
+            background: transparent;
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .pricing-calculator__button--secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-color: #fff;
+        }
+
+        /* アニメーション */
+
+        .pricing-calculator__total-price--count-up {
+            animation: countUp 0.8s ease-out;
+        }
+
+        @keyframes countUp {
+            0% { 
+                transform: scale(0.5) rotateX(90deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1) rotateX(0deg);
+                opacity: 0.8;
+            }
+            100% { 
+                transform: scale(1) rotateX(0deg);
+                opacity: 1;
+            }
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .pricing-calculator__content {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-calculator__header {
+                padding: 60px 25px 0;
+            }
+            
+            .pricing-calculator__title {
+                font-size: 1.75rem;
+            }
+            
+            .pricing-calculator__form {
+                padding: 0;
+            }
+            
+            .pricing-calculator__result {
+                padding: 20px;
+            }
+            
+            .pricing-calculator__total-price {
+                font-size: 2.5rem;
+            }
+            
+            .pricing-calculator__price-display {
+                min-width: auto;
+            }
+            
+            .pricing-calculator__actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .pricing-calculator__header {
+                padding: 40px 15px 0;
+            }
+            
+            .pricing-calculator__title {
+                font-size: 1.5rem;
+            }
+            
+            .pricing-calculator__subtitle {
+                font-size: 1rem;
+            }
+            
+            .pricing-calculator__option-label {
+                padding: 12px 15px;
+            }
+            
+            .pricing-calculator__total-price {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pricing-calculator">
+        <div class="pricing-calculator__header">
+            <h1 class="pricing-calculator__title">料金自動計算機</h1>
+            <p class="pricing-calculator__subtitle">あなたのプロジェクトに最適な料金を自動で算出いたします</p>
+        </div>
+
+        <div class="pricing-calculator__content">
+            <div class="pricing-calculator__form">
+                <!-- ページ数選択 -->
+                <div class="pricing-calculator__form-group">
+                    <h3 class="pricing-calculator__form-title">ページ数</h3>
+                    <div class="pricing-calculator__options">
+                        <div class="pricing-calculator__option">
+                            <input type="radio" id="pages-1" name="pages" value="1" class="pricing-calculator__option-input" checked>
+                            <label for="pages-1" class="pricing-calculator__option-label">
+                                <div class="pricing-calculator__option-content">
+                                    <div class="pricing-calculator__option-title">1ページ（LP）</div>
+                                    <div class="pricing-calculator__option-description">ランディングページ・単体ページ</div>
+                                </div>
+                                <div class="pricing-calculator__option-price">¥100,000</div>
+                            </label>
+                        </div>
+                        <div class="pricing-calculator__option">
+                            <input type="radio" id="pages-5" name="pages" value="5" class="pricing-calculator__option-input">
+                            <label for="pages-5" class="pricing-calculator__option-label">
+                                <div class="pricing-calculator__option-content">
+                                    <div class="pricing-calculator__option-title">5ページ</div>
+                                    <div class="pricing-calculator__option-description">コーポレートサイト・小規模</div>
+                                </div>
+                                <div class="pricing-calculator__option-price">¥150,000</div>
+                            </label>
+                        </div>
+                        <div class="pricing-calculator__option">
+                            <input type="radio" id="pages-10" name="pages" value="10" class="pricing-calculator__option-input">
+                            <label for="pages-10" class="pricing-calculator__option-label">
+                                <div class="pricing-calculator__option-content">
+                                    <div class="pricing-calculator__option-title">10ページ</div>
+                                    <div class="pricing-calculator__option-description">中規模サイト・充実したコンテンツ</div>
+                                </div>
+                                <div class="pricing-calculator__option-price">¥200,000</div>
+                            </label>
+                        </div>
+                        <div class="pricing-calculator__option">
+                            <input type="radio" id="pages-custom" name="pages" value="custom" class="pricing-calculator__option-input">
+                            <label for="pages-custom" class="pricing-calculator__option-label">
+                                <div class="pricing-calculator__option-content">
+                                    <div class="pricing-calculator__option-title">10ページ以上</div>
+                                    <div class="pricing-calculator__option-description">大規模サイト・個別相談</div>
+                                </div>
+                                <div class="pricing-calculator__option-price">お見積り</div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- デザイン複雑度 -->
+                <div class="pricing-calculator__form-group">
+                    <h3 class="pricing-calculator__form-title">デザイン複雑度</h3>
+                    <div class="pricing-calculator__options">
+                        <div class="pricing-calculator__option">
+                            <input type="radio" id="design-template" name="design" value="template" class="pricing-calculator__option-input" checked>
+                            <label for="design-template" class="pricing-calculator__option-label">
+                                <div class="pricing-calculator__option-content">
+                                    <div class="pricing-calculator__option-title">テンプレートベース</div>
+                                    <div class="pricing-calculator__option-description">既存デザインをカスタマイズ</div>
+                                </div>
+                                <div class="pricing-calculator__option-price">+¥0</div>
+                            </label>
+                        </div>
+                        <div class="pricing-calculator__option">
+                            <input type="radio" id="design-custom" name="design" value="custom" class="pricing-calculator__option-input">
+                            <label for="design-custom" class="pricing-calculator__option-label">
+                                <div class="pricing-calculator__option-content">
+                                    <div class="pricing-calculator__option-title">オリジナルデザイン</div>
+                                    <div class="pricing-calculator__option-description">完全オリジナルの制作</div>
+                                </div>
+                                <div class="pricing-calculator__option-price">+¥30,000</div>
+                            </label>
+                        </div>
+                        <div class="pricing-calculator__option">
+                            <input type="radio" id="design-premium" name="design" value="premium" class="pricing-calculator__option-input">
+                            <label for="design-premium" class="pricing-calculator__option-label">
+                                <div class="pricing-calculator__option-content">
+                                    <div class="pricing-calculator__option-title">プレミアムデザイン</div>
+                                    <div class="pricing-calculator__option-description">高度なアニメーション・インタラクション</div>
+                                </div>
+                                <div class="pricing-calculator__option-price">+¥50,000</div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 機能選択 -->
+                <div class="pricing-calculator__form-group">
+                    <h3 class="pricing-calculator__form-title">追加機能</h3>
+                    <div class="pricing-calculator__options">
+                        <div class="pricing-calculator__option">
+                            <input type="checkbox" id="feature-forms" name="features" value="forms" class="pricing-calculator__option-input">
+                            <label for="feature-forms" class="pricing-calculator__option-label">
+                                <div class="pricing-calculator__option-content">
+                                    <div class="pricing-calculator__option-title">高度なお問い合わせフォーム</div>
+                                    <div class="pricing-calculator__option-description">バリデーション・自動返信機能</div>
+                                </div>
+                                <div class="pricing-calculator__option-price">+¥50,000</div>
+                            </label>
+                        </div>
+                        <div class="pricing-calculator__option">
+                            <input type="checkbox" id="feature-cms" name="features" value="cms" class="pricing-calculator__option-input">
+                            <label for="feature-cms" class="pricing-calculator__option-label">
+                                <div class="pricing-calculator__option-content">
+                                    <div class="pricing-calculator__option-title">CMS機能</div>
+                                    <div class="pricing-calculator__option-description">ブログ・ニュース更新システム</div>
+                                </div>
+                                <div class="pricing-calculator__option-price">+¥120,000</div>
+                            </label>
+                        </div>
+                        <div class="pricing-calculator__option">
+                            <input type="checkbox" id="feature-ecommerce" name="features" value="ecommerce" class="pricing-calculator__option-input">
+                            <label for="feature-ecommerce" class="pricing-calculator__option-label">
+                                <div class="pricing-calculator__option-content">
+                                    <div class="pricing-calculator__option-title">ECサイト機能</div>
+                                    <div class="pricing-calculator__option-description">決済システム・商品管理</div>
+                                </div>
+                                <div class="pricing-calculator__option-price">+¥200,000</div>
+                            </label>
+                        </div>
+                        <div class="pricing-calculator__option">
+                            <input type="checkbox" id="feature-api" name="features" value="api" class="pricing-calculator__option-input">
+                            <label for="feature-api" class="pricing-calculator__option-label">
+                                <div class="pricing-calculator__option-content">
+                                    <div class="pricing-calculator__option-title">API連携</div>
+                                    <div class="pricing-calculator__option-description">外部サービス連携・自動化</div>
+                                </div>
+                                <div class="pricing-calculator__option-price">+¥150,000</div>
+                            </label>
+                        </div>
+                        <div class="pricing-calculator__option">
+                            <input type="checkbox" id="feature-seo" name="features" value="seo" class="pricing-calculator__option-input">
+                            <label for="feature-seo" class="pricing-calculator__option-label">
+                                <div class="pricing-calculator__option-content">
+                                    <div class="pricing-calculator__option-title">SEO最適化</div>
+                                    <div class="pricing-calculator__option-description">検索エンジン対策・分析ツール</div>
+                                </div>
+                                <div class="pricing-calculator__option-price">+¥80,000</div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pricing-calculator__result">
+                <div class="pricing-calculator__price-display">
+                    <div class="pricing-calculator__price-label">お見積り金額</div>
+                    <div class="pricing-calculator__total-price" id="totalPrice">¥100,000</div>
+                    <div class="pricing-calculator__tax-note">税込価格</div>
+                </div>
+
+                <div class="pricing-calculator__breakdown">
+                    <div id="breakdownItems">
+                        <div class="pricing-calculator__breakdown-item">
+                            <span>基本料金 (1ページ)</span>
+                            <span>¥100,000</span>
+                        </div>
+                        <div class="pricing-calculator__breakdown-item">
+                            <span>デザイン</span>
+                            <span>¥0</span>
+                        </div>
+                        <div class="pricing-calculator__breakdown-item">
+                            <span>追加機能</span>
+                            <span>¥0</span>
+                        </div>
+                        <div class="pricing-calculator__breakdown-item">
+                            <span><strong>合計金額</strong></span>
+                            <span><strong>¥100,000</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pricing-calculator__actions">
+                    <button class="pricing-calculator__button" onclick="requestQuote()">正式見積りを依頼</button>
+                    <button class="pricing-calculator__button pricing-calculator__button--secondary" onclick="shareEstimate()">見積りを共有</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 料金設定
+        const pricingConfig = {
+            pages: {
+                1: 100000,
+                5: 150000,
+                10: 200000,
+                custom: 0 // 個別相談
+            },
+            design: {
+                template: 0,
+                custom: 80000,
+                premium: 180000
+            },
+            features: {
+                forms: 50000,
+                cms: 120000,
+                ecommerce: 200000,
+                api: 150000,
+                seo: 80000
+            }
+        };
+
+        // DOM要素の取得（BEM記法準拠）
+        const totalPriceElement = document.getElementById('totalPrice');
+        const breakdownElement = document.getElementById('breakdownItems');
+
+        // 計算機の初期化
+        function initPricingCalculator() {
+            updatePrice();
+            attachEventListeners();
+        }
+
+        // イベントリスナーの設定
+        function attachEventListeners() {
+            // BEM記法のクラス名でセレクト
+            const inputs = document.querySelectorAll('.pricing-calculator__option-input');
+            inputs.forEach(input => {
+                input.addEventListener('change', updatePrice);
+            });
+        }
+
+        // 価格の更新
+        function updatePrice() {
+            const selectedPages = document.querySelector('input[name="pages"]:checked').value;
+            const selectedDesign = document.querySelector('input[name="design"]:checked').value;
+            const selectedFeatures = Array.from(document.querySelectorAll('input[name="features"]:checked'))
+                .map(input => input.value);
+
+            // 基本料金の計算
+            let basePrice = pricingConfig.pages[selectedPages];
+            let designPrice = pricingConfig.design[selectedDesign];
+            let featuresPrice = selectedFeatures.reduce((total, feature) => {
+                return total + pricingConfig.features[feature];
+            }, 0);
+
+            const totalPrice = basePrice + designPrice + featuresPrice;
+
+            // アニメーション付きで価格を更新
+            updatePriceWithAnimation(totalPrice);
+
+            // 内訳の更新
+            updateBreakdown(selectedPages, basePrice, designPrice, featuresPrice, selectedFeatures, totalPrice);
+        }
+
+        // アニメーション付きで価格を更新
+        function updatePriceWithAnimation(newPrice) {
+            totalPriceElement.classList.add('pricing-calculator__total-price--count-up');
+            
+            setTimeout(() => {
+                if (newPrice === 0) {
+                    totalPriceElement.textContent = 'お見積り';
+                } else {
+                    totalPriceElement.textContent = `¥${newPrice.toLocaleString()}`;
+                }
+                totalPriceElement.classList.remove('pricing-calculator__total-price--count-up');
+            }, 100);
+        }
+
+        // 内訳の更新
+        function updateBreakdown(selectedPages, basePrice, designPrice, featuresPrice, selectedFeatures, totalPrice) {
+            const pageLabels = {
+                1: '1ページ',
+                5: '5ページ',
+                10: '10ページ',
+                custom: 'カスタム'
+            };
+
+            const designLabels = {
+                template: 'テンプレートベース',
+                custom: 'オリジナルデザイン',
+                premium: 'プレミアムデザイン'
+            };
+
+            const featureLabels = {
+                forms: 'お問い合わせフォーム',
+                cms: 'CMS機能',
+                ecommerce: 'ECサイト機能',
+                api: 'API連携',
+                seo: 'SEO最適化'
+            };
+
+            let breakdownHTML = '';
+
+            // 基本料金
+            if (selectedPages === 'custom') {
+                breakdownHTML += `
+                    <div class="pricing-calculator__breakdown-item">
+                        <span>基本料金 (${pageLabels[selectedPages]})</span>
+                        <span>お見積り</span>
+                    </div>
+                `;
+            } else {
+                breakdownHTML += `
+                    <div class="pricing-calculator__breakdown-item">
+                        <span>基本料金 (${pageLabels[selectedPages]})</span>
+                        <span>¥${basePrice.toLocaleString()}</span>
+                    </div>
+                `;
+            }
+
+            // デザイン料金
+            const selectedDesignValue = document.querySelector('input[name="design"]:checked').value;
+            breakdownHTML += `
+                <div class="pricing-calculator__breakdown-item">
+                    <span>デザイン (${designLabels[selectedDesignValue]})</span>
+                    <span>¥${designPrice.toLocaleString()}</span>
+                </div>
+            `;
+
+            // 機能料金
+            if (selectedFeatures.length > 0) {
+                selectedFeatures.forEach(feature => {
+                    breakdownHTML += `
+                        <div class="pricing-calculator__breakdown-item">
+                            <span>${featureLabels[feature]}</span>
+                            <span>¥${pricingConfig.features[feature].toLocaleString()}</span>
+                        </div>
+                    `;
+                });
+            } else {
+                breakdownHTML += `
+                    <div class="pricing-calculator__breakdown-item">
+                        <span>追加機能</span>
+                        <span>¥0</span>
+                    </div>
+                `;
+            }
+
+            // 合計
+            if (selectedPages === 'custom') {
+                breakdownHTML += `
+                    <div class="pricing-calculator__breakdown-item">
+                        <span><strong>合計金額</strong></span>
+                        <span><strong>お見積り</strong></span>
+                    </div>
+                `;
+            } else {
+                breakdownHTML += `
+                    <div class="pricing-calculator__breakdown-item">
+                        <span><strong>合計金額</strong></span>
+                        <span><strong>¥${totalPrice.toLocaleString()}</strong></span>
+                    </div>
+                `;
+            }
+
+            breakdownElement.innerHTML = breakdownHTML;
+        }
+
+        // 正式見積りを依頼
+        function requestQuote() {
+            const selectedPages = document.querySelector('input[name="pages"]:checked').value;
+            const selectedDesign = document.querySelector('input[name="design"]:checked').value;
+            const selectedFeatures = Array.from(document.querySelectorAll('input[name="features"]:checked'))
+                .map(input => input.value);
+            
+            const totalPrice = document.getElementById('totalPrice').textContent;
+            
+            // メール本文の作成
+            const subject = 'Webサイト制作のお見積り依頼';
+            const body = `
+お見積り内容：
+・ページ数: ${selectedPages}
+・デザイン: ${selectedDesign}
+・追加機能: ${selectedFeatures.join(', ') || 'なし'}
+・概算金額: ${totalPrice}
+
+正式なお見積りをお願いいたします。
+            `.trim();
+
+            // メーラーを開く
+            window.location.href = `mailto:info@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+
+        // 見積りを共有
+        function shareEstimate() {
+            const totalPrice = document.getElementById('totalPrice').textContent;
+            const shareText = `Webサイト制作の概算見積り: ${totalPrice}\n料金自動計算機で簡単見積り！`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Webサイト制作 料金見積り',
+                    text: shareText,
+                    url: window.location.href
+                });
+            } else {
+                // フォールバック: クリップボードにコピー
+                navigator.clipboard.writeText(shareText + '\n' + window.location.href).then(() => {
+                    alert('見積り情報をクリップボードにコピーしました！');
+                });
+            }
+        }
+
+        // ページ読み込み時に初期化
+        document.addEventListener('DOMContentLoaded', initPricingCalculator);
+    </script>
+</body>
+</html>

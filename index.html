@@ -435,23 +435,21 @@
         <h2>お客様の声</h2>
         <p>スライド形式で1つずつお客様の声をじっくりご覧いただけます</p>
     </div>
-    
-    <div class="testimonials__container">
-        <!-- Swiper -->
-        <div class="swiper testimonials__swiper">
-            <div class="swiper-wrapper" id="carouselTrack">
-                <!-- スライドはJavaScriptで動的に生成 -->
-            </div>
-            
-            <!-- ナビゲーションボタン -->
-            <div class="swiper-button-next carousel-btn"></div>
-            <div class="swiper-button-prev carousel-btn"></div>
-            
-            <!-- ページネーション -->
-            <div class="swiper-pagination carousel-indicators"></div>
-        </div>
-    </div>
 </section>
+
+<!-- Swiper全幅コンテナ - testimonalsセクション外に配置 -->
+<div class="swiper testimonials__swiper">
+    <div class="swiper-wrapper" id="carouselTrack">
+        <!-- スライドはJavaScriptで動的に生成 -->
+    </div>
+    
+    <!-- ナビゲーションボタン -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    
+    <!-- ページネーション -->
+    <div class="swiper-pagination"></div>
+</div>
 
 <!-- よくある質問セクション - アコーディオン形式（クリック展開・アイコンアニメーション付き） -->
 <section class="faq">

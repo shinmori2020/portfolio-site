@@ -259,10 +259,10 @@ document.addEventListener('DOMContentLoaded', function() {
             return `
                 <div class="swiper-slide">
                     <div class="testimonials__card">
+                        <p class="testimonials__quote">${item.quote}</p>
                         <div class="rating">
                             ${'★'.repeat(item.rating).split('').map(star => `<span class="star">${star}</span>`).join('')}
                         </div>
-                        <p class="testimonials__quote">${item.quote}</p>
                         <div class="testimonials__customer">
                             <div class="testimonials__avatar">${nameFirst}</div>
                             <div class="testimonials__details">
@@ -285,34 +285,26 @@ document.addEventListener('DOMContentLoaded', function() {
         const swiper = new Swiper('.testimonials__swiper', {
             // 基本設定
             slidesPerView: 1,
-            spaceBetween: 30,
+            spaceBetween: 20,
             centeredSlides: true,
             loop: true,
             
-            // レスポンシブ設定
+            // レスポンシブ設定（シンプル化）
             breakpoints: {
-                480: {
-                    slidesPerView: 1.5, // 1.5枚表示（次のスライドが少し見える）
+                640: {
+                    slidesPerView: 2,
                     spaceBetween: 20
                 },
-                600: {
-                    slidesPerView: 2,   // タブレット小: 2枚表示
+                768: {
+                    slidesPerView: 3,
                     spaceBetween: 25
                 },
-                768: {
-                    slidesPerView: 2.5, // タブレット: 2.5枚表示
-                    spaceBetween: 30
-                },
                 1024: {
-                    slidesPerView: 3.5, // デスクトップ小: 3.5枚表示
-                    spaceBetween: 30
-                },
-                1200: {
-                    slidesPerView: 4,   // デスクトップ: 4枚表示
+                    slidesPerView: 4,
                     spaceBetween: 30
                 },
                 1440: {
-                    slidesPerView: 5,   // 大画面: 5枚表示
+                    slidesPerView: 5,
                     spaceBetween: 30
                 }
             },

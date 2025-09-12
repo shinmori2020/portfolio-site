@@ -47,7 +47,7 @@
 }
 
 .contact__form-group--dropdown {
-    z-index: 10000;
+    z-index: 10;
 }
 
 /* Unused dropdown-open styles removed */
@@ -133,7 +133,7 @@
     position: relative;
     width: 100%;
     isolation: isolate;
-    z-index: 1000;
+    z-index: 10;
 }
 
 .contact__select-button {
@@ -188,7 +188,7 @@
     border-top: none;
     max-height: 0;
     overflow: hidden;
-    z-index: 99999;
+    z-index: 50;
     transition: all 0.3s ease;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
     pointer-events: none;
@@ -230,7 +230,7 @@
 .contact__option:hover {
     background: rgba(255, 255, 255, 0.1);
     padding-left: 24px;
-    z-index: 10000;
+    z-index: 100;
 }
 
 .contact__option:active {
