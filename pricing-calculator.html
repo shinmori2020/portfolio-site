@@ -757,11 +757,17 @@
                     <div class="pricing-calculator__actions">
                         <button class="pricing-calculator__button" onclick="requestQuote()">正式見積りを依頼</button>
                         <button class="pricing-calculator__button pricing-calculator__button--secondary" onclick="shareEstimate()">見積りを共有</button>
+                        <button class="pricing-calculator__button pricing-calculator__button--secondary" onclick="generateEstimatePDF()">📄 PDF見積書ダウンロード</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- PDF生成用ライブラリ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- PDF生成モジュール（モダンデザイン版） -->
+    <script src="js/pdf-generator/pdf-generator-modern.js"></script>
 
     <script>
         // 料金設定
