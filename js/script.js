@@ -1,86 +1,9 @@
 /**
- * MAIN INITIALIZATION - All DOMContentLoaded events consolidated
+ * script.js - index.html専用機能
+ * ヒーロー、FAQ、サービスタブ、お客様の声、問い合わせフォーム等
  */
 document.addEventListener('DOMContentLoaded', function() {
-    
-    // ===== HAMBURGER MENU INITIALIZATION =====
-    // Get DOM elements
-    const hamburger = document.getElementById('hamburger');
-    const nav = document.getElementById('nav');
-    const navLinks = document.querySelectorAll('.header__menu-link');
-    
-    let isMenuOpen = false;
-    
-    /**
-     * Toggle hamburger menu
-     */
-    function toggleMenu() {
-        isMenuOpen = !isMenuOpen;
-        hamburger.classList.toggle('active', isMenuOpen);
-        nav.classList.toggle('active', isMenuOpen);
-        
-        // Prevent body scroll when menu is open
-        document.body.style.overflow = isMenuOpen ? 'hidden' : '';
-    }
-    
-    /**
-     * Close hamburger menu
-     */
-    function closeMenu() {
-        if (isMenuOpen) {
-            isMenuOpen = false;
-            hamburger.classList.remove('active');
-            nav.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    }
-    
-    // Hamburger button click event
-    hamburger.addEventListener('click', function(e) {
-        e.stopPropagation();
-        toggleMenu();
-    });
-    
-    // Menu link click events - close menu when link is clicked
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            closeMenu();
-            
-            // Smooth scroll to target section
-            const targetId = this.getAttribute('href');
-            if (targetId.startsWith('#')) {
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            }
-        });
-    });
-    
-    // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-        if (isMenuOpen && !nav.contains(event.target) && !hamburger.contains(event.target)) {
-            closeMenu();
-        }
-    });
-    
-    // Close menu on escape key press
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape' && isMenuOpen) {
-            closeMenu();
-        }
-    });
-    
-    // Handle window resize - close menu if switching to desktop view
-    window.addEventListener('resize', function() {
-        if (window.innerWidth > 768 && isMenuOpen) {
-            closeMenu();
-        }
-    });
-    
+
     // ===== HERO ANIMATIONS INITIALIZATION =====
     setTimeout(initHeroAnimations, 500);
     

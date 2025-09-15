@@ -76,7 +76,9 @@
       "Bash(start C:Userskiyos_000Desktop新しくポートフォリオにするプロフィールサイトhtmlsplit-gsap-text-reveal.html)",
       "Bash(start \"\" \"C:\\Users\\kiyos_000\\Desktop\\新しくポートフォリオにするプロフィールサイト\\html\\split-gsap-text-reveal.html\")",
       "Bash(start \"\" \"C:\\Users\\kiyos_000\\Desktop\\新しくポートフォリオにするプロフィールサイト\\html\\typing-animation.html\")",
-      "Bash(start \"\" \"C:\\Users\\kiyos_000\\Desktop\\新しくポートフォリオにするプロフィールサイト\\html\\index.html\")"
+      "Bash(start \"\" \"C:\\Users\\kiyos_000\\Desktop\\新しくポートフォリオにするプロフィールサイト\\html\\index.html\")",
+      "Bash(start \"\" \"C:\\Users\\kiyos_000\\Desktop\\新しくポートフォリオにするプロフィールサイト\\html\\pricing-calculator.html\")",
+      "Bash(mkdir:*)"
     ],
     "deny": [],
     "ask": []
