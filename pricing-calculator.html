@@ -262,18 +262,20 @@
             flex: 1;
             text-align: center;
             backdrop-filter: blur(10px);
+            white-space: nowrap;
         }
 
         .pricing-calculator__button:hover {
             background: rgba(0, 255, 136, 0.2);
             border-color: #00ff88;
-            transform: translateY(-5px);
         }
 
         .pricing-calculator__button--secondary {
             background: transparent;
             color: #fff;
             border-color: rgba(255, 255, 255, 0.3);
+            font-size: 1rem;
+            padding: 18px 30px;
         }
 
         .pricing-calculator__button--secondary:hover {
@@ -349,25 +351,462 @@
             body {
                 padding: 10px;
             }
-            
+
             .pricing-calculator__header {
                 padding: 40px 15px 0;
             }
-            
+
             .pricing-calculator__title {
                 font-size: 1.5rem;
             }
-            
+
             .pricing-calculator__subtitle {
                 font-size: 1rem;
             }
-            
+
             .pricing-calculator__option-label {
                 padding: 12px 15px;
             }
-            
+
             .pricing-calculator__total-price {
                 font-size: 2rem;
+            }
+        }
+
+        /* モーダルのスタイル */
+        .quote-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10000;
+        }
+
+        .quote-modal--active {
+            display: block;
+        }
+
+        .quote-modal__overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .quote-modal__content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a1a1a;
+            border: 1px solid #333;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -45%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .quote-modal__close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 30px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .quote-modal__close:hover {
+            color: #00ff88;
+            transform: rotate(90deg);
+        }
+
+        .quote-modal__title {
+            color: #00ff88;
+            font-size: 1.8rem;
+            margin: 0 0 10px 0;
+            padding: 30px 30px 0;
+        }
+
+        .quote-modal__subtitle {
+            color: #aaa;
+            font-size: 1rem;
+            margin: 0 0 30px 0;
+            padding: 0 30px;
+        }
+
+        .quote-modal__form {
+            padding: 0 30px 30px;
+        }
+
+        .quote-modal__summary {
+            background: rgba(0, 255, 136, 0.05);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .quote-modal__summary h3 {
+            color: #00ff88;
+            font-size: 1.1rem;
+            margin: 0 0 15px 0;
+        }
+
+        .quote-modal__summary-content {
+            color: #ddd;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .quote-modal__summary-total {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0, 255, 136, 0.3);
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .quote-modal__summary-total span {
+            color: #00ff88;
+        }
+
+        .quote-modal__inputs {
+            margin-bottom: 30px;
+        }
+
+        .quote-modal__field {
+            margin-bottom: 20px;
+        }
+
+        .quote-modal__label {
+            display: block;
+            color: #fff;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .quote-modal__required {
+            color: #00ff88;
+        }
+
+        .quote-modal__input,
+        .quote-modal__textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .quote-modal__input:focus,
+        .quote-modal__textarea:focus {
+            outline: none;
+            border-color: #00ff88;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .quote-modal__textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .quote-modal__checkbox-label {
+            display: flex;
+            align-items: center;
+            color: #ddd;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .quote-modal__checkbox-label input {
+            margin-right: 8px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .quote-modal__actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .quote-modal__submit {
+            flex: 1;
+            padding: 18px 40px;
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .quote-modal__submit:hover {
+            background: rgba(0, 255, 136, 0.2);
+            border-color: #00ff88;
+        }
+
+        .quote-modal__cancel {
+            flex: 1;
+            padding: 15px 30px;
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quote-modal__cancel:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #fff;
+        }
+
+        /* 成功メッセージ */
+        .quote-modal__success {
+            text-align: center;
+            padding: 50px 30px;
+        }
+
+        .quote-modal__success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            background: #00ff88;
+            color: #0a0a0a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            animation: successPulse 0.5s ease;
+        }
+
+        @keyframes successPulse {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .quote-modal__success h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .quote-modal__success p {
+            color: #ddd;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .quote-modal__success p span {
+            color: #00ff88;
+            font-weight: 600;
+        }
+
+        .quote-modal__close-success {
+            margin-top: 30px;
+            padding: 12px 40px;
+            background: #00ff88;
+            color: #0a0a0a;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quote-modal__close-success:hover {
+            background: #00cc6a;
+        }
+
+        /* ローディングスピナー */
+        .quote-modal__spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(0, 255, 136, 0.2);
+            border-top-color: #00ff88;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .quote-modal__submit-loading {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .quote-modal__submit[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: rgba(0, 255, 136, 0.05);
+        }
+
+        /* エラーメッセージ */
+        .quote-modal__error {
+            text-align: center;
+            padding: 50px 30px;
+        }
+
+        .quote-modal__error-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            background: #e74c3c;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .quote-modal__error h3 {
+            color: #e74c3c;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .quote-modal__error p {
+            color: #ddd;
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+
+        .quote-modal__retry {
+            padding: 12px 40px;
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quote-modal__retry:hover {
+            background: #c0392b;
+        }
+
+        /* カスタムスクロールバー */
+        /* Webkit系ブラウザ（Chrome、Edge、Safari）用 */
+        .quote-modal__content::-webkit-scrollbar,
+        .quote-modal__summary-content::-webkit-scrollbar,
+        .quote-modal__textarea::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        .quote-modal__content::-webkit-scrollbar-track,
+        .quote-modal__summary-content::-webkit-scrollbar-track,
+        .quote-modal__textarea::-webkit-scrollbar-track {
+            background: #1a1a1a;
+            border-left: 1px solid #333;
+        }
+
+        .quote-modal__content::-webkit-scrollbar-thumb,
+        .quote-modal__summary-content::-webkit-scrollbar-thumb,
+        .quote-modal__textarea::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 136, 0.3);
+            border: none;
+            transition: background 0.3s ease;
+        }
+
+        .quote-modal__content::-webkit-scrollbar-thumb:hover,
+        .quote-modal__summary-content::-webkit-scrollbar-thumb:hover,
+        .quote-modal__textarea::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 255, 136, 0.6);
+        }
+
+        .quote-modal__content::-webkit-scrollbar-thumb:active,
+        .quote-modal__summary-content::-webkit-scrollbar-thumb:active,
+        .quote-modal__textarea::-webkit-scrollbar-thumb:active {
+            background: #00ff88;
+        }
+
+        /* Firefox用 */
+        .quote-modal__content,
+        .quote-modal__summary-content,
+        .quote-modal__textarea {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 255, 136, 0.3) #1a1a1a;
+        }
+
+        .quote-modal__content:hover,
+        .quote-modal__summary-content:hover,
+        .quote-modal__textarea:hover {
+            scrollbar-color: rgba(0, 255, 136, 0.6) #1a1a1a;
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .quote-modal__content {
+                width: 95%;
+                max-height: 95vh;
+            }
+
+            .quote-modal__title {
+                font-size: 1.5rem;
+                padding: 20px 20px 0;
+            }
+
+            .quote-modal__subtitle {
+                padding: 0 20px;
+            }
+
+            .quote-modal__form {
+                padding: 0 20px 20px;
+            }
+
+            .quote-modal__actions {
+                flex-direction: column;
             }
         }
     </style>
@@ -756,8 +1195,7 @@
 
                     <div class="pricing-calculator__actions">
                         <button class="pricing-calculator__button" onclick="requestQuote()">正式見積りを依頼</button>
-                        <button class="pricing-calculator__button pricing-calculator__button--secondary" onclick="shareEstimate()">見積りを共有</button>
-                        <button class="pricing-calculator__button pricing-calculator__button--secondary" onclick="generateEstimatePDF()">📄 PDF見積書ダウンロード</button>
+                        <button class="pricing-calculator__button pricing-calculator__button--secondary" onclick="generateEstimatePDF()">PDF見積書ダウンロード</button>
                     </div>
                 </div>
             </div>
@@ -769,7 +1207,165 @@
     <!-- PDF生成モジュール（モダンデザイン版） -->
     <script src="js/pdf-generator/pdf-generator-modern.js"></script>
 
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <!-- 見積もり依頼モーダル -->
+    <div id="quoteModal" class="quote-modal">
+        <div class="quote-modal__overlay"></div>
+        <div class="quote-modal__content">
+            <button class="quote-modal__close">&times;</button>
+            <h2 class="quote-modal__title">正式見積りのご依頼</h2>
+            <p class="quote-modal__subtitle">選択された内容で正式なお見積りをお送りします</p>
+
+            <form id="quoteForm" class="quote-modal__form">
+                <!-- 選択内容の表示 -->
+                <div class="quote-modal__summary">
+                    <h3>選択された内容</h3>
+                    <div id="selectedItemsSummary" class="quote-modal__summary-content">
+                        <!-- JavaScriptで動的に挿入 -->
+                    </div>
+                    <div class="quote-modal__summary-total">
+                        概算金額: <span id="modalTotalPrice">¥0</span>
+                    </div>
+                </div>
+
+                <!-- 入力フォーム -->
+                <div class="quote-modal__inputs">
+                    <div class="quote-modal__field">
+                        <label for="customerName" class="quote-modal__label">
+                            お名前 <span class="quote-modal__required">*</span>
+                        </label>
+                        <input type="text" id="customerName" name="customerName" required class="quote-modal__input">
+                    </div>
+
+                    <div class="quote-modal__field">
+                        <label for="companyName" class="quote-modal__label">
+                            会社名
+                        </label>
+                        <input type="text" id="companyName" name="companyName" class="quote-modal__input">
+                    </div>
+
+                    <div class="quote-modal__field">
+                        <label for="customerEmail" class="quote-modal__label">
+                            メールアドレス <span class="quote-modal__required">*</span>
+                        </label>
+                        <input type="email" id="customerEmail" name="customerEmail" required class="quote-modal__input">
+                    </div>
+
+                    <div class="quote-modal__field">
+                        <label for="customerPhone" class="quote-modal__label">
+                            電話番号
+                        </label>
+                        <input type="tel" id="customerPhone" name="customerPhone" class="quote-modal__input">
+                    </div>
+
+                    <div class="quote-modal__field">
+                        <label for="projectDeadline" class="quote-modal__label">
+                            希望納期
+                        </label>
+                        <input type="date" id="projectDeadline" name="projectDeadline" class="quote-modal__input">
+                    </div>
+
+                    <div class="quote-modal__field">
+                        <label for="additionalMessage" class="quote-modal__label">
+                            その他ご要望
+                        </label>
+                        <textarea id="additionalMessage" name="additionalMessage" rows="4" class="quote-modal__textarea"></textarea>
+                    </div>
+
+                    <div class="quote-modal__field">
+                        <label class="quote-modal__checkbox-label">
+                            <input type="checkbox" id="privacyAgree" name="privacyAgree" required>
+                            <span>プライバシーポリシーに同意する <span class="quote-modal__required">*</span></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 送信ボタン -->
+                <div class="quote-modal__actions">
+                    <button type="submit" class="quote-modal__submit" id="submitButton">
+                        <span class="quote-modal__submit-text">見積りを依頼する</span>
+                        <span class="quote-modal__submit-loading" style="display: none;">
+                            <span class="quote-modal__spinner"></span>
+                            送信中...
+                        </span>
+                    </button>
+                    <button type="button" class="quote-modal__cancel">キャンセル</button>
+                </div>
+            </form>
+
+            <!-- エラーメッセージ -->
+            <div id="quoteError" class="quote-modal__error" style="display: none;">
+                <div class="quote-modal__error-icon">⚠</div>
+                <h3>送信エラー</h3>
+                <p id="errorMessage">送信に失敗しました。もう一度お試しください。</p>
+                <button class="quote-modal__retry">もう一度試す</button>
+            </div>
+
+            <!-- 送信完了メッセージ -->
+            <div id="quoteSuccess" class="quote-modal__success" style="display: none;">
+                <div class="quote-modal__success-icon">✓</div>
+                <h3>お見積り依頼を受け付けました</h3>
+                <p>受付番号: <span id="receiptNumber"></span></p>
+                <p>1営業日以内に担当者よりご連絡いたします。</p>
+                <button class="quote-modal__close-success">閉じる</button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        /* ========================================
+           EmailJS 設定手順（重要！）
+           ========================================
+
+           1. EmailJS アカウント作成
+              - https://www.emailjs.com/ でサインアップ（無料）
+
+           2. Email Service を追加
+              - Dashboard > Email Services > Add New Service
+              - Gmail または他のメールサービスを選択
+              - Service ID をメモ（例: "service_abc123"）
+
+           3. Email Template を作成
+              - Dashboard > Email Templates > Create New Template
+              - 以下の変数を使用:
+                {{from_name}} - お客様名
+                {{from_email}} - メールアドレス
+                {{company_name}} - 会社名
+                {{phone}} - 電話番号
+                {{deadline}} - 希望納期
+                {{selected_items}} - 選択項目
+                {{total_price}} - 概算金額
+                {{message}} - その他要望
+                {{receipt_number}} - 受付番号
+              - Template ID をメモ（例: "template_xyz789"）
+
+           4. API Keys を確認
+              - Dashboard > Account > API Keys
+              - Public Key をメモ（例: "user_PublicKey123"）
+
+           5. 下記の定数を実際の値に置き換える
+              - EMAILJS_PUBLIC_KEY
+              - EMAILJS_SERVICE_ID
+              - EMAILJS_TEMPLATE_ID
+
+           6. Netlify へデプロイ後
+              - EmailJS Dashboard > Email Services > 設定
+              - Whitelist domains に Netlify URL を追加
+              （例: your-site.netlify.app）
+        ======================================== */
+
+        // EmailJS 設定（これらを実際の値に置き換えてください）
+        const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';  // EmailJSのPublic Key
+        const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';  // Service ID
+        const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'; // Template ID
+
+        // EmailJS 初期化
+        (function() {
+            emailjs.init(EMAILJS_PUBLIC_KEY);
+        })();
+
         // 料金設定
         const pricingConfig = {
             pages: {
@@ -970,49 +1566,232 @@
             breakdownElement.innerHTML = breakdownHTML;
         }
 
-        // 正式見積りを依頼
+        // モーダル関連の要素取得
+        const modal = document.getElementById('quoteModal');
+        const modalOverlay = document.querySelector('.quote-modal__overlay');
+        const modalClose = document.querySelector('.quote-modal__close');
+        const modalCancel = document.querySelector('.quote-modal__cancel');
+        const quoteForm = document.getElementById('quoteForm');
+        const quoteSuccess = document.getElementById('quoteSuccess');
+        const closeSuccessBtn = document.querySelector('.quote-modal__close-success');
+
+        // 正式見積りを依頼（モーダルを開く）
         function requestQuote() {
-            const selectedPages = document.querySelector('input[name="pages"]:checked').value;
-            const selectedDesign = document.querySelector('input[name="design"]:checked').value;
-            const selectedFeatures = Array.from(document.querySelectorAll('input[name="features"]:checked'))
-                .map(input => input.value);
-            
-            const totalPrice = document.getElementById('totalPrice').textContent;
-            
-            // メール本文の作成
-            const subject = 'Webサイト制作のお見積り依頼';
-            const body = `
-お見積り内容：
-・ページ数: ${selectedPages}
-・デザイン: ${selectedDesign}
-・追加機能: ${selectedFeatures.join(', ') || 'なし'}
-・概算金額: ${totalPrice}
+            // モーダルを開く
+            openQuoteModal();
 
-正式なお見積りをお願いいたします。
-            `.trim();
-
-            // メーラーを開く
-            window.location.href = `mailto:info@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            // 選択内容を収集して表示
+            updateModalSummary();
         }
 
-        // 見積りを共有
-        function shareEstimate() {
+        // モーダルを開く
+        function openQuoteModal() {
+            modal.classList.add('quote-modal--active');
+            document.body.style.overflow = 'hidden';
+
+            // フォームをリセット
+            quoteForm.reset();
+            quoteForm.style.display = 'block';
+            quoteSuccess.style.display = 'none';
+        }
+
+        // モーダルを閉じる
+        function closeQuoteModal() {
+            modal.classList.remove('quote-modal--active');
+            document.body.style.overflow = '';
+        }
+
+        // 選択内容をモーダルに反映
+        function updateModalSummary() {
+            const selectedPages = document.querySelector('input[name="pages"]:checked');
+            const selectedDesign = document.querySelector('input[name="design"]:checked');
+            const selectedFeatures = document.querySelectorAll('input[name="features"]:checked');
+
+            let summaryHTML = '';
+
+            // ページ数
+            if (selectedPages) {
+                const pageLabel = selectedPages.nextElementSibling.querySelector('.pricing-calculator__option-title').textContent;
+                const pagePrice = selectedPages.nextElementSibling.querySelector('.pricing-calculator__option-price').textContent;
+                summaryHTML += `<div class="quote-modal__summary-item">• ページ数: ${pageLabel} (${pagePrice})</div>`;
+            }
+
+            // デザイン
+            if (selectedDesign) {
+                const designLabel = selectedDesign.nextElementSibling.querySelector('.pricing-calculator__option-title').textContent;
+                const designPrice = selectedDesign.nextElementSibling.querySelector('.pricing-calculator__option-price').textContent;
+                if (designPrice !== '+¥0') {
+                    summaryHTML += `<div class="quote-modal__summary-item">• デザイン: ${designLabel} (${designPrice})</div>`;
+                }
+            }
+
+            // 追加機能
+            selectedFeatures.forEach(feature => {
+                const featureLabel = feature.nextElementSibling.querySelector('.pricing-calculator__option-title').textContent;
+                const featurePrice = feature.nextElementSibling.querySelector('.pricing-calculator__option-price').textContent;
+                summaryHTML += `<div class="quote-modal__summary-item">• ${featureLabel} (${featurePrice})</div>`;
+            });
+
+            // サマリーを更新
+            document.getElementById('selectedItemsSummary').innerHTML = summaryHTML || '<div>選択された項目はありません</div>';
+
+            // 合計金額を更新
             const totalPrice = document.getElementById('totalPrice').textContent;
-            const shareText = `Webサイト制作の概算見積り: ${totalPrice}\n料金自動計算機で簡単見積り！`;
-            
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Webサイト制作 料金見積り',
-                    text: shareText,
-                    url: window.location.href
-                });
-            } else {
-                // フォールバック: クリップボードにコピー
-                navigator.clipboard.writeText(shareText + '\n' + window.location.href).then(() => {
-                    alert('見積り情報をクリップボードにコピーしました！');
-                });
+            document.getElementById('modalTotalPrice').textContent = totalPrice;
+        }
+
+        // フォーム送信処理
+        async function handleQuoteSubmit(e) {
+            e.preventDefault();
+
+            // ボタンをローディング状態にする
+            const submitButton = document.getElementById('submitButton');
+            const submitText = submitButton.querySelector('.quote-modal__submit-text');
+            const submitLoading = submitButton.querySelector('.quote-modal__submit-loading');
+            const quoteError = document.getElementById('quoteError');
+
+            submitButton.disabled = true;
+            submitText.style.display = 'none';
+            submitLoading.style.display = 'inline-flex';
+            quoteError.style.display = 'none';
+
+            // フォームデータを取得
+            const formData = new FormData(quoteForm);
+            const customerName = formData.get('customerName');
+            const companyName = formData.get('companyName') || '(未入力)';
+            const customerEmail = formData.get('customerEmail');
+            const customerPhone = formData.get('customerPhone') || '(未入力)';
+            const projectDeadline = formData.get('projectDeadline');
+            const additionalMessage = formData.get('additionalMessage') || '(なし)';
+
+            // 選択内容を取得
+            const selectedItems = Array.from(document.querySelectorAll('#selectedItemsSummary .quote-modal__summary-item'))
+                .map(item => item.textContent).join('\n');
+            const totalPrice = document.getElementById('modalTotalPrice').textContent;
+
+            // 見積もり番号を生成
+            const receiptNumber = generateReceiptNumber();
+
+            // EmailJS用のテンプレートパラメータ
+            const templateParams = {
+                from_name: customerName,
+                from_email: customerEmail,
+                company_name: companyName,
+                phone: customerPhone,
+                deadline: projectDeadline ? new Date(projectDeadline).toLocaleDateString('ja-JP') : '(未指定)',
+                selected_items: selectedItems,
+                total_price: totalPrice,
+                message: additionalMessage,
+                receipt_number: receiptNumber,
+                request_date: new Date().toLocaleString('ja-JP')
+            };
+
+            try {
+                // EmailJSで送信
+                if (EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
+                    // EmailJSが設定されている場合
+                    const response = await emailjs.send(
+                        EMAILJS_SERVICE_ID,
+                        EMAILJS_TEMPLATE_ID,
+                        templateParams
+                    );
+
+                    console.log('EmailJS送信成功:', response);
+
+                    // 成功画面を表示
+                    showSuccessMessage(receiptNumber);
+                } else {
+                    // EmailJSが設定されていない場合はmailtoにフォールバック
+                    console.warn('EmailJSが設定されていません。mailtoを使用します。');
+
+                    const subject = `[見積依頼 #${receiptNumber}] Webサイト制作のお見積り`;
+                    const body = `
+【お見積り依頼】
+
+受付番号: ${receiptNumber}
+依頼日時: ${templateParams.request_date}
+
+■ お客様情報
+お名前: ${customerName}
+会社名: ${companyName}
+メールアドレス: ${customerEmail}
+電話番号: ${customerPhone}
+
+■ プロジェクト情報
+希望納期: ${templateParams.deadline}
+
+■ 選択された内容
+${selectedItems}
+
+概算金額: ${totalPrice}
+
+■ その他ご要望
+${additionalMessage}
+
+---
+このメールは料金自動計算機から送信されました。
+`.trim();
+
+                    const mailtoLink = `mailto:info@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                    window.location.href = mailtoLink;
+
+                    // 成功画面を表示
+                    showSuccessMessage(receiptNumber);
+                }
+            } catch (error) {
+                console.error('送信エラー:', error);
+
+                // エラー画面を表示
+                document.getElementById('errorMessage').textContent =
+                    error.text || '送信に失敗しました。もう一度お試しください。';
+                quoteForm.style.display = 'none';
+                quoteError.style.display = 'block';
+            } finally {
+                // ボタンを元に戻す
+                submitButton.disabled = false;
+                submitText.style.display = 'inline';
+                submitLoading.style.display = 'none';
             }
         }
+
+        // 受付番号を生成
+        function generateReceiptNumber() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const random = String(Math.floor(Math.random() * 10000)).padStart(4, '0');
+            return `${year}${month}${day}-${random}`;
+        }
+
+        // 成功メッセージを表示
+        function showSuccessMessage(receiptNumber) {
+            document.getElementById('receiptNumber').textContent = receiptNumber;
+            quoteForm.style.display = 'none';
+            quoteSuccess.style.display = 'block';
+        }
+
+        // イベントリスナーの設定
+        modalClose.addEventListener('click', closeQuoteModal);
+        modalOverlay.addEventListener('click', closeQuoteModal);
+        modalCancel.addEventListener('click', closeQuoteModal);
+        closeSuccessBtn.addEventListener('click', closeQuoteModal);
+        quoteForm.addEventListener('submit', handleQuoteSubmit);
+
+        // エラー時の「もう一度試す」ボタン
+        document.querySelector('.quote-modal__retry').addEventListener('click', () => {
+            document.getElementById('quoteError').style.display = 'none';
+            quoteForm.style.display = 'block';
+            quoteForm.reset();
+            updateModalSummary();
+        });
+
+        // ESCキーでモーダルを閉じる
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('quote-modal--active')) {
+                closeQuoteModal();
+            }
+        });
 
         // 右側パネルの高さを左側に合わせる関数
         function adjustResultPanelHeight() {

@@ -91,9 +91,9 @@
         doc.setFillColor(22, 160, 133); // accent color
         doc.rect(x, y - 2, 3, 8, 'F');
 
-        // タイトル
+        // タイトル（上下中央に配置）
         const titleImage = createModernJapaneseImage(title, 11, COLORS.primary, '500');
-        doc.addImage(titleImage.dataUrl, 'PNG', x + 8, y - 2, titleImage.width, titleImage.height);
+        doc.addImage(titleImage.dataUrl, 'PNG', x + 8, y, titleImage.width, titleImage.height);
 
         // 下線
         doc.setDrawColor(224, 230, 232); // border color
@@ -543,17 +543,14 @@
         const notification = document.createElement('div');
         notification.className = 'pdf-notification-modern';
 
-        const bgColor = type === 'success' ? '#16A085' :
-                       type === 'error' ? '#E74C3C' : '#3498DB';
-
         notification.style.cssText = `
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: ${bgColor};
+            background: #000000;
             color: #FFFFFF;
             padding: 16px 24px;
-            border-radius: 4px;
+            border-radius: 0;
             font-weight: 400;
             font-family: 'Helvetica Neue', Arial, sans-serif;
             z-index: 100000;
@@ -593,8 +590,5 @@
 
     // グローバルに公開
     window.generateEstimatePDF = window.generateModernPDF;
-    window.generateJapanesePDF = window.generateModernPDF;
-    window.generateJapaneseFullPDF = window.generateModernPDF;
-    window.generateHighQualityJapanesePDF = window.generateModernPDF;
 
 })();
