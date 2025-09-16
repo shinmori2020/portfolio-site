@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ニーズ診断ツール - あなたに最適なWEB制作プランをご提案</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/destyle.css@4.0.0/destyle.min.css">
+    <!-- base.css for header and footer -->
+    <link rel="stylesheet" href="css/base.css">
+    <!-- needs-diagnosis specific styles -->
+    <link rel="stylesheet" href="css/needs-diagnosis.css">
+</head>
+<body>
+
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="header__container">
+            <div class="header__logo">
+                LOGO
+            </div>
+            <button class="header__hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="header__nav" id="nav">
+                <div class="header__overlay"></div>
+                <ul class="header__menu">
+                    <li class="header__menu-item"><a href="index.html#works" class="header__menu-link">Works</a></li>
+                    <li class="header__menu-item"><a href="index.html#skills" class="header__menu-link">Skills</a></li>
+                    <li class="header__menu-item"><a href="index.html#about" class="header__menu-link">About</a></li>
+                    <li class="header__menu-item"><a href="index.html#contact" class="header__menu-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="diagnosis" role="main">
+        <div class="diagnosis__container">
+            <!-- プログレスバー -->
+            <div class="diagnosis__progress" id="progressContainer" style="display: none;">
+                <div class="diagnosis__progress-bar">
+                    <div class="diagnosis__progress-fill" id="progressFill" style="width: 0%;"></div>
+                </div>
+                <div class="diagnosis__progress-text">
+                    <span id="progressCurrent">質問 1</span>
+                    <span id="progressTotal">/ 7</span>
+                </div>
+            </div>
+
+            <!-- ウェルカム画面 -->
+            <div class="diagnosis__screen diagnosis__screen--active" id="welcomeScreen">
+                <div class="diagnosis__welcome">
+                    <h1 class="diagnosis__title">あなたに最適な<br><span>WEB制作プラン</span>を診断</h1>
+                    <div class="diagnosis__subtitle-accent">10万円～100万円の幅広いプランから最適解をご提案</div>
+                    <p class="diagnosis__subtitle">
+                        10個の簡単な質問に答えるだけで、あなたのビジネスにピッタリな<br>
+                        WEB制作プランと概算費用がすぐにわかります
+                    </p>
+
+                    <div class="diagnosis__features">
+                        <div class="diagnosis__feature">
+                            <div class="diagnosis__feature-number">3分</div>
+                            <div class="diagnosis__feature-text">かんたん診断</div>
+                            <div class="diagnosis__feature-description">スマホでもOK</div>
+                        </div>
+                        <div class="diagnosis__feature">
+                            <div class="diagnosis__feature-number">無料</div>
+                            <div class="diagnosis__feature-text">概算見積もり</div>
+                            <div class="diagnosis__feature-description">すぐに確認可能</div>
+                        </div>
+                        <div class="diagnosis__feature">
+                            <div class="diagnosis__feature-number">3プラン</div>
+                            <div class="diagnosis__feature-text">最適提案</div>
+                            <div class="diagnosis__feature-description">LP/WEB/WPから選択</div>
+                        </div>
+                    </div>
+
+                    <button class="diagnosis__button" onclick="startDiagnosis()">無料で診断を始める</button>
+                </div>
+            </div>
+
+            <!-- 質問画面 -->
+            <div class="diagnosis__screen" id="questionScreen">
+                <h2 class="diagnosis__question" id="questionTitle"></h2>
+                <div class="diagnosis__options" id="optionsContainer"></div>
+                <div class="diagnosis__buttons" id="questionButtons" style="display: none;">
+                    <button class="diagnosis__button diagnosis__button--secondary" id="prevButton" onclick="previousQuestion()">前へ</button>
+                    <button class="diagnosis__button diagnosis__button--inactive" id="nextButton" onclick="nextQuestion()">次へ</button>
+                </div>
+            </div>
+
+
+            <!-- 結果画面 -->
+            <div class="diagnosis__screen" id="resultScreen">
+                <h1 class="diagnosis__title">診断結果</h1>
+                <p class="diagnosis__subtitle">あなたのビジネスに最適なプランをご提案します</p>
+
+                <div class="diagnosis__result-card">
+                    <div class="diagnosis__result-plan" id="recommendedPlan"></div>
+                    <div class="diagnosis__result-price" id="recommendedPrice"></div>
+                    <p id="recommendedDescription"></p>
+                    <ul class="diagnosis__result-features" id="recommendedFeatures"></ul>
+                </div>
+
+                <div class="diagnosis__email-capture">
+                    <h3 class="diagnosis__email-title">詳細な診断結果をメールで受け取る</h3>
+                    <p class="diagnosis__email-description">
+                        より詳しい見積もりやオプション情報をPDFでお送りします（無料）
+                    </p>
+                    <input type="email" class="diagnosis__email-input" placeholder="メールアドレスを入力" id="emailInput">
+                    <button class="diagnosis__button diagnosis__button--secondary" onclick="sendResultByEmail()">PDFを送信</button>
+                </div>
+
+                <div class="diagnosis__buttons">
+                    <button class="diagnosis__button diagnosis__button--secondary" onclick="restartDiagnosis()">もう一度診断する</button>
+                    <button class="diagnosis__button" onclick="goToCalculator()">料金計算機で詳細を見る</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 診断ツール専用JavaScript -->
+    <script src="js/needs-diagnosis.js"></script>
+    <!-- 共通JavaScript (ハンバーガーメニューなど) -->
+    <script src="js/common.js"></script>
+</body>
+</html>

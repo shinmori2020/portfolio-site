@@ -1,0 +1,595 @@
+/* ================================
+   ニーズ診断ツール スタイルシート
+   ================================ */
+
+/* ================================
+   Base Styles (BEM記法準拠)
+================================ */
+:root {
+    --primary-color: #00ff88;
+    --secondary-color: #0a0a0a;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    background: #0a0a0a;
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ================================
+   診断ツールコンテナー
+================================ */
+.diagnosis {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 110px 20px 40px;  /* ヘッダー高さ(70px) + 余白(40px) */
+    display: flex;
+    justify-content: center;
+}
+
+.diagnosis__container {
+    width: 100%;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    padding: 60px 40px 140px;
+    position: relative;
+    overflow: hidden;
+    min-height: 600px;
+}
+
+/* ================================
+   プログレスバー
+================================ */
+.diagnosis__progress {
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+}
+
+.diagnosis__progress-bar {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.diagnosis__progress-fill {
+    height: 100%;
+    background: var(--primary-color);
+    transition: width 0.5s ease;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+}
+
+.diagnosis__progress-text {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* ================================
+   各画面の共通スタイル
+================================ */
+.diagnosis__screen {
+    display: none;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.diagnosis__screen--active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.diagnosis__title {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #fff;
+    letter-spacing: 0.02em;
+    line-height: 1.3;
+    position: relative;
+}
+
+/* ウェルカム画面用の特別なタイトル */
+.diagnosis__welcome .diagnosis__title {
+    font-size: 56px;
+    margin-bottom: 10px;
+}
+
+.diagnosis__welcome .diagnosis__title span {
+    color: var(--primary-color);
+}
+
+.diagnosis__welcome .diagnosis__subtitle-accent {
+    font-size: 24px;
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 25px;
+    letter-spacing: 0.05em;
+}
+
+.diagnosis__subtitle {
+    font-size: 18px;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    line-height: 1.8;
+}
+
+.diagnosis__welcome .diagnosis__subtitle {
+    font-size: 16px;
+    color: #ccc;
+    margin-bottom: 50px;
+    line-height: 1.8;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ================================
+   ウェルカム画面
+================================ */
+.diagnosis__welcome {
+    text-align: center;
+    position: relative;
+}
+
+.diagnosis__features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin: 50px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.diagnosis__feature {
+    padding: 30px 20px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border: 1px solid rgba(0, 255, 136, 0.2);
+    text-align: center;
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.diagnosis__feature:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 255, 136, 0.15);
+    border-color: var(--primary-color);
+}
+
+.diagnosis__feature-text {
+    font-size: 18px;
+    color: #fff;
+    font-weight: 600;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.diagnosis__feature-number {
+    font-size: 36px;
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 15px;
+    font-family: 'Inter', sans-serif;
+}
+
+.diagnosis__feature-description {
+    font-size: 13px;
+    color: #999;
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+.diagnosis__feature::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent 0%, var(--primary-color) 50%, transparent 100%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.diagnosis__feature:hover::before {
+    transform: translateX(0);
+}
+
+.diagnosis__feature::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, var(--primary-color) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+}
+
+.diagnosis__feature:hover::after {
+    opacity: 0.05;
+}
+
+/* ================================
+   質問画面
+================================ */
+.diagnosis__question {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.diagnosis__question-number {
+    display: inline-flex;
+    width: 48px;
+    height: 48px;
+    background: #6c757d;
+    color: #ffffff;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-right: 20px;
+}
+
+.diagnosis__options {
+    display: grid;
+    gap: 0;
+    margin-top: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.diagnosis__option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* キーボードフォーカス時のスタイル */
+.diagnosis__option:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+.diagnosis__options .diagnosis__option:first-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.diagnosis__option:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.diagnosis__option--selected {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #333;
+}
+
+.diagnosis__option--selected::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #00ff88;
+}
+
+.diagnosis__option-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.diagnosis__option-description {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* 複数選択用チェックボックス */
+.diagnosis__option--multiple {
+    padding-left: 50px;
+}
+
+.diagnosis__option--multiple .diagnosis__option-checkbox {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: var(--transition);
+    background: transparent;
+}
+
+.diagnosis__option--multiple.diagnosis__option--selected .diagnosis__option-checkbox {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.diagnosis__option--multiple.diagnosis__option--selected .diagnosis__option-checkbox::after {
+    content: '✓';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--secondary-color);
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* ================================
+   結果画面
+================================ */
+.diagnosis__result-card {
+    background: rgba(0, 255, 136, 0.05);
+    border: 1px solid var(--primary-color);
+    padding: 30px;
+    margin: 30px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.diagnosis__result-card::before {
+    content: 'おすすめ';
+    position: absolute;
+    top: 10px;
+    right: -40px;
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 5px 40px;
+    font-size: 12px;
+    font-weight: bold;
+    transform: rotate(45deg);
+}
+
+.diagnosis__result-plan {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.diagnosis__result-price {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.diagnosis__result-features {
+    list-style: none;
+    margin: 20px 0;
+}
+
+.diagnosis__result-features li {
+    padding: 10px 0;
+    padding-left: 30px;
+    position: relative;
+    color: var(--text-secondary);
+}
+
+.diagnosis__result-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.diagnosis__email-capture {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid #333;
+    padding: 30px;
+    margin: 30px 0;
+}
+
+.diagnosis__email-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.diagnosis__email-description {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+.diagnosis__email-input {
+    width: 100%;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.diagnosis__email-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1);
+}
+
+/* ================================
+   ボタン
+================================ */
+.diagnosis__button {
+    padding: 18px 40px;
+    background: rgba(0, 255, 136, 0.1);
+    color: #00ff88;
+    border: 2px solid rgba(0, 255, 136, 0.3);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    white-space: nowrap;
+}
+
+.diagnosis__button:hover {
+    background: rgba(0, 255, 136, 0.2);
+    border-color: #00ff88;
+}
+
+.diagnosis__button:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+
+.diagnosis__button--secondary {
+    background: transparent;
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.3);
+    font-size: 1rem;
+    padding: 18px 30px;
+}
+
+.diagnosis__button--secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-color: #fff;
+}
+
+.diagnosis__button--secondary:focus {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+/* 未選択時の次へボタン（グレー系） */
+.diagnosis__button--inactive {
+    background: transparent;
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    font-size: 1.1rem;
+    padding: 18px 40px;
+    font-weight: 600;
+    cursor: not-allowed;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    white-space: nowrap;
+    opacity: 0.7;
+}
+
+/* 未選択時はホバーエフェクトなし */
+.diagnosis__button--inactive:hover {
+    background: transparent;
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.diagnosis__button--inactive:focus {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+/* 選択後の次へボタン（緑色に変化） */
+.diagnosis__button--active {
+    background: rgba(0, 255, 136, 0.1) !important;
+    color: #00ff88 !important;
+    border: 2px solid rgba(0, 255, 136, 0.3) !important;
+    cursor: pointer !important;
+    opacity: 1 !important;
+}
+
+.diagnosis__button--active:hover {
+    background: rgba(0, 255, 136, 0.2) !important;
+    border-color: #00ff88 !important;
+}
+
+
+.diagnosis__buttons {
+    display: flex;
+    gap: 20px;
+    padding: 40px 0 0;
+    justify-content: space-between;
+}
+
+.diagnosis__buttons [class*="diagnosis__button"] {
+    width: calc(50% - 10px);
+    min-width: 0;
+}
+
+/* 質問画面用のパディング調整 */
+#questionScreen {
+    padding-bottom: 20px;
+}
+
+/* ================================
+   レスポンシブ対応
+================================ */
+@media (max-width: 768px) {
+    .diagnosis__container {
+        padding: 40px 20px;
+    }
+
+    .diagnosis__title {
+        font-size: 24px;
+    }
+
+    .diagnosis__welcome .diagnosis__title {
+        font-size: 32px;
+    }
+
+    .diagnosis__welcome .diagnosis__subtitle-accent {
+        font-size: 16px;
+    }
+
+    .diagnosis__subtitle {
+        font-size: 14px;
+    }
+
+    .diagnosis__question {
+        font-size: 20px;
+    }
+
+    .diagnosis__features {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .diagnosis__feature {
+        padding: 20px;
+    }
+
+    .diagnosis__buttons {
+        flex-direction: column-reverse;
+        gap: 15px;
+        padding: 30px 0 0;
+    }
+
+    .diagnosis__buttons [class*="diagnosis__button"] {
+        width: 100%;
+    }
+
+}

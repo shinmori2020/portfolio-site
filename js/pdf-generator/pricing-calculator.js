@@ -93,8 +93,208 @@ const breakdownElement = document.getElementById('breakdownItems');
 
 // 計算機の初期化
 function initPricingCalculator() {
+    // 診断ツールからのパラメータをチェック
+    checkDiagnosisParams();
     updatePrice();
     attachEventListeners();
+}
+
+// 診断ツールからのパラメータを処理
+function checkDiagnosisParams() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const fromDiagnosis = urlParams.get('from') === 'diagnosis';
+    const recommendedType = urlParams.get('type');
+
+    if (fromDiagnosis && recommendedType) {
+        // LocalStorageから診断結果を取得
+        const diagnosisData = localStorage.getItem('diagnosisResult');
+        if (diagnosisData) {
+            const result = JSON.parse(diagnosisData);
+            applyDiagnosisResult(result, recommendedType);
+
+            // 診断からの遷移メッセージを表示
+            showDiagnosisMessage(result.recommendation);
+        }
+    }
+}
+
+// 診断結果を料金計算機に反映
+function applyDiagnosisResult(result, type) {
+    const answers = result.answers;
+
+    // プランタイプに応じて設定
+    switch(type) {
+        case 'lp':
+            // ランディングページ設定
+            document.querySelector('input[name="pages"][value="1"]').checked = true;
+            document.querySelector('input[name="design"][value="custom"]').checked = true;
+            break;
+
+        case 'website':
+            // Webサイト設定
+            document.querySelector('input[name="pages"][value="5"]').checked = true;
+            document.querySelector('input[name="design"][value="custom"]').checked = true;
+            break;
+
+        case 'wordpress':
+            // WordPress設定
+            document.querySelector('input[name="pages"][value="10"]').checked = true;
+            document.querySelector('input[name="design"][value="premium"]').checked = true;
+            // CMS機能を自動選択
+            document.querySelector('input[value="basic-cms"]').checked = true;
+            break;
+    }
+
+    // 機能要件に基づいて追加機能を選択
+    if (answers.features) {
+        answers.features.forEach(feature => {
+            switch(feature) {
+                case 'contact':
+                    const contactCheckbox = document.querySelector('input[value="contact-form"]');
+                    if (contactCheckbox) contactCheckbox.checked = true;
+                    break;
+                case 'cms':
+                    const cmsCheckbox = document.querySelector('input[value="basic-cms"]');
+                    if (cmsCheckbox) cmsCheckbox.checked = true;
+                    break;
+                case 'reservation':
+                    const bookingCheckbox = document.querySelector('input[value="booking-form"]');
+                    if (bookingCheckbox) bookingCheckbox.checked = true;
+                    break;
+                case 'payment':
+                    const paymentCheckbox = document.querySelector('input[value="wp-woo-payment"]');
+                    if (paymentCheckbox) paymentCheckbox.checked = true;
+                    break;
+                case 'member':
+                    const memberCheckbox = document.querySelector('input[value="wp-membership"]');
+                    if (memberCheckbox) memberCheckbox.checked = true;
+                    break;
+                case 'multilang':
+                    const multilangCheckbox = document.querySelector('input[value="wp-polylang"]');
+                    if (multilangCheckbox) multilangCheckbox.checked = true;
+                    break;
+            }
+        });
+    }
+
+    // SEO対策（更新頻度が高い場合）
+    if (answers.update === 'daily' || answers.update === 'weekly') {
+        const seoCheckbox = document.querySelector('input[value="seo"]');
+        if (seoCheckbox) seoCheckbox.checked = true;
+    }
+}
+
+// 診断結果からの遷移メッセージを表示
+function showDiagnosisMessage(recommendation) {
+    // メッセージ要素を作成
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'diagnosis-message';
+    messageDiv.innerHTML = `
+        <div class="diagnosis-message__content">
+            <h3>診断結果を反映しました</h3>
+            <p>「${recommendation.plan}」をベースに料金を計算しています。<br>
+            項目は自由に変更できますので、ご要望に合わせて調整してください。</p>
+        </div>
+        <button class="diagnosis-message__close" onclick="this.parentElement.remove()">×</button>
+    `;
+
+    // スタイルを追加
+    const style = document.createElement('style');
+    style.textContent = `
+        .diagnosis-message {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 500px;
+            z-index: 1000;
+            display: flex;
+            gap: 20px;
+            animation: slideIn 0.5s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .diagnosis-message__content h3 {
+            margin: 0 0 15px 0;
+            font-size: 24px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .diagnosis-message__content p {
+            margin: 0;
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .diagnosis-message__close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .diagnosis-message__close:hover {
+            color: var(--primary-color);
+            transform: rotate(90deg);
+        }
+
+        @media (max-width: 768px) {
+            .diagnosis-message {
+                right: 10px;
+                left: 10px;
+                max-width: none;
+                padding: 20px;
+            }
+
+            .diagnosis-message__content h3 {
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
+
+            .diagnosis-message__content p {
+                font-size: 14px;
+            }
+        }
+    `;
+
+    document.head.appendChild(style);
+    document.body.appendChild(messageDiv);
+
+    // 10秒後に自動で非表示
+    setTimeout(() => {
+        if (messageDiv.parentElement) {
+            messageDiv.style.animation = 'fadeOut 0.5s ease';
+            setTimeout(() => messageDiv.remove(), 500);
+        }
+    }, 10000);
 }
 
 // イベントリスナーの設定
