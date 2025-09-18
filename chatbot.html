@@ -184,21 +184,29 @@
             gap: 10px;
         }
 
-        .chatbot__messages::-webkit-scrollbar {
-            width: 6px;
+        /* 既存サイトデザインに合わせたスクロールバー */
+        .chatbot__messages::-webkit-scrollbar,
+        .chatbot__options::-webkit-scrollbar {
+            width: 8px;
         }
 
-        .chatbot__messages::-webkit-scrollbar-track {
-            background: #2a2a2a;
+        .chatbot__messages::-webkit-scrollbar-track,
+        .chatbot__options::-webkit-scrollbar-track {
+            background: #1a1a1a;
+            border-radius: 4px;
         }
 
-        .chatbot__messages::-webkit-scrollbar-thumb {
-            background: #444;
-            border-radius: 3px;
+        .chatbot__messages::-webkit-scrollbar-thumb,
+        .chatbot__options::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #00ff88 0%, #00cc70 100%);
+            border-radius: 4px;
+            opacity: 0.8;
         }
 
-        .chatbot__messages::-webkit-scrollbar-thumb:hover {
-            background: #555;
+        .chatbot__messages::-webkit-scrollbar-thumb:hover,
+        .chatbot__options::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #00ff99 0%, #00dd80 100%);
+            opacity: 1;
         }
 
         /* メッセージバブル */
@@ -1315,25 +1323,214 @@
                         }, 1000);
                     }
 
-                    // 人気の質問を表示（拡張版がある場合）
+                    // 初期選択肢を表示
                     setTimeout(() => {
-                        if (typeof PopularQuestionSuggester !== 'undefined') {
-                            const suggestion = PopularQuestionSuggester.suggestQuestions([]);
-                            if (suggestion) {
-                                this.addBotMessage(suggestion.message);
-                            }
-                        } else {
-                            // フォールバック：既存の質問表示
-                            this.addBotMessage(`よくあるご質問：
-• 料金について
-• 制作期間について
-• 制作実績を見たい
-• 相談したい
-
-何でもお気軽にご質問ください！`);
-                        }
+                        this.showInitialCategories();
                     }, 1500);
                 }, 1000);
+            }
+
+            // 初期カテゴリー選択を表示
+            showInitialCategories() {
+                const categories = [
+                    { id: 'pricing', label: '料金・見積もりについて', keywords: ['料金', '見積もり', '予算'] },
+                    { id: 'production', label: 'サイト制作について', keywords: ['制作', 'WordPress', 'LP'] },
+                    { id: 'schedule', label: '納期・スケジュール', keywords: ['期間', '納期', '急ぎ'] },
+                    { id: 'tech', label: '技術・機能について', keywords: ['機能', 'SEO', 'スマホ'] },
+                    { id: 'support', label: 'サポート・保守', keywords: ['サポート', '修正', '更新'] },
+                    { id: 'portfolio', label: '制作実績・事例', keywords: ['実績', '事例', 'ポートフォリオ'] },
+                    { id: 'contact', label: '直接相談したい', keywords: ['相談', '問い合わせ'] },
+                    { id: 'other', label: 'その他の質問', keywords: [] }
+                ];
+
+                const optionsHtml = categories.map(cat =>
+                    `<button class="chatbot__option-btn chatbot__category-btn" data-category="${cat.id}" data-keywords='${JSON.stringify(cat.keywords)}'>
+                        ${cat.label}
+                    </button>`
+                ).join('');
+
+                const messageHtml = `
+                    <div class="chatbot__initial-select">
+                        <p style="margin-bottom: 15px; font-weight: bold;">どのようなご相談でしょうか？</p>
+                        <div class="chatbot__options" style="max-height: 350px; overflow-y: auto; padding-right: 5px;">
+                            ${optionsHtml}
+                        </div>
+                        <p style="margin-top: 15px; font-size: 12px; color: #999;">
+                            または、下の入力欄から直接ご質問いただくこともできます。
+                        </p>
+                    </div>
+                `;
+
+                this.addBotMessageHtml(messageHtml);
+
+                // カテゴリーボタンのクリックイベント
+                setTimeout(() => {
+                    document.querySelectorAll('.chatbot__category-btn').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            const category = e.currentTarget.dataset.category;
+                            const keywords = JSON.parse(e.currentTarget.dataset.keywords);
+                            const label = e.currentTarget.textContent.trim();
+
+                            // ユーザーの選択を表示
+                            this.addUserMessage(label);
+
+                            // カテゴリーに応じた詳細選択肢を表示
+                            setTimeout(() => {
+                                this.showCategoryDetails(category, keywords);
+                            }, 500);
+                        });
+                    });
+                }, 100);
+            }
+
+            // カテゴリー別の詳細選択肢を表示
+            showCategoryDetails(category, keywords) {
+                const categoryResponses = {
+                    'pricing': {
+                        message: '料金についてお答えします！',
+                        options: [
+                            { text: '基本料金を知りたい', response: '料金' },
+                            { text: '見積もりを依頼したい', response: '見積もり無料' },
+                            { text: '分割払いについて', response: '分割払い' },
+                            { text: '追加料金について', response: '追加料金' },
+                            { text: '業種別の料金', response: '業種別料金' }
+                        ]
+                    },
+                    'production': {
+                        message: 'サイト制作について詳しくご説明します！',
+                        options: [
+                            { text: 'LP制作について', response: 'LP' },
+                            { text: 'WordPress制作', response: 'WordPress' },
+                            { text: 'ECサイト制作', response: 'ECサイト' },
+                            { text: '制作の流れ', response: '制作フロー' },
+                            { text: 'カスタム機能開発', response: 'カスタム機能' }
+                        ]
+                    },
+                    'schedule': {
+                        message: 'スケジュールについてお答えします！',
+                        options: [
+                            { text: '標準的な納期', response: '期間' },
+                            { text: '急ぎの対応', response: '急ぎ' },
+                            { text: '制作フロー', response: '制作フロー' },
+                            { text: '開始時期について', response: '開始時期' }
+                        ]
+                    },
+                    'tech': {
+                        message: '技術・機能についてご説明します！',
+                        options: [
+                            { text: 'SEO対策', response: 'SEO' },
+                            { text: 'スマホ対応', response: 'スマホ' },
+                            { text: 'セキュリティ対策', response: 'セキュリティ' },
+                            { text: 'API連携', response: 'API連携' },
+                            { text: '予約システム', response: '予約システム' }
+                        ]
+                    },
+                    'support': {
+                        message: 'サポート体制についてご説明します！',
+                        options: [
+                            { text: '納品後のサポート', response: '完成後サポート' },
+                            { text: '保守・メンテナンス', response: '保守費用' },
+                            { text: '修正対応', response: '修正回数' },
+                            { text: '緊急時の対応', response: '緊急対応' },
+                            { text: '操作説明', response: '操作説明' }
+                        ]
+                    },
+                    'portfolio': {
+                        message: '制作実績をご覧いただけます！',
+                        options: [
+                            { text: '制作実績を見る', response: '制作実績' },
+                            { text: '業種別の事例', response: '業種別料金' },
+                            { text: 'お客様の声', response: 'お客様の声' },
+                            { text: '会社情報', response: '会社情報' }
+                        ]
+                    },
+                    'contact': {
+                        message: 'お問い合わせ方法をご案内します！',
+                        direct: true,
+                        response: `ご相談ありがとうございます！
+
+以下の方法でお問い合わせいただけます：
+
+• 電話相談（平日9:00-18:00）
+• メール相談（24時間受付）
+• オンライン相談（Zoom/Teams）
+• 来社相談（要予約）
+
+[今すぐ問い合わせる](#contact)`
+                    },
+                    'other': {
+                        message: 'その他のご質問をどうぞ！',
+                        direct: true,
+                        response: `下の入力欄にご質問をお書きください。
+
+よくあるご質問：
+• 著作権について
+• 契約書について
+• ドメイン・サーバーについて
+• 多言語対応について
+
+何でもお気軽にご質問ください！`
+                    }
+                };
+
+                const categoryData = categoryResponses[category];
+                if (!categoryData) return;
+
+                if (categoryData.direct) {
+                    // 直接回答を表示
+                    this.addBotMessage(categoryData.response);
+                } else {
+                    // 詳細選択肢を表示
+                    this.addBotMessage(categoryData.message);
+
+                    const optionsHtml = categoryData.options.map((opt, index) =>
+                        `<button class="chatbot__option-btn" data-response="${opt.response}">
+                            ${index + 1}. ${opt.text}
+                        </button>`
+                    ).join('');
+
+                    const messageHtml = `
+                        <div class="chatbot__options">
+                            ${optionsHtml}
+                        </div>
+                    `;
+
+                    setTimeout(() => {
+                        this.addBotMessageHtml(messageHtml);
+
+                        // 選択肢のクリックイベント
+                        setTimeout(() => {
+                            document.querySelectorAll('.chatbot__option-btn[data-response]').forEach(btn => {
+                                btn.addEventListener('click', (e) => {
+                                    const responseKey = e.target.dataset.response;
+                                    const buttonText = e.target.textContent;
+
+                                    // ユーザーの選択を表示
+                                    this.addUserMessage(buttonText);
+
+                                    // タイピング表示
+                                    this.showTypingIndicator();
+
+                                    // 対応する回答を検索して表示
+                                    setTimeout(() => {
+                                        this.hideTypingIndicator();
+
+                                        // KeywordMatcherを使って回答を取得
+                                        const response = KeywordMatcher.findMatch(responseKey);
+                                        if (response) {
+                                            this.addBotMessage(response.message);
+                                            if (response.action) {
+                                                setTimeout(() => {
+                                                    this.addBotMessage(response.action);
+                                                }, 500);
+                                            }
+                                        }
+                                    }, 1000);
+                                });
+                            });
+                        }, 100);
+                    }, 500);
+                }
             }
 
             // メッセージ送信

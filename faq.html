@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>よくある質問 | WEB制作サービス FAQ</title>
+    <meta name="description" content="WEB制作サービスに関するよくある質問をまとめました。制作費用、納期、技術的な内容など、お客様からよくいただくご質問にお答えします。">
+    <meta name="keywords" content="WEB制作,FAQ,よくある質問,制作費用,納期,WordPress">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="よくある質問 | WEB制作サービス">
+    <meta property="og:description" content="WEB制作に関する疑問を解決。料金・納期・技術仕様など詳しく解説">
+    <meta property="og:type" content="website">
+
+    <!-- 構造化データ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": []
+    }
+    </script>
+
+    <style>
+        /* リセットスタイル */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ベーススタイル */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* コンテナ */
+        .faq {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        /* ヘッダー */
+        .faq__header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .faq__title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #00ff88, #00cc70);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .faq__subtitle {
+            font-size: 1.1rem;
+            color: #aaa;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 検索ボックス */
+        .faq__search-container {
+            margin-bottom: 40px;
+        }
+
+        .faq__search {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .faq__search-input {
+            width: 100%;
+            padding: 18px 50px 18px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(0, 255, 136, 0.2);
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .faq__search-input:focus {
+            outline: none;
+            border-color: #00ff88;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+        }
+
+        .faq__search-input::placeholder {
+            color: #666;
+        }
+
+        .faq__search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #00ff88;
+            pointer-events: none;
+        }
+
+        /* カテゴリーフィルター */
+        .faq__categories {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .faq__category {
+            padding: 10px 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .faq__category:hover {
+            background: rgba(0, 255, 136, 0.1);
+            border-color: rgba(0, 255, 136, 0.3);
+            color: #00ff88;
+            transform: translateY(-2px);
+        }
+
+        .faq__category--active {
+            background: rgba(0, 255, 136, 0.1);
+            border-color: #00ff88;
+            color: #00ff88;
+        }
+
+        /* FAQ リスト */
+        .faq__list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .faq__item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq__item:hover {
+            background: rgba(0, 255, 136, 0.05);
+            border-color: rgba(0, 255, 136, 0.3);
+            transform: translateX(5px);
+        }
+
+        /* 質問部分 */
+        .faq__question {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .faq__question:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .faq__question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            flex: 1;
+            padding-right: 40px;
+        }
+
+        .faq__question-icon {
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .faq__question-icon::before,
+        .faq__question-icon::after {
+            content: '';
+            position: absolute;
+            background: #00ff88;
+            transition: all 0.3s ease;
+        }
+
+        .faq__question-icon::before {
+            width: 100%;
+            height: 2px;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+
+        .faq__question-icon::after {
+            width: 2px;
+            height: 100%;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .faq__question--active .faq__question-icon::after {
+            opacity: 0;
+            transform: translateX(-50%) rotate(90deg);
+        }
+
+        /* 回答部分 */
+        .faq__answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .faq__answer--active {
+            max-height: 500px;
+        }
+
+        .faq__answer-content {
+            padding: 0 25px 25px;
+            color: #ccc;
+            line-height: 1.8;
+        }
+
+        /* タグ */
+        .faq__tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .faq__tag {
+            padding: 4px 12px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            color: #00ff88;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .faq__tag:hover {
+            background: rgba(0, 255, 136, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* 検索結果メッセージ */
+        .faq__no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .faq__no-results-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .faq__no-results-text {
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+
+        /* お問い合わせ誘導セクション */
+        .faq__contact {
+            margin-top: 80px;
+            padding: 50px;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.05), rgba(0, 204, 112, 0.05));
+            border: 2px solid rgba(0, 255, 136, 0.2);
+            text-align: center;
+        }
+
+        .faq__contact-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #00ff88;
+        }
+
+        .faq__contact-text {
+            color: #ccc;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .faq__contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .faq__button {
+            padding: 15px 35px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            color: #00ff88;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .faq__button:hover {
+            background: rgba(0, 255, 136, 0.2);
+            border-color: #00ff88;
+            transform: translateY(-2px);
+        }
+
+        .faq__button--primary {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 204, 112, 0.2));
+        }
+
+        /* ハイライト */
+        mark {
+            background: linear-gradient(135deg, rgba(255, 223, 0, 0.3), rgba(255, 191, 0, 0.3));
+            color: #fff;
+            padding: 2px 4px;
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 768px) {
+            .faq {
+                padding: 60px 15px;
+            }
+
+            .faq__title {
+                font-size: 2rem;
+            }
+
+            .faq__categories {
+                justify-content: stretch;
+            }
+
+            .faq__category {
+                flex: 1;
+                text-align: center;
+                min-width: 120px;
+            }
+
+            .faq__contact {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .faq__question-text {
+                font-size: 1rem;
+            }
+
+            .faq__answer-content {
+                padding: 0 20px 20px;
+            }
+
+            .faq__contact-buttons {
+                flex-direction: column;
+            }
+
+            .faq__button {
+                width: 100%;
+            }
+        }
+
+        /* アニメーション */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .faq__item {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* ローディング表示 */
+        .faq__loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .faq__loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0, 255, 136, 0.3);
+            border-top-color: #00ff88;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="faq">
+        <!-- ヘッダー -->
+        <header class="faq__header">
+            <h1 class="faq__title">よくある質問</h1>
+            <p class="faq__subtitle">WEB制作サービスに関する疑問にお答えします</p>
+        </header>
+
+        <!-- 検索ボックス -->
+        <div class="faq__search-container">
+            <div class="faq__search">
+                <input
+                    type="text"
+                    class="faq__search-input"
+                    placeholder="質問を検索..."
+                    id="searchInput"
+                >
+                <span class="faq__search-icon">🔍</span>
+            </div>
+        </div>
+
+        <!-- カテゴリーフィルター -->
+        <div class="faq__categories" id="categoryFilter">
+            <button class="faq__category faq__category--active" data-category="all">
+                すべて
+            </button>
+            <button class="faq__category" data-category="production">
+                制作関連
+            </button>
+            <button class="faq__category" data-category="pricing">
+                料金・納期
+            </button>
+            <button class="faq__category" data-category="support">
+                サポート・運用
+            </button>
+        </div>
+
+        <!-- FAQ リスト -->
+        <div class="faq__list" id="faqList">
+            <!-- FAQ項目がJavaScriptで挿入されます -->
+        </div>
+
+        <!-- 検索結果なし -->
+        <div class="faq__no-results" id="noResults" style="display: none;">
+            <h3 class="faq__no-results-title">検索結果が見つかりません</h3>
+            <p class="faq__no-results-text">別のキーワードでお試しください</p>
+            <button class="faq__button" onclick="clearSearch()">検索をクリア</button>
+        </div>
+
+        <!-- お問い合わせ誘導 -->
+        <section class="faq__contact">
+            <h3 class="faq__contact-title">お探しの情報は見つかりましたか？</h3>
+            <p class="faq__contact-text">解決しない場合は、お気軽にお問い合わせください</p>
+            <div class="faq__contact-buttons">
+                <a href="reservation.html" class="faq__button faq__button--primary">
+                    無料相談を予約
+                </a>
+                <a href="chatbot.html" class="faq__button">
+                    チャットで質問
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // FAQデータ
+        const faqData = [
+            // 制作関連
+            {
+                id: 1,
+                category: 'production',
+                question: 'どのような技術でサイトを制作していますか？',
+                answer: 'HTML5、CSS3、JavaScript、WordPress等の最新技術を使用しています。SEO対策、レスポンシブデザイン、高速表示を重視した制作を行っています。フレームワークはReact、Vue.js、Next.jsなども対応可能です。',
+                tags: ['技術', 'HTML', 'CSS', 'JavaScript', 'WordPress', 'SEO']
+            },
+            {
+                id: 2,
+                category: 'production',
+                question: 'デザインはオリジナルで制作してもらえますか？',
+                answer: 'はい、完全オリジナルデザインで制作いたします。お客様のブランドイメージや業界特性に合わせたデザインをご提案します。参考サイトがあればお聞かせください。デザインカンプの確認後、修正も承ります。',
+                tags: ['デザイン', 'オリジナル', 'ブランド', 'カスタム']
+            },
+            {
+                id: 3,
+                category: 'production',
+                question: 'スマートフォン対応は含まれますか？',
+                answer: 'はい、レスポンシブデザインによるスマートフォン・タブレット対応は標準で含まれています。どのデバイスでも快適に閲覧できるよう最適化いたします。iOS、Android、各種ブラウザでの動作確認も実施します。',
+                tags: ['スマホ対応', 'レスポンシブ', 'モバイル', 'タブレット']
+            },
+            {
+                id: 4,
+                category: 'production',
+                question: 'SEO対策はどこまで対応していますか？',
+                answer: 'メタタグ最適化、構造化データ実装、サイトマップ作成、表示速度最適化など基本的なSEO対策は全プランに含まれています。より高度なSEO対策（コンテンツマーケティング、被リンク獲得等）も別途対応可能です。',
+                tags: ['SEO', 'メタタグ', '構造化データ', 'サイトマップ', '検索順位']
+            },
+            {
+                id: 5,
+                category: 'production',
+                question: 'WordPressのカスタマイズは可能ですか？',
+                answer: 'はい、WordPressの豊富なカスタマイズ経験があります。独自プラグイン開発、カスタム投稿タイプ、既存テーマのカスタマイズなど、ご要望に応じて対応いたします。管理画面の使いやすさも重視しています。',
+                tags: ['WordPress', 'カスタマイズ', 'プラグイン', 'CMS']
+            },
+
+            // 料金・納期
+            {
+                id: 6,
+                category: 'pricing',
+                question: '制作費用はいくらですか？',
+                answer: 'LP制作：10万円〜、WEB制作：30万円〜、WordPress制作：50万円〜が目安です。詳細は無料お見積りにて、お客様のご要望に応じた正確な金額をご提示いたします。分割払いも対応可能です。',
+                tags: ['料金', '費用', '価格', '見積り', 'コスト']
+            },
+            {
+                id: 7,
+                category: 'pricing',
+                question: '追加料金は発生しますか？',
+                answer: '基本的に初回お見積り金額から追加料金は発生しません。大幅な仕様変更や追加ページがある場合は事前にお見積りをお渡しし、ご承諾いただいてから作業いたします。透明性のある料金体系を心がけています。',
+                tags: ['追加費用', '見積り', '仕様変更', '料金']
+            },
+            {
+                id: 8,
+                category: 'pricing',
+                question: '制作期間はどのくらいですか？',
+                answer: 'LP制作：2-3週間、WEB制作：3-4週間、WordPress制作：4-6週間が目安です。お急ぎの場合はご相談ください。可能な限り対応いたします。特急料金での最短1週間納品も可能です。',
+                tags: ['制作期間', '納期', 'スケジュール', '急ぎ', '期間']
+            },
+            {
+                id: 9,
+                category: 'pricing',
+                question: '支払い方法を教えてください',
+                answer: '銀行振込、クレジットカード決済に対応しています。分割払い（2回・3回）も可能です。着手金50%、納品時50%の2回払いが基本ですが、ご相談に応じて柔軟に対応いたします。',
+                tags: ['支払い', '銀行振込', 'クレジット', '分割', '決済']
+            },
+            {
+                id: 10,
+                category: 'pricing',
+                question: '修正は何回まで可能ですか？',
+                answer: 'デザイン確定前は無制限で修正対応いたします。コーディング着手後は3回まで無料、それ以降は別途お見積りとなります。お客様が満足いただけるまで丁寧に対応いたします。',
+                tags: ['修正', '回数', '無料', '変更']
+            },
+
+            // サポート・運用
+            {
+                id: 11,
+                category: 'support',
+                question: '納品後のサポートはありますか？',
+                answer: '納品後3ヶ月間は無料サポート期間として、軽微な修正や操作方法のサポートを行います。その後も保守契約プラン（月額1万円〜）をご用意しています。24時間365日の監視サービスもございます。',
+                tags: ['サポート', '保守', 'アフターケア', '納品後', 'メンテナンス']
+            },
+            {
+                id: 12,
+                category: 'support',
+                question: 'ドメイン・サーバーの契約は必要ですか？',
+                answer: 'はい、別途必要となります。取得・契約代行も承っております（手数料5,000円）。お客様に最適なプランをご提案し、初期設定まで対応いたします。年間費用は1-3万円程度が目安です。',
+                tags: ['ドメイン', 'サーバー', 'レンタルサーバー', '代行', 'ホスティング']
+            },
+            {
+                id: 13,
+                category: 'support',
+                question: 'SSL証明書の設定は含まれますか？',
+                answer: 'はい、SSL証明書（無料版）の設定は標準で含まれています。有料SSL証明書をご希望の場合も対応可能です。セキュリティを重視し、すべてのサイトにSSL実装を推奨しています。',
+                tags: ['SSL', '証明書', 'セキュリティ', 'HTTPS', '暗号化']
+            },
+            {
+                id: 14,
+                category: 'support',
+                question: 'Google Analyticsの設定はしてもらえますか？',
+                answer: 'Google Analytics、Google Search Consoleの設定・初期設定は基本プランに含まれています。レポートの見方もご説明いたします。月次レポート作成サービス（有料）もご用意しています。',
+                tags: ['Analytics', 'Google', '解析', 'アクセス解析', '分析']
+            },
+            {
+                id: 15,
+                category: 'support',
+                question: '既存サイトのリニューアルも対応していますか？',
+                answer: 'はい、既存サイトのリニューアルも承っています。現状分析から改善提案、データ移行まで全て対応いたします。SEO順位を落とさない移行計画も立案いたします。',
+                tags: ['リニューアル', '改修', '移行', '既存サイト', 'リデザイン']
+            },
+            {
+                id: 16,
+                category: 'support',
+                question: 'コンテンツの更新方法を教えてもらえますか？',
+                answer: 'もちろんです。納品時に管理画面の操作マニュアルをお渡しし、実際の操作方法をレクチャーいたします。その後も電話・メール・Zoomでのサポートを行っています。',
+                tags: ['更新', '管理', 'マニュアル', '操作', 'CMS']
+            },
+            {
+                id: 17,
+                category: 'production',
+                question: 'ECサイトの制作は可能ですか？',
+                answer: 'はい、Shopify、WooCommerce、EC-CUBEなど各種ECプラットフォームでの構築が可能です。商品登録、決済設定、配送設定まですべて対応いたします。',
+                tags: ['ECサイト', 'ネットショップ', 'Shopify', 'WooCommerce', '通販']
+            },
+            {
+                id: 18,
+                category: 'production',
+                question: '多言語サイトは作れますか？',
+                answer: '英語、中国語、韓国語など多言語サイトの制作経験があります。翻訳サービスの手配から、言語切り替え機能の実装まで対応可能です。',
+                tags: ['多言語', '英語', '翻訳', 'グローバル', '国際化']
+            },
+            {
+                id: 19,
+                category: 'pricing',
+                question: 'キャンセル料は発生しますか？',
+                answer: '着手前のキャンセルは無料です。デザイン着手後は進捗に応じて料金が発生します（着手金の範囲内）。詳細は契約時にご説明いたします。',
+                tags: ['キャンセル', '解約', '返金', '契約']
+            },
+            {
+                id: 20,
+                category: 'support',
+                question: 'バックアップは取ってもらえますか？',
+                answer: '定期的な自動バックアップを設定いたします。保守契約をいただいている場合は、毎日バックアップを取得し、過去30日分を保管します。',
+                tags: ['バックアップ', '復旧', 'セキュリティ', '保管', 'データ']
+            }
+        ];
+
+        // FAQ管理クラス
+        class FAQManager {
+            constructor(data) {
+                this.allData = data;
+                this.filteredData = [...data];
+                this.currentCategory = 'all';
+                this.searchQuery = '';
+                this.init();
+            }
+
+            init() {
+                this.renderFAQs();
+                this.setupEventListeners();
+                this.updateStructuredData();
+            }
+
+            setupEventListeners() {
+                // 検索機能
+                const searchInput = document.getElementById('searchInput');
+                searchInput.addEventListener('input', (e) => {
+                    this.searchQuery = e.target.value;
+                    this.filterFAQs();
+                });
+
+                // カテゴリーフィルター
+                const categoryButtons = document.querySelectorAll('.faq__category');
+                categoryButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        // アクティブクラスの切り替え
+                        categoryButtons.forEach(btn => btn.classList.remove('faq__category--active'));
+                        button.classList.add('faq__category--active');
+
+                        this.currentCategory = button.dataset.category;
+                        this.filterFAQs();
+                    });
+                });
+            }
+
+            filterFAQs() {
+                this.filteredData = this.allData.filter(item => {
+                    // カテゴリーフィルター
+                    if (this.currentCategory !== 'all' && item.category !== this.currentCategory) {
+                        return false;
+                    }
+
+                    // 検索フィルター
+                    if (this.searchQuery) {
+                        const query = this.searchQuery.toLowerCase();
+                        return item.question.toLowerCase().includes(query) ||
+                               item.answer.toLowerCase().includes(query) ||
+                               item.tags.some(tag => tag.toLowerCase().includes(query));
+                    }
+
+                    return true;
+                });
+
+                this.renderFAQs();
+            }
+
+            renderFAQs() {
+                const faqList = document.getElementById('faqList');
+                const noResults = document.getElementById('noResults');
+
+                if (this.filteredData.length === 0) {
+                    faqList.style.display = 'none';
+                    noResults.style.display = 'block';
+                    return;
+                }
+
+                faqList.style.display = 'grid';
+                noResults.style.display = 'none';
+
+                faqList.innerHTML = this.filteredData.map(item => {
+                    const highlightedQuestion = this.highlightText(item.question, this.searchQuery);
+                    const highlightedAnswer = this.highlightText(item.answer, this.searchQuery);
+
+                    return `
+                        <div class="faq__item" data-id="${item.id}">
+                            <div class="faq__question" onclick="toggleAnswer(${item.id})">
+                                <div class="faq__question-text">${highlightedQuestion}</div>
+                                <div class="faq__question-icon"></div>
+                            </div>
+                            <div class="faq__answer" id="answer-${item.id}">
+                                <div class="faq__answer-content">
+                                    ${highlightedAnswer}
+                                    <div class="faq__tags">
+                                        ${item.tags.map(tag => `
+                                            <span class="faq__tag" onclick="searchByTag('${tag}')">${tag}</span>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            highlightText(text, query) {
+                if (!query) return text;
+                const regex = new RegExp(`(${query})`, 'gi');
+                return text.replace(regex, '<mark>$1</mark>');
+            }
+
+            updateStructuredData() {
+                const structuredData = {
+                    "@context": "https://schema.org",
+                    "@type": "FAQPage",
+                    "mainEntity": this.allData.map(item => ({
+                        "@type": "Question",
+                        "name": item.question,
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": item.answer
+                        }
+                    }))
+                };
+
+                const script = document.querySelector('script[type="application/ld+json"]');
+                if (script) {
+                    script.textContent = JSON.stringify(structuredData);
+                }
+            }
+        }
+
+        // FAQマネージャーのインスタンス作成
+        let faqManager;
+
+        // ページ読み込み時の初期化
+        document.addEventListener('DOMContentLoaded', () => {
+            faqManager = new FAQManager(faqData);
+        });
+
+        // アコーディオン開閉
+        function toggleAnswer(id) {
+            const question = document.querySelector(`[data-id="${id}"] .faq__question`);
+            const answer = document.getElementById(`answer-${id}`);
+
+            question.classList.toggle('faq__question--active');
+            answer.classList.toggle('faq__answer--active');
+
+            // 高さの調整
+            if (answer.classList.contains('faq__answer--active')) {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+            } else {
+                answer.style.maxHeight = '0';
+            }
+        }
+
+        // タグで検索
+        function searchByTag(tag) {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.value = tag;
+            searchInput.dispatchEvent(new Event('input'));
+        }
+
+        // 検索クリア
+        function clearSearch() {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.value = '';
+            searchInput.dispatchEvent(new Event('input'));
+        }
+
+        // ページ離脱時に検索履歴を保存
+        window.addEventListener('beforeunload', () => {
+            if (faqManager && faqManager.searchQuery) {
+                const searchHistory = JSON.parse(localStorage.getItem('faqSearchHistory') || '[]');
+                if (!searchHistory.includes(faqManager.searchQuery)) {
+                    searchHistory.unshift(faqManager.searchQuery);
+                    localStorage.setItem('faqSearchHistory', JSON.stringify(searchHistory.slice(0, 10)));
+                }
+            }
+        });
+    </script>
+</body>
+</html>

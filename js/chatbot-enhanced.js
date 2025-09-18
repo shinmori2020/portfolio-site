@@ -683,6 +683,201 @@ SEO評価も引き継ぎます。`,
         confidence: 'high'
     },
 
+    // ========== 具体的な技術質問（15パターン） ==========
+    'JavaScript': {
+        message: `JavaScript開発について！
+
+■ JS開発対応：
+• Vanilla JavaScript
+• React / Vue.js / Angular
+• jQuery実装
+• アニメーション実装
+• 非同期処理対応
+
+料金: 要件により異なります。`,
+        confidence: 'high'
+    },
+
+    'React': {
+        message: `React開発について！
+
+■ React開発：
+• SPAアプリケーション
+• Next.js対応
+• Redux状態管理
+• TypeScript対応
+• 料金: 25万円〜
+
+モダンなWebアプリを構築します。`,
+        action: '[React開発詳細](#react)',
+        confidence: 'high'
+    },
+
+    'Vue': {
+        message: `Vue.js開発について！
+
+■ Vue.js開発：
+• Vue 3対応
+• Nuxt.js対応
+• Vuex状態管理
+• コンポーネント設計
+• 料金: 23万円〜`,
+        confidence: 'high'
+    },
+
+    'データベース': {
+        message: `データベース設計について！
+
+■ DB対応：
+• MySQL / PostgreSQL
+• MongoDB
+• Firebase
+• データ移行サポート
+• バックアップ設計
+
+最適なDB選定をサポートします。`,
+        confidence: 'high'
+    },
+
+    'ヘッドレスCMS': {
+        message: `ヘッドレスCMS導入について！
+
+■ 対応CMS：
+• Contentful
+• Strapi
+• microCMS
+• Sanity
+• 料金: 15万円〜
+
+APIベースの柔軟な構成を実現。`,
+        confidence: 'high'
+    },
+
+    'PWA': {
+        message: `PWA（Progressive Web App）について！
+
+■ PWA機能：
+• オフライン対応
+• プッシュ通知
+• ホーム画面追加
+• 高速キャッシュ
+• 料金: +5万円〜
+
+アプリのような体験を提供。`,
+        confidence: 'high'
+    },
+
+    'AMP': {
+        message: `AMP対応について！
+
+■ AMP実装：
+• 超高速表示
+• Google推奨
+• SEO効果大
+• モバイル最適化
+• 料金: +3万円〜`,
+        confidence: 'medium'
+    },
+
+    'GraphQL': {
+        message: `GraphQL API開発！
+
+■ GraphQL：
+• 効率的なデータ取得
+• Apollo Server/Client
+• スキーマ設計
+• リアルタイム更新
+• 料金: 要相談`,
+        confidence: 'medium'
+    },
+
+    'Jamstack': {
+        message: `Jamstackアーキテクチャについて！
+
+■ Jamstack：
+• 静的サイトジェネレータ
+• Gatsby / Next.js
+• Netlify / Vercel デプロイ
+• 高速・セキュア・スケーラブル
+• 料金: 20万円〜`,
+        confidence: 'high'
+    },
+
+    'WebGL': {
+        message: `WebGL/3D表現について！
+
+■ 3D表現：
+• Three.js実装
+• 3Dアニメーション
+• インタラクティブ表現
+• VR/AR対応
+• 料金: 30万円〜`,
+        confidence: 'medium'
+    },
+
+    'WebSocket': {
+        message: `リアルタイム通信実装！
+
+■ WebSocket：
+• チャット機能
+• リアルタイム更新
+• Socket.io実装
+• 通知システム
+• 料金: 10万円〜`,
+        confidence: 'high'
+    },
+
+    'Docker': {
+        message: `Docker環境構築について！
+
+■ Docker対応：
+• コンテナ化
+• docker-compose設定
+• CI/CD構築
+• 開発環境統一
+• 料金: 5万円〜`,
+        confidence: 'medium'
+    },
+
+    'Git': {
+        message: `Git/バージョン管理について！
+
+■ Git管理：
+• GitHub/GitLab設定
+• ブランチ戦略
+• CI/CD連携
+• コードレビュー体制
+
+開発効率を向上させます。`,
+        confidence: 'high'
+    },
+
+    'テスト': {
+        message: `テスト実装について！
+
+■ テスト：
+• ユニットテスト
+• E2Eテスト
+• Jest / Cypress
+• 自動テスト構築
+• 料金: +3万円〜
+
+品質保証を強化します。`,
+        confidence: 'high'
+    },
+
+    'CI/CD': {
+        message: `CI/CDパイプライン構築！
+
+■ 自動化：
+• GitHub Actions
+• Jenkins
+• 自動デプロイ
+• 自動テスト
+• 料金: 8万円〜`,
+        confidence: 'medium'
+    },
+
     // ========== その他の頻出質問（10パターン） ==========
     '納品形式': {
         message: `納品形式について！
@@ -817,11 +1012,248 @@ SEO評価も引き継ぎます。`,
 お急ぎの場合もご相談ください。`,
         action: '[今すぐ相談](#contact)',
         confidence: 'high'
+    },
+
+    // ========== マーケティング・集客関連（15パターン） ==========
+    'SEO詳細': {
+        message: `SEO対策の詳細について！
+
+■ 内部SEO対策：
+• タイトル・メタタグ最適化
+• 構造化データマークアップ
+• サイトマップ生成
+• robots.txt設定
+• ページ速度最適化
+• Core Web Vitals対応
+
+全プラン標準対応です。`,
+        confidence: 'high'
+    },
+
+    'MEO': {
+        message: `MEO（Map Engine Optimization）対策！
+
+■ Googleマップ対策：
+• Googleビジネスプロフィール最適化
+• 店舗情報の統一
+• 口コミ対策サポート
+• 写真最適化
+• 料金: 3万円〜
+
+地域集客を強化します。`,
+        confidence: 'high'
+    },
+
+    'コンテンツマーケティング': {
+        message: `コンテンツマーケティング支援！
+
+■ コンテンツ戦略：
+• ブログ記事作成代行
+• SEOライティング
+• コンテンツカレンダー作成
+• 効果測定
+• 月額: 5万円〜
+
+継続的な集客を実現。`,
+        confidence: 'high'
+    },
+
+    'SNS運用': {
+        message: `SNS運用代行サービス！
+
+■ SNS運用：
+• Instagram運用
+• Twitter運用
+• Facebook運用
+• 投稿デザイン作成
+• 月額: 3万円〜
+
+SNSからの流入を増やします。`,
+        confidence: 'high'
+    },
+
+    'リスティング広告': {
+        message: `リスティング広告運用について！
+
+■ 広告運用サポート：
+• Google広告設定
+• Yahoo!広告設定
+• ランディングページ最適化
+• コンバージョン測定
+• 運用代行: 月額5万円〜`,
+        confidence: 'high'
+    },
+
+    'アナリティクス設定': {
+        message: `詳細なアナリティクス設定！
+
+■ 分析環境構築：
+• GA4詳細設定
+• GTM（タグマネージャー）
+• コンバージョン設定
+• イベント計測
+• カスタムレポート作成
+
+料金: 3万円〜`,
+        confidence: 'high'
+    },
+
+    'A/Bテスト': {
+        message: `A/Bテスト実施について！
+
+■ テスト実施：
+• デザインパターンテスト
+• コピーライティングテスト
+• CTA最適化
+• 結果分析レポート
+• 料金: 5万円〜
+
+コンバージョン率を改善。`,
+        confidence: 'high'
+    },
+
+    'メールマーケティング': {
+        message: `メールマーケティング機能！
+
+■ メール配信：
+• メルマガ配信システム
+• ステップメール構築
+• HTMLメールテンプレート
+• 配信分析
+• 料金: 5万円〜`,
+        confidence: 'high'
+    },
+
+    'LPO': {
+        message: `LPO（ランディングページ最適化）！
+
+■ LPO施策：
+• ヒートマップ分析
+• 離脱ポイント改善
+• フォーム最適化
+• CTA改善
+• 料金: 3万円〜
+
+成約率を向上させます。`,
+        confidence: 'high'
+    },
+
+    'コンバージョン改善': {
+        message: `コンバージョン改善施策！
+
+■ 改善内容：
+• ユーザー行動分析
+• UI/UX改善
+• 導線設計見直し
+• フォーム改善
+• チャットボット導入
+
+成果を最大化します。`,
+        confidence: 'high'
+    },
+
+    'リマーケティング': {
+        message: `リマーケティング設定！
+
+■ リターゲティング：
+• Googleリマーケティングタグ
+• Facebook Pixel設定
+• カスタムオーディエンス作成
+• 動的リマーケティング
+• 設定料: 2万円〜`,
+        confidence: 'high'
+    },
+
+    'インフルエンサー': {
+        message: `インフルエンサーマーケティング！
+
+■ 施策内容：
+• インフルエンサー選定
+• タイアップ企画
+• 効果測定
+• 料金: 要相談
+
+認知度を向上させます。`,
+        confidence: 'medium'
+    },
+
+    'オウンドメディア': {
+        message: `オウンドメディア構築！
+
+■ メディア運営：
+• コンテンツ企画
+• 記事制作
+• SEO対策
+• 分析・改善
+• 構築: 30万円〜
+
+長期的な資産を作ります。`,
+        confidence: 'high'
+    },
+
+    'ブランディング': {
+        message: `ブランディング支援！
+
+■ ブランド構築：
+• ロゴデザイン
+• ブランドガイドライン
+• トーン&マナー設定
+• VI/CI設計
+• 料金: 15万円〜
+
+統一感のあるブランドを。`,
+        confidence: 'high'
+    },
+
+    'クチコミ': {
+        message: `クチコミ・レビュー対策！
+
+■ 評判管理：
+• レビュー促進施策
+• 返信テンプレート作成
+• ネガティブ対応
+• 評価向上施策
+• 料金: 月額2万円〜`,
+        confidence: 'medium'
     }
 };
 
 // 拡張同義語辞書（各カテゴリ2倍以上に拡張）
 const EnhancedSynonymDictionary = {
+    // 新規追加カテゴリ
+    "JavaScript": [
+        "JavaScript", "JS", "ジャバスクリプト", "javascript", "ジャバ", "スクリプト",
+        "フロントエンド", "front-end", "クライアントサイド"
+    ],
+
+    "React": [
+        "React", "リアクト", "react", "React.js", "リアクトジェーエス", "reactjs"
+    ],
+
+    "Vue": [
+        "Vue", "ビュー", "vue", "Vue.js", "ビュージェーエス", "vuejs"
+    ],
+
+    "データベース": [
+        "データベース", "DB", "デーベー", "database", "MySQL", "PostgreSQL",
+        "MongoDB", "SQL", "NoSQL", "データ管理"
+    ],
+
+    "マーケティング": [
+        "マーケティング", "集客", "マーケ", "marketing", "プロモーション",
+        "宣伝", "広告", "PR", "販促", "売上", "コンバージョン"
+    ],
+
+    "ブランディング": [
+        "ブランディング", "ブランド", "brand", "ロゴ", "CI", "VI",
+        "アイデンティティ", "イメージ", "統一感"
+    ],
+
+    "アナリティクス": [
+        "アナリティクス", "分析", "analytics", "GA", "解析", "測定",
+        "計測", "データ分析", "効果測定"
+    ],
+
     "料金": [
         "料金", "価格", "費用", "コスト", "いくら", "金額", "値段", "予算", "お金",
         "プライス", "価格帯", "相場", "単価", "見積", "見積もり", "見積り",
