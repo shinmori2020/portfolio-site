@@ -18,23 +18,32 @@
     max-width: 1200px;
     margin: 0 auto;
     overflow: hidden;
-    border: 1px solid #333;
+    transition: min-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* 各FAQアイテム */
 .faq__item {
-    border-bottom: 1px solid #333;
     background: #1a1a1a;
     transition: background 0.3s ease;
+    border: 1px solid #333;
+    margin-top: -1px; /* 上のボーダーと重ねる */
+    position: relative;
+    z-index: 1;
 }
 
-.faq__item:last-child {
-    border-bottom: none;
+.faq__item:first-child {
+    margin-top: 0; /* 最初の要素は重ねない */
+}
+
+/* ホバー時とアクティブ時は前面に */
+.faq__item:hover {
+    z-index: 2;
 }
 
 /* アクティブ状態のFAQアイテム */
 .faq__item--active {
     background: linear-gradient(90deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 255, 136, 0.05) 100%);
+    z-index: 3;
 }
 
 /* 質問部分 */
