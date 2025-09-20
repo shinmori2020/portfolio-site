@@ -50,12 +50,13 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0;
         }
 
         /* フィルターセクション */
         .portfolio-filters {
             margin-bottom: 30px;
+            padding: 0 20px;
             text-align: center;
         }
 
@@ -103,7 +104,7 @@
             flex-wrap: wrap;
             padding: 20px;
             background: rgba(255, 255, 255, 0.02);
-            border-radius: 8px;
+            border-radius: 0;
         }
 
         .filter-group {
@@ -123,7 +124,7 @@
             background: #1a1a1a;
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: #fff;
-            border-radius: 4px;
+            border-radius: 0;
             cursor: pointer;
             min-width: 150px;
         }
@@ -131,15 +132,16 @@
         /* ポートフォリオグリッド */
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 30px;
             margin: 50px 0;
+            padding: 0;
         }
 
         /* ポートフォリオカード */
         .portfolio-card {
             background: #1a1a1a;
-            border-radius: 12px;
+            border-radius: 0;
             overflow: hidden;
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -149,9 +151,7 @@
         }
 
         .portfolio-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(0, 255, 136, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+            border-color: rgba(255, 255, 255, 0.1);
         }
 
         @keyframes fadeInUp {
@@ -164,7 +164,7 @@
         /* Before/After セクション */
         .portfolio-card__comparison {
             position: relative;
-            height: 250px;
+            height: 375px;
             overflow: hidden;
             background: #0a0a0a;
         }
@@ -178,7 +178,7 @@
             z-index: 10;
             background: rgba(0, 0, 0, 0.7);
             padding: 3px;
-            border-radius: 6px;
+            border-radius: 0;
         }
 
         .comparison-tab {
@@ -189,7 +189,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 0.85rem;
-            border-radius: 4px;
+            border-radius: 0;
         }
 
         .comparison-tab--active {
@@ -219,8 +219,8 @@
 
         .portfolio-card__header {
             display: flex;
-            justify-content: space-between;
-            align-items: start;
+            flex-direction: column;
+            align-items: flex-start;
             margin-bottom: 15px;
         }
 
@@ -235,63 +235,47 @@
         .portfolio-card__category {
             padding: 4px 12px;
             font-size: 0.8rem;
-            border-radius: 20px;
+            border-radius: 0;
             font-weight: 600;
             white-space: nowrap;
-        }
-
-        /* カテゴリー別の色 */
-        .category--medical {
-            background: rgba(74, 158, 255, 0.2);
-            color: #4a9eff;
-        }
-
-        .category--beauty {
-            background: rgba(255, 107, 157, 0.2);
-            color: #ff6b9d;
-        }
-
-        .category--restaurant {
-            background: rgba(255, 167, 38, 0.2);
-            color: #ffa726;
-        }
-
-        .category--corporate {
+            margin-bottom: 8px;
             background: rgba(0, 255, 136, 0.2);
             color: #00ff88;
+            border: 1px solid rgba(0, 255, 136, 0.3);
         }
 
-        .category--ecommerce {
-            background: rgba(156, 39, 176, 0.2);
-            color: #9c27b0;
-        }
 
         /* メタ情報 */
         .portfolio-card__meta {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            display: flex;
+            gap: 10px;
             margin-bottom: 20px;
-            padding: 15px;
+            padding: 20px;
             background: rgba(255, 255, 255, 0.02);
-            border-radius: 8px;
+            border-radius: 0;
+            flex-wrap: wrap;
         }
 
         .meta-item {
             display: flex;
             flex-direction: column;
+            flex: 1;
+            min-width: 0;
         }
 
         .meta-label {
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             color: #666;
             margin-bottom: 3px;
         }
 
         .meta-value {
-            font-size: 0.95rem;
+            font-size: 0.8rem;
             color: #fff;
             font-weight: 500;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         /* テクノロジータグ */
@@ -307,7 +291,7 @@
             background: rgba(0, 255, 136, 0.1);
             color: #00ff88;
             font-size: 0.75rem;
-            border-radius: 4px;
+            border-radius: 0;
             border: 1px solid rgba(0, 255, 136, 0.2);
         }
 
@@ -362,37 +346,42 @@
         }
 
         .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 6px;
+            padding: 18px 40px;
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            border-radius: 0;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             text-decoration: none;
             display: inline-block;
             text-align: center;
             flex: 1;
+            backdrop-filter: blur(10px);
+            white-space: nowrap;
         }
 
         .btn--primary {
-            background: #00ff88;
-            color: #000;
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            border-color: rgba(0, 255, 136, 0.3);
         }
 
         .btn--primary:hover {
-            background: #00cc6a;
-            transform: translateY(-2px);
+            background: rgba(0, 255, 136, 0.2);
+            border-color: #00ff88;
         }
 
         .btn--outline {
             background: transparent;
-            color: #00ff88;
-            border: 1px solid #00ff88;
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .btn--outline:hover {
-            background: rgba(0, 255, 136, 0.1);
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-color: #fff;
         }
 
         /* モーダル */
@@ -436,7 +425,7 @@
             max-height: 90vh;
             margin: 5vh auto;
             background: #1a1a1a;
-            border-radius: 12px;
+            border-radius: 0;
             overflow-y: auto;
             animation: slideUp 0.3s ease;
         }
@@ -460,7 +449,7 @@
             height: 40px;
             background: rgba(255, 255, 255, 0.1);
             border: none;
-            border-radius: 50%;
+            border-radius: 0;
             color: #fff;
             font-size: 1.5rem;
             cursor: pointer;
@@ -472,9 +461,10 @@
         }
 
         .modal__close:hover {
-            background: rgba(255, 0, 0, 0.2);
-            transform: rotate(90deg);
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
         }
+
 
         .modal__header {
             padding: 30px;
@@ -491,14 +481,17 @@
             display: inline-block;
             padding: 6px 15px;
             font-size: 0.9rem;
-            border-radius: 20px;
+            border-radius: 0;
             font-weight: 600;
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+            border: 1px solid rgba(0, 255, 136, 0.3);
         }
 
         /* Before/After スライダー */
         .modal__comparison {
             position: relative;
-            height: 400px;
+            height: 600px;
             background: #0a0a0a;
             overflow: hidden;
         }
@@ -551,7 +544,7 @@
             width: 40px;
             height: 40px;
             background: #00ff88;
-            border-radius: 50%;
+            border-radius: 0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -592,13 +585,13 @@
         .comparison-label--before {
             top: 20px;
             left: 20px;
-            border-radius: 6px 0 6px 0;
+            border-radius: 0;
         }
 
         .comparison-label--after {
             top: 20px;
             right: 20px;
-            border-radius: 0 6px 0 6px;
+            border-radius: 0;
         }
 
         /* モーダル詳細 */
@@ -616,7 +609,7 @@
         .detail-section {
             background: rgba(255, 255, 255, 0.02);
             padding: 20px;
-            border-radius: 8px;
+            border-radius: 0;
         }
 
         .detail-section h3 {
@@ -651,7 +644,7 @@
             padding: 10px 15px;
             background: rgba(0, 255, 136, 0.1);
             border: 1px solid rgba(0, 255, 136, 0.2);
-            border-radius: 6px;
+            border-radius: 0;
             color: #00ff88;
             font-size: 0.9rem;
             text-align: center;
@@ -665,10 +658,10 @@
         }
 
         .modal__cta {
-            text-align: center;
+            /* text-align: center;
             padding: 30px;
-            background: rgba(0, 255, 136, 0.02);
-            border-radius: 8px;
+            background: rgba(0, 255, 136, 0.02); */
+            border-radius: 0;
         }
 
         .modal__cta h3 {
@@ -684,25 +677,26 @@
 
         /* CTA セクション */
         .portfolio-cta {
+            margin: 80px 20px 0;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 1200px;
+            padding: 50px;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.05), rgba(0, 204, 112, 0.05));
+            border: 2px solid rgba(0, 255, 136, 0.2);
             text-align: center;
-            padding: 80px 20px;
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.05) 0%, rgba(0, 255, 136, 0.01) 100%);
-            margin-top: 80px;
         }
 
         .portfolio-cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #00ff88;
         }
 
         .portfolio-cta p {
-            font-size: 1.2rem;
-            color: #999;
+            color: #ccc;
             margin-bottom: 30px;
+            font-size: 1.1rem;
         }
 
         .cta-buttons {
@@ -710,6 +704,40 @@
             justify-content: center;
             gap: 20px;
             flex-wrap: wrap;
+        }
+
+        /* カスタムスクロールバー */
+        .modal__content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal__content::-webkit-scrollbar-track {
+            background: #1a1a1a;
+            border-left: 1px solid #333;
+        }
+
+        .modal__content::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 136, 0.3);
+            border: none;
+            transition: background 0.3s ease;
+        }
+
+        .modal__content::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 255, 136, 0.6);
+        }
+
+        .modal__content::-webkit-scrollbar-thumb:active {
+            background: #00ff88;
+        }
+
+        /* Firefox用 */
+        .modal__content {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 255, 136, 0.3) #1a1a1a;
+        }
+
+        .modal__content:hover {
+            scrollbar-color: rgba(0, 255, 136, 0.6) #1a1a1a;
         }
 
         /* レスポンシブ */
@@ -733,7 +761,7 @@
             }
 
             .portfolio-card__meta {
-                grid-template-columns: 1fr;
+                flex-direction: column;
             }
 
             .results-grid {
@@ -747,6 +775,10 @@
 
             .portfolio-card__actions {
                 flex-direction: column;
+            }
+
+            .portfolio-cta {
+                padding: 30px 20px;
             }
 
             .cta-buttons {
@@ -770,6 +802,7 @@
         .no-results {
             text-align: center;
             padding: 100px 20px;
+            margin: 0 20px;
             color: #666;
         }
 
@@ -898,8 +931,8 @@
                 technologies: ["HTML5", "CSS3", "JavaScript", "レスポンシブ"],
                 features: ["オンライン予約", "診療案内", "医師紹介", "アクセスマップ"],
                 description: "患者様に分かりやすい診療案内と、24時間対応のオンライン予約システムを導入",
-                beforeImage: "https://via.placeholder.com/600x400/2d2d2d/666?text=Before",
-                afterImage: "https://via.placeholder.com/600x400/4a9eff/ffffff?text=After",
+                beforeImage: "https://picsum.photos/600/400?random=1",
+                afterImage: "https://picsum.photos/600/400?random=2",
                 beforeDescription: "古いデザインで情報が見つけにくく、スマホ対応していない状態",
                 afterDescription: "スッキリとしたモダンなデザインで、スマホからも簡単に予約が可能に",
                 results: {
@@ -922,8 +955,8 @@
                 technologies: ["WordPress", "カスタムテーマ", "SEO対策", "SSL"],
                 features: ["予約管理システム", "ブログ機能", "症例紹介", "Q&A"],
                 description: "新規開業に合わせて、信頼感のある歯科医院サイトを構築",
-                beforeImage: "https://via.placeholder.com/600x400/2d2d2d/666?text=New",
-                afterImage: "https://via.placeholder.com/600x400/4a9eff/ffffff?text=Complete",
+                beforeImage: "https://picsum.photos/600/400?random=5",
+                afterImage: "https://picsum.photos/600/400?random=6",
                 beforeDescription: "新規開業のため、Webサイトが存在しない状態",
                 afterDescription: "清潔感と信頼感のあるデザインで、地域No.1の集患を実現",
                 results: {
@@ -946,8 +979,8 @@
                 technologies: ["HTML5", "CSS3", "jQuery", "アニメーション"],
                 features: ["問い合わせフォーム", "施術説明", "料金表", "アクセス"],
                 description: "腰痛治療専門のランディングページで集患効果を最大化",
-                beforeImage: "https://via.placeholder.com/600x400/2d2d2d/666?text=Before",
-                afterImage: "https://via.placeholder.com/600x400/4a9eff/ffffff?text=After",
+                beforeImage: "https://picsum.photos/600/400?random=3",
+                afterImage: "https://picsum.photos/600/400?random=4",
                 beforeDescription: "一般的な整形外科サイトで専門性が伝わらない",
                 afterDescription: "腰痛治療に特化した訴求で、問い合わせが3倍に",
                 results: {
@@ -971,8 +1004,8 @@
                 technologies: ["HTML5", "CSS3", "JavaScript", "GSAP"],
                 features: ["オンライン予約", "スタッフ紹介", "メニュー", "ギャラリー"],
                 description: "高級感のあるデザインで、ブランド価値を最大限に表現",
-                beforeImage: "https://via.placeholder.com/600x400/2d2d2d/666?text=Before",
-                afterImage: "https://via.placeholder.com/600x400/ff6b9d/ffffff?text=After",
+                beforeImage: "https://picsum.photos/600/400?random=7",
+                afterImage: "https://picsum.photos/600/400?random=8",
                 beforeDescription: "SNSのみの集客で、ブランドイメージが定まらない",
                 afterDescription: "ラグジュアリーな世界観で、客単価が大幅アップ",
                 results: {
@@ -995,8 +1028,8 @@
                 technologies: ["HTML5", "CSS3", "JavaScript", "レスポンシブ"],
                 features: ["予約フォーム", "デザインギャラリー", "料金表", "クーポン"],
                 description: "季節限定キャンペーンに特化したランディングページ",
-                beforeImage: "https://via.placeholder.com/600x400/2d2d2d/666?text=Before",
-                afterImage: "https://via.placeholder.com/600x400/ff6b9d/ffffff?text=After",
+                beforeImage: "https://picsum.photos/600/400?random=9",
+                afterImage: "https://picsum.photos/600/400?random=10",
                 beforeDescription: "通常のホームページでキャンペーンが埋もれている",
                 afterDescription: "キャンペーン専用LPで、成約率が2.5倍に向上",
                 results: {
@@ -1020,8 +1053,8 @@
                 technologies: ["WordPress", "WooCommerce", "多言語対応", "SEO"],
                 features: ["オンライン予約", "メニュー管理", "テイクアウト注文", "イベント情報"],
                 description: "本格イタリアンの魅力を伝える、美味しそうなビジュアル重視のサイト",
-                beforeImage: "https://via.placeholder.com/600x400/2d2d2d/666?text=Before",
-                afterImage: "https://via.placeholder.com/600x400/ffa726/ffffff?text=After",
+                beforeImage: "https://picsum.photos/600/400?random=11",
+                afterImage: "https://picsum.photos/600/400?random=12",
                 beforeDescription: "メニューが古く、料理の魅力が伝わらない",
                 afterDescription: "プロの料理写真で、予約が常に満席状態に",
                 results: {
@@ -1044,8 +1077,8 @@
                 technologies: ["HTML5", "CSS3", "JavaScript", "Instagram連携"],
                 features: ["メニュー表示", "Instagram連携", "お知らせ", "アクセス"],
                 description: "オーガニックカフェの温かみのある雰囲気を表現",
-                beforeImage: "https://via.placeholder.com/600x400/2d2d2d/666?text=Before",
-                afterImage: "https://via.placeholder.com/600x400/ffa726/ffffff?text=After",
+                beforeImage: "https://picsum.photos/600/400?random=13",
+                afterImage: "https://picsum.photos/600/400?random=14",
                 beforeDescription: "手作り感はあるが、プロフェッショナルさに欠ける",
                 afterDescription: "温かみとプロ感を両立し、若い客層も獲得",
                 results: {
@@ -1069,8 +1102,8 @@
                 technologies: ["WordPress", "カスタム開発", "多言語", "IR機能"],
                 features: ["企業情報", "IR情報", "採用ページ", "ニュースリリース"],
                 description: "上場企業として相応しい、信頼感のあるコーポレートサイト",
-                beforeImage: "https://via.placeholder.com/600x400/2d2d2d/666?text=Before",
-                afterImage: "https://via.placeholder.com/600x400/00ff88/000000?text=After",
+                beforeImage: "https://picsum.photos/600/400?random=15",
+                afterImage: "https://picsum.photos/600/400?random=16",
                 beforeDescription: "情報が古く、企業の成長が伝わらない",
                 afterDescription: "最新の企業情報で、投資家・求職者から高評価",
                 results: {
@@ -1093,8 +1126,8 @@
                 technologies: ["HTML5", "CSS3", "JavaScript", "画像最適化"],
                 features: ["施工実績", "会社案内", "お問い合わせ", "資料請求"],
                 description: "豊富な施工実績を効果的に見せる、信頼感のあるサイト",
-                beforeImage: "https://via.placeholder.com/600x400/2d2d2d/666?text=Before",
-                afterImage: "https://via.placeholder.com/600x400/00ff88/000000?text=After",
+                beforeImage: "https://picsum.photos/600/400?random=17",
+                afterImage: "https://picsum.photos/600/400?random=18",
                 beforeDescription: "実績写真が少なく、技術力が伝わらない",
                 afterDescription: "豊富な実績写真で、大型案件の受注に成功",
                 results: {
@@ -1117,8 +1150,8 @@
                 technologies: ["WordPress", "SSL", "SEO対策", "モバイル最適化"],
                 features: ["サービス紹介", "弁護士紹介", "相談予約", "コラム"],
                 description: "専門性と親しみやすさを両立した法律事務所サイト",
-                beforeImage: "https://via.placeholder.com/600x400/2d2d2d/666?text=Before",
-                afterImage: "https://via.placeholder.com/600x400/00ff88/000000?text=After",
+                beforeImage: "https://picsum.photos/600/400?random=19",
+                afterImage: "https://picsum.photos/600/400?random=20",
                 beforeDescription: "堅すぎて相談しづらい印象",
                 afterDescription: "親しみやすいデザインで、相談件数が大幅増",
                 results: {
@@ -1142,8 +1175,8 @@
                 technologies: ["WordPress", "WooCommerce", "決済システム", "在庫管理"],
                 features: ["商品管理", "決済機能", "会員機能", "レビュー機能"],
                 description: "ハンドメイド商品の魅力を最大限に引き出すECサイト",
-                beforeImage: "https://via.placeholder.com/600x400/2d2d2d/666?text=Before",
-                afterImage: "https://via.placeholder.com/600x400/9c27b0/ffffff?text=After",
+                beforeImage: "https://picsum.photos/600/400?random=21",
+                afterImage: "https://picsum.photos/600/400?random=22",
                 beforeDescription: "外部モールのみで、ブランド構築が困難",
                 afterDescription: "独自ECサイトで、ファンコミュニティを形成",
                 results: {
@@ -1166,8 +1199,8 @@
                 technologies: ["WordPress", "WooCommerce", "Instagram連携", "AR試着"],
                 features: ["商品カタログ", "サイズガイド", "コーディネート提案", "ポイント機能"],
                 description: "実店舗の雰囲気をオンラインで再現した、体験型ECサイト",
-                beforeImage: "https://via.placeholder.com/600x400/2d2d2d/666?text=Before",
-                afterImage: "https://via.placeholder.com/600x400/9c27b0/ffffff?text=After",
+                beforeImage: "https://picsum.photos/600/400?random=23",
+                afterImage: "https://picsum.photos/600/400?random=24",
                 beforeDescription: "実店舗のみで、オンライン販売なし",
                 afterDescription: "オムニチャネル化で、売上が2倍以上に",
                 results: {
@@ -1220,8 +1253,8 @@
 
                     <div class="portfolio-card__content">
                         <div class="portfolio-card__header">
-                            <h3 class="portfolio-card__title">${project.title}</h3>
                             <span class="portfolio-card__category category--${project.category}">${getCategoryName(project.category)}</span>
+                            <h3 class="portfolio-card__title">${project.title}</h3>
                         </div>
 
                         <div class="portfolio-card__meta">
@@ -1249,17 +1282,6 @@
 
                         <p class="portfolio-card__description">${project.description}</p>
 
-                        <div class="portfolio-card__results">
-                            <h4>導入効果</h4>
-                            <div class="results-grid">
-                                ${Object.entries(project.results).map(([key, value]) => `
-                                    <div class="result-item">
-                                        <span class="result-value">${value}</span>
-                                        <span class="result-label">${key}</span>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
 
                         <div class="portfolio-card__actions">
                             <button class="btn btn--primary" onclick="openModal(${project.id})">詳細を見る</button>
@@ -1443,17 +1465,6 @@
                         </div>
                     </div>
 
-                    <div class="modal__results">
-                        <h3>導入効果の詳細</h3>
-                        <div class="results-grid">
-                            ${Object.entries(project.results).map(([key, value]) => `
-                                <div class="result-item">
-                                    <span class="result-value">${value}</span>
-                                    <span class="result-label">${key}</span>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
 
                     <div class="modal__cta">
                         <h3>同じような制作をご希望ですか？</h3>
