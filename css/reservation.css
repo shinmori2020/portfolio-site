@@ -1,0 +1,542 @@
+/* リセットスタイル */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ベーススタイル */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* コンテナ */
+.reservation-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* ヘッダー */
+.reservation-header {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: fadeInDown 0.8s ease;
+}
+
+.reservation-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #00ff88 0%, #00cc70 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.reservation-header p {
+    font-size: 1.2rem;
+    color: #aaa;
+}
+
+/* メインコンテンツグリッド */
+.reservation-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    animation: fadeIn 1s ease;
+}
+
+/* カレンダーセクション */
+.calendar-section {
+    background: #1a1a1a;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    border: 1px solid #333;
+}
+
+.calendar-section h2 {
+    color: #00ff88;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+/* FullCalendarカスタムスタイル */
+#calendar {
+    background: #0a0a0a;
+    padding: 20px;
+}
+
+.fc {
+    background: transparent;
+}
+
+.fc-theme-standard th,
+.fc-theme-standard td,
+.fc-theme-standard .fc-scrollgrid {
+    border-color: #333 !important;
+}
+
+.fc .fc-button-primary {
+    background: rgba(0, 255, 136, 0.1);
+    border: 2px solid rgba(0, 255, 136, 0.3);
+    color: #00ff88;
+    font-weight: 600;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fc .fc-button-primary:hover {
+    background: rgba(0, 255, 136, 0.2);
+    border-color: #00ff88;
+}
+
+.fc .fc-button-primary:disabled {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #666;
+    opacity: 0.5;
+}
+
+.fc .fc-button-primary:focus {
+    outline: 2px solid #00ff88;
+    outline-offset: 2px;
+}
+
+.fc-toolbar-title {
+    color: #ffffff !important;
+    font-size: 1.3rem !important;
+}
+
+.fc-col-header-cell {
+    background: #1a1a1a;
+    color: #00ff88 !important;
+    font-weight: 600;
+}
+
+.fc-daygrid-day {
+    background: #0a0a0a;
+    transition: background 0.3s ease;
+}
+
+.fc-daygrid-day:hover {
+    background: #222;
+}
+
+.fc-daygrid-day-number {
+    color: #ffffff !important;
+}
+
+.fc-day-today {
+    background: rgba(0, 255, 136, 0.1) !important;
+}
+
+/* 予約可能な日 */
+.available-slot {
+    background: rgba(0, 255, 136, 0.2) !important;
+    cursor: pointer;
+    position: relative;
+}
+
+.available-slot::after {
+    content: '◉';
+    color: #00ff88;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 8px;
+}
+
+/* 予約済みの日 */
+.booked-slot {
+    background: rgba(102, 102, 102, 0.2) !important;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* フォームセクション */
+.form-section {
+    background: #1a1a1a;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    border: 1px solid #333;
+}
+
+.form-section h2 {
+    color: #00ff88;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+/* 時間選択 */
+.time-slots {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #0a0a0a;
+}
+
+.time-slot {
+    padding: 10px;
+    background: #1a1a1a;
+    border: 2px solid #333;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.time-slot:hover {
+    border-color: #00ff88;
+    transform: translateY(-2px);
+}
+
+.time-slot.selected {
+    background: linear-gradient(135deg, #00ff88 0%, #00cc70 100%);
+    color: #0a0a0a;
+    border-color: #00ff88;
+    font-weight: 600;
+}
+
+.time-slot.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* フォーム要素 */
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #aaa;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    background: #0a0a0a;
+    border: 2px solid #333;
+    color: #ffffff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #00ff88;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+}
+
+.form-group input.error,
+.form-group select.error,
+.form-group textarea.error {
+    border-color: #ff4444;
+}
+
+.error-message {
+    color: #ff4444;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    display: none;
+}
+
+.error-message.show {
+    display: block;
+}
+
+/* チェックボックスグループ */
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 15px;
+    background: #0a0a0a;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: auto;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.checkbox-item label {
+    margin: 0;
+    cursor: pointer;
+    color: #ffffff;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+/* 送信ボタン */
+.submit-button {
+    width: 100%;
+    padding: 18px 40px;
+    background: rgba(0, 255, 136, 0.1);
+    color: #00ff88;
+    border: 2px solid rgba(0, 255, 136, 0.3);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+}
+
+.submit-button:hover {
+    background: rgba(0, 255, 136, 0.2);
+    border-color: #00ff88;
+}
+
+.submit-button:disabled {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #666;
+    cursor: not-allowed;
+}
+
+.submit-button:focus {
+    outline: 2px solid #00ff88;
+    outline-offset: 2px;
+}
+
+/* モーダル */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: #1a1a1a;
+    padding: 40px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    animation: slideUp 0.3s ease;
+    border: 2px solid #00ff88;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: #ffffff;
+}
+
+.modal h3 {
+    color: #00ff88;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.modal p {
+    color: #aaa;
+    margin-bottom: 15px;
+}
+
+/* ローディング */
+.loading {
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+
+.loading.show {
+    display: block;
+}
+
+.loading-spinner {
+    border: 3px solid #333;
+    border-top: 3px solid #00ff88;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+/* アニメーション */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .reservation-main {
+        grid-template-columns: 1fr;
+    }
+
+    .reservation-header h1 {
+        font-size: 2rem;
+    }
+
+    .time-slots {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .checkbox-group {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .reservation-container {
+        padding: 20px 15px;
+    }
+
+    .calendar-section,
+    .form-section {
+        padding: 20px;
+    }
+
+    .reservation-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .time-slots {
+        grid-template-columns: 1fr;
+    }
+
+    /* モバイル用カレンダー最適化 */
+    #calendar {
+        font-size: 0.85rem;
+    }
+
+    .fc-daygrid-day-number {
+        font-size: 0.9rem;
+        padding: 4px;
+    }
+
+    .fc-col-header-cell {
+        padding: 8px 0;
+        font-size: 0.85rem;
+    }
+
+    /* 日付セルの高さを減らす */
+    .fc-daygrid-day-frame {
+        min-height: 40px;
+        height: 40px;
+    }
+
+    .fc-daygrid-day {
+        height: 40px;
+    }
+
+    /* タイトルをコンパクトに */
+    .fc-toolbar-title {
+        font-size: 1.2rem !important;
+    }
+
+    /* ナビゲーションボタンを小さく */
+    .fc .fc-button-primary {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+}
+
+/* 成功メッセージ */
+.success-message {
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 204, 112, 0.2));
+    border: 2px solid #00ff88;
+    padding: 20px;
+    margin: 20px 0;
+    display: none;
+}
+
+.success-message.show {
+    display: block;
+    animation: slideUp 0.5s ease;
+}
+
+.success-message h4 {
+    color: #00ff88;
+    margin-bottom: 10px;
+}
+
+/* エラーメッセージ */
+.error-banner {
+    background: rgba(255, 68, 68, 0.2);
+    border: 2px solid #ff4444;
+    padding: 20px;
+    margin: 20px 0;
+    display: none;
+}
+
+.error-banner.show {
+    display: block;
+    animation: slideUp 0.5s ease;
+}
+
+.error-banner h4 {
+    color: #ff4444;
+    margin-bottom: 10px;
+}

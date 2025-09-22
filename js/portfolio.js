@@ -1,0 +1,615 @@
+// ポートフォリオデータ
+const portfolioData = [
+    // 医療・クリニック
+    {
+        id: 1,
+        title: "さくら内科クリニック様 ホームページリニューアル",
+        client: "さくら内科クリニック様",
+        category: "medical",
+        projectType: "WEB",
+        budget: "15-30万円",
+        budgetRange: [15, 30],
+        period: "6週間",
+        periodWeeks: 6,
+        completedDate: "2024年8月",
+        technologies: ["HTML5", "CSS3", "JavaScript", "レスポンシブ"],
+        features: ["オンライン予約", "診療案内", "医師紹介", "アクセスマップ"],
+        description: "患者様に分かりやすい診療案内と、24時間対応のオンライン予約システムを導入",
+        beforeImage: "https://picsum.photos/600/400?random=1",
+        afterImage: "https://picsum.photos/600/400?random=2",
+        beforeDescription: "古いデザインで情報が見つけにくく、スマホ対応していない状態",
+        afterDescription: "スッキリとしたモダンなデザインで、スマホからも簡単に予約が可能に",
+        results: {
+            "ページビュー": "+150%",
+            "予約数": "+200%",
+            "モバイル率": "75%"
+        }
+    },
+    {
+        id: 2,
+        title: "やまだ歯科医院様 新規開業サイト制作",
+        client: "やまだ歯科医院様",
+        category: "medical",
+        projectType: "WordPress",
+        budget: "30-50万円",
+        budgetRange: [30, 50],
+        period: "8週間",
+        periodWeeks: 8,
+        completedDate: "2024年7月",
+        technologies: ["WordPress", "カスタムテーマ", "SEO対策", "SSL"],
+        features: ["予約管理システム", "ブログ機能", "症例紹介", "Q&A"],
+        description: "新規開業に合わせて、信頼感のある歯科医院サイトを構築",
+        beforeImage: "https://picsum.photos/600/400?random=5",
+        afterImage: "https://picsum.photos/600/400?random=6",
+        beforeDescription: "新規開業のため、Webサイトが存在しない状態",
+        afterDescription: "清潔感と信頼感のあるデザインで、地域No.1の集患を実現",
+        results: {
+            "新規患者": "月50名",
+            "予約率": "85%",
+            "満足度": "4.8/5"
+        }
+    },
+    {
+        id: 3,
+        title: "みどり整形外科様 LP制作",
+        client: "みどり整形外科様",
+        category: "medical",
+        projectType: "LP",
+        budget: "10-15万円",
+        budgetRange: [10, 15],
+        period: "3週間",
+        periodWeeks: 3,
+        completedDate: "2024年9月",
+        technologies: ["HTML5", "CSS3", "jQuery", "アニメーション"],
+        features: ["問い合わせフォーム", "施術説明", "料金表", "アクセス"],
+        description: "腰痛治療専門のランディングページで集患効果を最大化",
+        beforeImage: "https://picsum.photos/600/400?random=3",
+        afterImage: "https://picsum.photos/600/400?random=4",
+        beforeDescription: "一般的な整形外科サイトで専門性が伝わらない",
+        afterDescription: "腰痛治療に特化した訴求で、問い合わせが3倍に",
+        results: {
+            "問い合わせ": "+300%",
+            "滞在時間": "+120%",
+            "直帰率": "-40%"
+        }
+    },
+    // 美容・サロン
+    {
+        id: 4,
+        title: "Beauty Salon LUXE様 ブランドサイト制作",
+        client: "Beauty Salon LUXE様",
+        category: "beauty",
+        projectType: "WEB",
+        budget: "30-50万円",
+        budgetRange: [30, 50],
+        period: "7週間",
+        periodWeeks: 7,
+        completedDate: "2024年6月",
+        technologies: ["HTML5", "CSS3", "JavaScript", "GSAP"],
+        features: ["オンライン予約", "スタッフ紹介", "メニュー", "ギャラリー"],
+        description: "高級感のあるデザインで、ブランド価値を最大限に表現",
+        beforeImage: "https://picsum.photos/600/400?random=7",
+        afterImage: "https://picsum.photos/600/400?random=8",
+        beforeDescription: "SNSのみの集客で、ブランドイメージが定まらない",
+        afterDescription: "ラグジュアリーな世界観で、客単価が大幅アップ",
+        results: {
+            "客単価": "+40%",
+            "予約率": "+180%",
+            "リピート率": "85%"
+        }
+    },
+    {
+        id: 5,
+        title: "ネイルサロン Fairy様 LP制作",
+        client: "ネイルサロン Fairy様",
+        category: "beauty",
+        projectType: "LP",
+        budget: "10-15万円",
+        budgetRange: [10, 15],
+        period: "4週間",
+        periodWeeks: 4,
+        completedDate: "2024年8月",
+        technologies: ["HTML5", "CSS3", "JavaScript", "レスポンシブ"],
+        features: ["予約フォーム", "デザインギャラリー", "料金表", "クーポン"],
+        description: "季節限定キャンペーンに特化したランディングページ",
+        beforeImage: "https://picsum.photos/600/400?random=9",
+        afterImage: "https://picsum.photos/600/400?random=10",
+        beforeDescription: "通常のホームページでキャンペーンが埋もれている",
+        afterDescription: "キャンペーン専用LPで、成約率が2.5倍に向上",
+        results: {
+            "成約率": "+250%",
+            "新規顧客": "+85%",
+            "売上": "+120%"
+        }
+    },
+    // 飲食店
+    {
+        id: 6,
+        title: "イタリアン Bella Vista様 公式サイト制作",
+        client: "イタリアン Bella Vista様",
+        category: "restaurant",
+        projectType: "WordPress",
+        budget: "30-50万円",
+        budgetRange: [30, 50],
+        period: "6週間",
+        periodWeeks: 6,
+        completedDate: "2024年5月",
+        technologies: ["WordPress", "WooCommerce", "多言語対応", "SEO"],
+        features: ["オンライン予約", "メニュー管理", "テイクアウト注文", "イベント情報"],
+        description: "本格イタリアンの魅力を伝える、美味しそうなビジュアル重視のサイト",
+        beforeImage: "https://picsum.photos/600/400?random=11",
+        afterImage: "https://picsum.photos/600/400?random=12",
+        beforeDescription: "メニューが古く、料理の魅力が伝わらない",
+        afterDescription: "プロの料理写真で、予約が常に満席状態に",
+        results: {
+            "予約数": "+180%",
+            "客単価": "+25%",
+            "リピート率": "+60%"
+        }
+    },
+    {
+        id: 7,
+        title: "カフェ Green Garden様 リニューアル",
+        client: "カフェ Green Garden様",
+        category: "restaurant",
+        projectType: "WEB",
+        budget: "15-30万円",
+        budgetRange: [15, 30],
+        period: "5週間",
+        periodWeeks: 5,
+        completedDate: "2024年7月",
+        technologies: ["HTML5", "CSS3", "JavaScript", "Instagram連携"],
+        features: ["メニュー表示", "Instagram連携", "お知らせ", "アクセス"],
+        description: "オーガニックカフェの温かみのある雰囲気を表現",
+        beforeImage: "https://picsum.photos/600/400?random=13",
+        afterImage: "https://picsum.photos/600/400?random=14",
+        beforeDescription: "手作り感はあるが、プロフェッショナルさに欠ける",
+        afterDescription: "温かみとプロ感を両立し、若い客層も獲得",
+        results: {
+            "来店数": "+90%",
+            "SNSフォロワー": "+300%",
+            "売上": "+65%"
+        }
+    },
+    // コーポレート
+    {
+        id: 8,
+        title: "テクノロジー株式会社様 コーポレートサイト",
+        client: "テクノロジー株式会社様",
+        category: "corporate",
+        projectType: "WordPress",
+        budget: "50万円以上",
+        budgetRange: [50, 100],
+        period: "10週間",
+        periodWeeks: 10,
+        completedDate: "2024年4月",
+        technologies: ["WordPress", "カスタム開発", "多言語", "IR機能"],
+        features: ["企業情報", "IR情報", "採用ページ", "ニュースリリース"],
+        description: "上場企業として相応しい、信頼感のあるコーポレートサイト",
+        beforeImage: "https://picsum.photos/600/400?random=15",
+        afterImage: "https://picsum.photos/600/400?random=16",
+        beforeDescription: "情報が古く、企業の成長が伝わらない",
+        afterDescription: "最新の企業情報で、投資家・求職者から高評価",
+        results: {
+            "採用応募": "+250%",
+            "投資家閲覧": "+180%",
+            "ブランド認知": "+80%"
+        }
+    },
+    {
+        id: 9,
+        title: "建設会社様 実績紹介サイト",
+        client: "山田建設株式会社様",
+        category: "corporate",
+        projectType: "WEB",
+        budget: "30-50万円",
+        budgetRange: [30, 50],
+        period: "6週間",
+        periodWeeks: 6,
+        completedDate: "2024年6月",
+        technologies: ["HTML5", "CSS3", "JavaScript", "画像最適化"],
+        features: ["施工実績", "会社案内", "お問い合わせ", "資料請求"],
+        description: "豊富な施工実績を効果的に見せる、信頼感のあるサイト",
+        beforeImage: "https://picsum.photos/600/400?random=17",
+        afterImage: "https://picsum.photos/600/400?random=18",
+        beforeDescription: "実績写真が少なく、技術力が伝わらない",
+        afterDescription: "豊富な実績写真で、大型案件の受注に成功",
+        results: {
+            "問い合わせ": "+200%",
+            "資料請求": "+150%",
+            "受注額": "+40%"
+        }
+    },
+    {
+        id: 10,
+        title: "法律事務所様 サービスサイト",
+        client: "山田法律事務所様",
+        category: "corporate",
+        projectType: "WordPress",
+        budget: "30-50万円",
+        budgetRange: [30, 50],
+        period: "7週間",
+        periodWeeks: 7,
+        completedDate: "2024年5月",
+        technologies: ["WordPress", "SSL", "SEO対策", "モバイル最適化"],
+        features: ["サービス紹介", "弁護士紹介", "相談予約", "コラム"],
+        description: "専門性と親しみやすさを両立した法律事務所サイト",
+        beforeImage: "https://picsum.photos/600/400?random=19",
+        afterImage: "https://picsum.photos/600/400?random=20",
+        beforeDescription: "堅すぎて相談しづらい印象",
+        afterDescription: "親しみやすいデザインで、相談件数が大幅増",
+        results: {
+            "相談予約": "+180%",
+            "電話問合せ": "+120%",
+            "成約率": "+45%"
+        }
+    },
+    // ECサイト
+    {
+        id: 11,
+        title: "ハンドメイドショップ様 ECサイト構築",
+        client: "Handmade Collection様",
+        category: "ecommerce",
+        projectType: "WordPress",
+        budget: "30-50万円",
+        budgetRange: [30, 50],
+        period: "8週間",
+        periodWeeks: 8,
+        completedDate: "2024年3月",
+        technologies: ["WordPress", "WooCommerce", "決済システム", "在庫管理"],
+        features: ["商品管理", "決済機能", "会員機能", "レビュー機能"],
+        description: "ハンドメイド商品の魅力を最大限に引き出すECサイト",
+        beforeImage: "https://picsum.photos/600/400?random=21",
+        afterImage: "https://picsum.photos/600/400?random=22",
+        beforeDescription: "外部モールのみで、ブランド構築が困難",
+        afterDescription: "独自ECサイトで、ファンコミュニティを形成",
+        results: {
+            "売上": "+400%",
+            "転換率": "3.2%",
+            "客単価": "+60%"
+        }
+    },
+    {
+        id: 12,
+        title: "アパレルショップ様 オンラインストア",
+        client: "Fashion Store STYLE様",
+        category: "ecommerce",
+        projectType: "WordPress",
+        budget: "50万円以上",
+        budgetRange: [50, 100],
+        period: "10週間",
+        periodWeeks: 10,
+        completedDate: "2024年2月",
+        technologies: ["WordPress", "WooCommerce", "Instagram連携", "AR試着"],
+        features: ["商品カタログ", "サイズガイド", "コーディネート提案", "ポイント機能"],
+        description: "実店舗の雰囲気をオンラインで再現した、体験型ECサイト",
+        beforeImage: "https://picsum.photos/600/400?random=23",
+        afterImage: "https://picsum.photos/600/400?random=24",
+        beforeDescription: "実店舗のみで、オンライン販売なし",
+        afterDescription: "オムニチャネル化で、売上が2倍以上に",
+        results: {
+            "オンライン売上": "月500万円",
+            "会員数": "3000名",
+            "リピート率": "45%"
+        }
+    }
+];
+
+// フィルター状態
+let currentFilters = {
+    category: 'all',
+    budget: '',
+    period: '',
+    type: ''
+};
+
+// 初期化
+document.addEventListener('DOMContentLoaded', function() {
+    renderPortfolio();
+    initializeFilters();
+    updateCounts();
+});
+
+// ポートフォリオをレンダリング
+function renderPortfolio() {
+    const grid = document.getElementById('portfolioGrid');
+    const filteredData = filterPortfolio();
+
+    if (filteredData.length === 0) {
+        grid.style.display = 'none';
+        document.getElementById('noResults').style.display = 'block';
+        return;
+    }
+
+    grid.style.display = 'grid';
+    document.getElementById('noResults').style.display = 'none';
+
+    grid.innerHTML = filteredData.map((project, index) => `
+        <article class="portfolio-card" data-portfolio='${JSON.stringify(project)}' style="animation-delay: ${index * 0.1}s">
+            <div class="portfolio-card__comparison">
+                <div class="comparison-tabs">
+                    <button class="comparison-tab comparison-tab--active" onclick="switchTab(this, ${project.id}, 'before')">Before</button>
+                    <button class="comparison-tab" onclick="switchTab(this, ${project.id}, 'after')">After</button>
+                </div>
+                <img src="${project.beforeImage}" alt="Before" class="comparison-image comparison-image--active" id="before-${project.id}">
+                <img src="${project.afterImage}" alt="After" class="comparison-image" id="after-${project.id}">
+            </div>
+
+            <div class="portfolio-card__content">
+                <div class="portfolio-card__header">
+                    <span class="portfolio-card__category category--${project.category}">${getCategoryName(project.category)}</span>
+                    <h3 class="portfolio-card__title">${project.title}</h3>
+                </div>
+
+                <div class="portfolio-card__meta">
+                    <div class="meta-item">
+                        <span class="meta-label">制作タイプ</span>
+                        <span class="meta-value">${project.projectType}制作</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">予算</span>
+                        <span class="meta-value">${project.budget}</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">制作期間</span>
+                        <span class="meta-value">${project.period}</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">完成</span>
+                        <span class="meta-value">${project.completedDate}</span>
+                    </div>
+                </div>
+
+                <div class="portfolio-card__technologies">
+                    ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                </div>
+
+                <p class="portfolio-card__description">${project.description}</p>
+
+
+                <div class="portfolio-card__actions">
+                    <button class="btn btn--primary" onclick="openModal(${project.id})">詳細を見る</button>
+                    <a href="contact.html" class="btn btn--outline">相談する</a>
+                </div>
+            </div>
+        </article>
+    `).join('');
+}
+
+// フィルタリング
+function filterPortfolio() {
+    return portfolioData.filter(project => {
+        // カテゴリーフィルター
+        if (currentFilters.category !== 'all' && project.category !== currentFilters.category) {
+            return false;
+        }
+
+        // 予算フィルター
+        if (currentFilters.budget) {
+            if (!matchBudget(project.budgetRange, currentFilters.budget)) {
+                return false;
+            }
+        }
+
+        // 期間フィルター
+        if (currentFilters.period) {
+            if (!matchPeriod(project.periodWeeks, currentFilters.period)) {
+                return false;
+            }
+        }
+
+        // タイプフィルター
+        if (currentFilters.type && project.projectType !== currentFilters.type) {
+            return false;
+        }
+
+        return true;
+    });
+}
+
+// 予算マッチング
+function matchBudget(budgetRange, filterValue) {
+    const ranges = {
+        'under15': [0, 15],
+        '15-30': [15, 30],
+        '30-50': [30, 50],
+        'over50': [50, Infinity]
+    };
+
+    const range = ranges[filterValue];
+    if (!range) return true;
+
+    return budgetRange[0] >= range[0] && budgetRange[0] < range[1];
+}
+
+// 期間マッチング
+function matchPeriod(weeks, filterValue) {
+    switch(filterValue) {
+        case 'short': return weeks <= 4;
+        case 'medium': return weeks > 4 && weeks <= 6;
+        case 'long': return weeks > 6;
+        default: return true;
+    }
+}
+
+// フィルター初期化
+function initializeFilters() {
+    // カテゴリーボタン
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('filter-btn--active'));
+            this.classList.add('filter-btn--active');
+            currentFilters.category = this.dataset.filter;
+            renderPortfolio();
+        });
+    });
+
+    // 詳細フィルター
+    document.querySelectorAll('.filter-select').forEach(select => {
+        select.addEventListener('change', function() {
+            const filterType = this.dataset.filterType;
+            currentFilters[filterType] = this.value;
+            renderPortfolio();
+        });
+    });
+}
+
+// カウント更新
+function updateCounts() {
+    const categories = ['all', 'medical', 'beauty', 'restaurant', 'corporate', 'ecommerce'];
+
+    categories.forEach(category => {
+        const count = category === 'all'
+            ? portfolioData.length
+            : portfolioData.filter(p => p.category === category).length;
+
+        const btn = document.querySelector(`.filter-btn[data-filter="${category}"] .count`);
+        if (btn) {
+            btn.textContent = `(${count})`;
+        }
+    });
+}
+
+// カテゴリー名取得
+function getCategoryName(category) {
+    const names = {
+        medical: '医療・クリニック',
+        beauty: '美容・サロン',
+        restaurant: '飲食店',
+        corporate: 'コーポレート',
+        ecommerce: 'ECサイト'
+    };
+    return names[category] || category;
+}
+
+// タブ切り替え
+function switchTab(button, projectId, type) {
+    const parent = button.parentElement;
+    parent.querySelectorAll('.comparison-tab').forEach(tab => {
+        tab.classList.remove('comparison-tab--active');
+    });
+    button.classList.add('comparison-tab--active');
+
+    const beforeImg = document.getElementById(`before-${projectId}`);
+    const afterImg = document.getElementById(`after-${projectId}`);
+
+    if (type === 'before') {
+        beforeImg.classList.add('comparison-image--active');
+        afterImg.classList.remove('comparison-image--active');
+    } else {
+        beforeImg.classList.remove('comparison-image--active');
+        afterImg.classList.add('comparison-image--active');
+    }
+}
+
+// モーダルを開く
+function openModal(projectId) {
+    const project = portfolioData.find(p => p.id === projectId);
+    if (!project) return;
+
+    const modalContent = document.getElementById('modalContent');
+    modalContent.innerHTML = `
+        <div class="modal__header">
+            <h2 class="modal__title">${project.title}</h2>
+            <span class="modal__category category--${project.category}">${getCategoryName(project.category)}</span>
+        </div>
+
+        <div class="modal__comparison">
+            <div class="comparison-slider" id="comparisonSlider">
+                <div class="comparison-slider__before">
+                    <img src="${project.beforeImage}" alt="Before">
+                    <div class="comparison-label comparison-label--before">Before</div>
+                </div>
+                <div class="comparison-slider__after">
+                    <img src="${project.afterImage}" alt="After">
+                    <div class="comparison-label comparison-label--after">After</div>
+                </div>
+                <div class="comparison-slider__handle" id="sliderHandle">
+                    <div class="comparison-slider__button"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal__body">
+            <div class="modal__details">
+                <div class="detail-section">
+                    <h3>Before - 改善前の状態</h3>
+                    <p>${project.beforeDescription}</p>
+                </div>
+                <div class="detail-section">
+                    <h3>After - 改善後の成果</h3>
+                    <p>${project.afterDescription}</p>
+                </div>
+            </div>
+
+            <div class="modal__features">
+                <h3>実装機能</h3>
+                <div class="features-grid">
+                    ${project.features.map(feature => `<div class="feature-item">${feature}</div>`).join('')}
+                </div>
+            </div>
+
+
+            <div class="modal__cta">
+                <h3>同じような制作をご希望ですか？</h3>
+                <p>${project.client}と同じような成果を、あなたのビジネスでも実現します。</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn--primary">無料相談を申し込む</a>
+                    <a href="pricing-calculator.html" class="btn btn--outline">料金を確認する</a>
+                </div>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('portfolioModal').classList.add('modal--active');
+
+    // スライダー初期化
+    setTimeout(() => initializeSlider(), 100);
+}
+
+// モーダルを閉じる
+function closeModal() {
+    document.getElementById('portfolioModal').classList.remove('modal--active');
+}
+
+// Before/Afterスライダー初期化
+function initializeSlider() {
+    const slider = document.getElementById('comparisonSlider');
+    const handle = document.getElementById('sliderHandle');
+    if (!slider || !handle) return;
+
+    const afterImage = slider.querySelector('.comparison-slider__after');
+    let isDragging = false;
+
+    function updateSliderPosition(x) {
+        const rect = slider.getBoundingClientRect();
+        const position = Math.max(0, Math.min(100, ((x - rect.left) / rect.width) * 100));
+        handle.style.left = `${position}%`;
+        afterImage.style.clipPath = `inset(0 ${100 - position}% 0 0)`;
+    }
+
+    // マウスイベント
+    handle.addEventListener('mousedown', () => isDragging = true);
+    document.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+            updateSliderPosition(e.clientX);
+        }
+    });
+    document.addEventListener('mouseup', () => isDragging = false);
+
+    // タッチイベント
+    handle.addEventListener('touchstart', () => isDragging = true);
+    document.addEventListener('touchmove', (e) => {
+        if (isDragging && e.touches[0]) {
+            updateSliderPosition(e.touches[0].clientX);
+        }
+    });
+    document.addEventListener('touchend', () => isDragging = false);
+}
+
+// ESCキーでモーダルを閉じる
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeModal();
+    }
+});

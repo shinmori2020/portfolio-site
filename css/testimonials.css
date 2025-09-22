@@ -255,6 +255,13 @@
     transform: scale(1.2);
 }
 
+/* レスポンシブ: 1200px以下 */
+@media (max-width: 1200px) {
+    .testimonials {
+        padding: 80px 20px 40px;
+    }
+}
+
 /* レスポンシブ: デスクトップ (5枚表示) - Swiperの breakpoints で管理 */
 @media (min-width: 960px) {
     /* Swiperが自動で幅を計算 */
@@ -275,7 +282,7 @@
 /* レスポンシブ: モバイル (1枚表示) - Swiperの breakpoints で管理 */
 @media (max-width: 599px) {
     .testimonials {
-        padding: 60px 0;
+        padding: 60px 20px;
     }
     
     .testimonials__header h2 {
@@ -321,6 +328,13 @@
     .testimonials__swiper .swiper-button-next:after,
     .testimonials__swiper .swiper-button-prev:after {
         font-size: 14px;
+    }
+}
+
+/* レスポンシブ: 480px以下 */
+@media (max-width: 480px) {
+    .testimonials {
+        padding: 60px 15px;
     }
 }
 

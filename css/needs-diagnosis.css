@@ -548,9 +548,15 @@ body {
 /* ================================
    レスポンシブ対応
 ================================ */
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
     .diagnosis__container {
         padding: 40px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .diagnosis__container {
+        padding: 40px 30px;
     }
 
     .diagnosis__title {
@@ -591,5 +597,10 @@ body {
     .diagnosis__buttons [class*="diagnosis__button"] {
         width: 100%;
     }
+}
 
+@media (max-width: 480px) {
+    .diagnosis__container {
+        padding: 40px 15px;
+    }
 }
