@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEBサイト評価アンケート</title>
+    <style>
+        /* リセット & 基本スタイル */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .survey-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            border-radius: 0;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .survey-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .survey-title {
+            font-size: 2.2rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .survey-description {
+            font-size: 1rem;
+            color: #999;
+            margin-bottom: 30px;
+        }
+
+        /* プログレスバー */
+        .progress-section {
+            margin-bottom: 40px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        .progress-counter {
+            font-size: 1.1rem;
+            color: #00ff88;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff88 0%, #00cc6a 100%);
+            transition: width 0.5s ease;
+            width: 10%;
+        }
+
+        /* 質問セクション */
+        .question-container {
+            position: relative;
+            min-height: 350px;
+            height: auto;
+        }
+
+        .question {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-height: 350px;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.4s ease;
+            pointer-events: none;
+        }
+
+        .question.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: all;
+        }
+
+        .question.prev {
+            transform: translateX(-50px);
+        }
+
+        .question.next {
+            transform: translateX(50px);
+        }
+
+        .question-title {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* 星評価 */
+        .star-rating {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .star {
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .star:hover,
+        .star.active,
+        .star.hover {
+            color: #00ff88;
+            transform: scale(1.1);
+        }
+
+        /* ラジオボタン */
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .radio-option:hover {
+            border-color: #00ff88;
+            background: rgba(0, 255, 136, 0.05);
+        }
+
+        .radio-option.selected {
+            border-color: #00ff88;
+            background: rgba(0, 255, 136, 0.15);
+            box-shadow: 0 0 0 2px rgba(0, 255, 136, 0.2);
+        }
+
+        .radio-option input[type="radio"] {
+            margin-right: 15px;
+            transform: scale(1.3);
+            accent-color: #00ff88;
+        }
+
+        .radio-label {
+            font-size: 1.1rem;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        /* スライダー */
+        .slider-container {
+            margin-bottom: 30px;
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        .slider-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            outline: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #00ff88;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 255, 136, 0.3);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #00ff88;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 255, 136, 0.3);
+        }
+
+        .slider-value {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #00ff88;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        /* チェックボックス */
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .checkbox-option:hover {
+            border-color: #00ff88;
+            background: rgba(0, 255, 136, 0.05);
+        }
+
+        .checkbox-option.selected {
+            border-color: #00ff88;
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            margin-right: 12px;
+            transform: scale(1.3);
+            accent-color: #00ff88;
+        }
+
+        /* テキストエリア */
+        .textarea-container {
+            margin-bottom: 30px;
+        }
+
+        .form-textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0;
+            background: #0a0a0a;
+            color: #ffffff;
+            font-size: 1rem;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+
+        .form-textarea:focus {
+            outline: none;
+            border-color: #00ff88;
+            box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1);
+        }
+
+        /* ナビゲーションボタン */
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 60px;
+            clear: both;
+        }
+
+        .nav-btn {
+            padding: 15px 30px;
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            border-radius: 0;
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: rgba(0, 255, 136, 0.2);
+            border-color: #00ff88;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .nav-btn.primary {
+            background: rgba(0, 255, 136, 0.2);
+            border-color: #00ff88;
+        }
+
+        /* 完了画面 */
+        .completion-screen {
+            text-align: center;
+            padding: 60px 20px;
+            display: none;
+        }
+
+        .completion-screen.active {
+            display: block;
+        }
+
+        .completion-icon {
+            font-size: 4rem;
+            color: #00ff88;
+            margin-bottom: 30px;
+            animation: bounce 1s ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .completion-title {
+            font-size: 2rem;
+            color: #00ff88;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .completion-text {
+            font-size: 1.1rem;
+            color: #999;
+            margin-bottom: 30px;
+        }
+
+        /* ローディング */
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid #00ff88;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 1200px) {
+            .survey-container {
+                padding: 40px 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .survey-container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+
+            .survey-title {
+                font-size: 1.8rem;
+            }
+
+            .star {
+                font-size: 2.5rem;
+                gap: 10px;
+            }
+
+            .star-rating {
+                gap: 10px;
+            }
+
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+
+            .navigation {
+                flex-direction: column-reverse;
+                gap: 15px;
+            }
+
+            .nav-btn {
+                width: 100%;
+            }
+
+            .question-container {
+                min-height: 200px;
+            }
+
+            .question {
+                min-height: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .survey-container {
+                padding: 20px 15px;
+            }
+
+            .question-title {
+                font-size: 1.3rem;
+            }
+
+            .star {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="survey-container">
+        <!-- ヘッダー -->
+        <div class="survey-header">
+            <h1 class="survey-title">WEBサイト評価アンケート</h1>
+            <p class="survey-description">
+                当サイトの改善のため、皆様のご意見をお聞かせください。<br>
+                ご回答は約2-3分で完了します。
+            </p>
+        </div>
+
+        <!-- プログレスバー -->
+        <div class="progress-section">
+            <div class="progress-info">
+                <span class="progress-text">進捗状況</span>
+                <span class="progress-counter" id="progressCounter">1 / 10</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <!-- 質問セクション -->
+        <div class="question-container" id="questionContainer">
+            <!-- 質問1: サイトの第一印象 -->
+            <div class="question active" data-question="1">
+                <h2 class="question-title">サイトの第一印象はいかがでしたか？</h2>
+                <div class="radio-group" data-name="first_impression">
+                    <label class="radio-option">
+                        <input type="radio" name="first_impression" value="とても良い">
+                        <span class="radio-label">とても良い</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="first_impression" value="良い">
+                        <span class="radio-label">良い</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="first_impression" value="普通">
+                        <span class="radio-label">普通</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="first_impression" value="悪い">
+                        <span class="radio-label">悪い</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="first_impression" value="とても悪い">
+                        <span class="radio-label">とても悪い</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 質問2: デザインの見やすさ -->
+            <div class="question" data-question="2">
+                <h2 class="question-title">デザインの見やすさはいかがですか？</h2>
+                <div class="radio-group" data-name="design_visibility">
+                    <label class="radio-option">
+                        <input type="radio" name="design_visibility" value="とても見やすい">
+                        <span class="radio-label">とても見やすい</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="design_visibility" value="見やすい">
+                        <span class="radio-label">見やすい</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="design_visibility" value="普通">
+                        <span class="radio-label">普通</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="design_visibility" value="見にくい">
+                        <span class="radio-label">見にくい</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="design_visibility" value="とても見にくい">
+                        <span class="radio-label">とても見にくい</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 質問3: 情報の探しやすさ -->
+            <div class="question" data-question="3">
+                <h2 class="question-title">情報の探しやすさはいかがですか？</h2>
+                <div class="radio-group" data-name="info_findability">
+                    <label class="radio-option">
+                        <input type="radio" name="info_findability" value="とても探しやすい">
+                        <span class="radio-label">とても探しやすい</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="info_findability" value="探しやすい">
+                        <span class="radio-label">探しやすい</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="info_findability" value="普通">
+                        <span class="radio-label">普通</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="info_findability" value="探しにくい">
+                        <span class="radio-label">探しにくい</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="info_findability" value="とても探しにくい">
+                        <span class="radio-label">とても探しにくい</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 質問4: サイトの読み込み速度 -->
+            <div class="question" data-question="4">
+                <h2 class="question-title">サイトの読み込み速度はいかがですか？</h2>
+                <div class="radio-group" data-name="loading_speed">
+                    <label class="radio-option">
+                        <input type="radio" name="loading_speed" value="とても速い">
+                        <span class="radio-label">とても速い</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="loading_speed" value="速い">
+                        <span class="radio-label">速い</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="loading_speed" value="普通">
+                        <span class="radio-label">普通</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="loading_speed" value="遅い">
+                        <span class="radio-label">遅い</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="loading_speed" value="とても遅い">
+                        <span class="radio-label">とても遅い</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 質問5: スマートフォンでの使いやすさ -->
+            <div class="question" data-question="5">
+                <h2 class="question-title">スマートフォンでの使いやすさはいかがですか？</h2>
+                <div class="radio-group" data-name="mobile_usability">
+                    <label class="radio-option">
+                        <input type="radio" name="mobile_usability" value="とても使いやすい">
+                        <span class="radio-label">とても使いやすい</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="mobile_usability" value="使いやすい">
+                        <span class="radio-label">使いやすい</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="mobile_usability" value="普通">
+                        <span class="radio-label">普通</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="mobile_usability" value="使いにくい">
+                        <span class="radio-label">使いにくい</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="mobile_usability" value="とても使いにくい">
+                        <span class="radio-label">とても使いにくい</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 質問6: 求めていた情報 -->
+            <div class="question" data-question="6">
+                <h2 class="question-title">求めていた情報は見つかりましたか？</h2>
+                <div class="radio-group" data-name="info_found">
+                    <label class="radio-option">
+                        <input type="radio" name="info_found" value="すぐに見つかった">
+                        <span class="radio-label">すぐに見つかった</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="info_found" value="少し時間がかかったが見つかった">
+                        <span class="radio-label">少し時間がかかったが見つかった</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="info_found" value="まだ探している途中">
+                        <span class="radio-label">まだ探している途中</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="info_found" value="見つからなかった">
+                        <span class="radio-label">見つからなかった</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="info_found" value="特に探していない">
+                        <span class="radio-label">特に探していない</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 質問7: 推奨度 -->
+            <div class="question" data-question="7">
+                <h2 class="question-title">このサイトを友人に勧めたいですか？</h2>
+                <div class="radio-group" data-name="recommendation">
+                    <label class="radio-option">
+                        <input type="radio" name="recommendation" value="ぜひ勧めたい">
+                        <span class="radio-label">ぜひ勧めたい</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="recommendation" value="多分勧める">
+                        <span class="radio-label">多分勧める</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="recommendation" value="どちらとも言えない">
+                        <span class="radio-label">どちらとも言えない</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="recommendation" value="多分勧めない">
+                        <span class="radio-label">多分勧めない</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="recommendation" value="全く勧めない">
+                        <span class="radio-label">全く勧めない</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 質問8: 改善点 -->
+            <div class="question" data-question="8">
+                <h2 class="question-title">最も改善してほしい点はどれですか？</h2>
+                <div class="radio-group" data-name="improvements">
+                    <label class="radio-option">
+                        <input type="radio" name="improvements" value="デザイン・見た目">
+                        <span class="radio-label">デザイン・見た目</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="improvements" value="操作性・使いやすさ">
+                        <span class="radio-label">操作性・使いやすさ</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="improvements" value="情報の内容・量">
+                        <span class="radio-label">情報の内容・量</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="improvements" value="読み込み速度">
+                        <span class="radio-label">読み込み速度</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="improvements" value="特に改善点はない">
+                        <span class="radio-label">特に改善点はない</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 質問9: 再訪問意向 -->
+            <div class="question" data-question="9">
+                <h2 class="question-title">また訪問したいと思いますか？</h2>
+                <div class="radio-group" data-name="revisit_intention">
+                    <label class="radio-option">
+                        <input type="radio" name="revisit_intention" value="ぜひ訪問したい">
+                        <span class="radio-label">ぜひ訪問したい</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="revisit_intention" value="多分訪問する">
+                        <span class="radio-label">多分訪問する</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="revisit_intention" value="わからない">
+                        <span class="radio-label">わからない</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="revisit_intention" value="多分訪問しない">
+                        <span class="radio-label">多分訪問しない</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="revisit_intention" value="訪問しない">
+                        <span class="radio-label">訪問しない</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 質問10: 総合評価 -->
+            <div class="question" data-question="10">
+                <h2 class="question-title">サイト全体の総合評価をお聞かせください</h2>
+                <div class="radio-group" data-name="overall_rating">
+                    <label class="radio-option">
+                        <input type="radio" name="overall_rating" value="非常に良い">
+                        <span class="radio-label">非常に良い</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="overall_rating" value="良い">
+                        <span class="radio-label">良い</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="overall_rating" value="普通">
+                        <span class="radio-label">普通</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="overall_rating" value="悪い">
+                        <span class="radio-label">悪い</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="overall_rating" value="非常に悪い">
+                        <span class="radio-label">非常に悪い</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- ナビゲーション -->
+        <div class="navigation">
+            <button class="nav-btn" id="prevBtn" disabled>戻る</button>
+            <button class="nav-btn primary" id="nextBtn">次へ</button>
+        </div>
+
+        <!-- 選択メッセージ -->
+        <div id="selectionMessage" style="text-align: center; margin-top: 20px; color: #00ff88; opacity: 0; transition: opacity 0.3s; font-size: 0.9rem;">
+            ※ 選択してから次へ進んでください
+        </div>
+
+        <!-- 完了画面 -->
+        <div class="completion-screen" id="completionScreen">
+            <div class="completion-icon">✓</div>
+            <h2 class="completion-title">アンケート完了</h2>
+            <p class="completion-text">
+                貴重なご意見をありがとうございました！<br>
+                いただいたフィードバックは、サイト改善に活用させていただきます。
+            </p>
+        </div>
+
+        <!-- ローディング -->
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>送信中...</p>
+        </div>
+    </div>
+
+    <script>
+        // アンケートシステムのメインクラス
+        class SurveySystem {
+            constructor() {
+                this.currentQuestion = 1;
+                this.totalQuestions = 10;
+                this.answers = {};
+                this.autoAdvance = false; // 自動進行を無効化
+
+                this.init();
+            }
+
+            init() {
+                this.bindEvents();
+                this.updateProgress();
+                this.loadSavedAnswers();
+                this.setupBeforeUnload();
+                this.adjustContainerHeight();
+
+                // ウィンドウリサイズ時にも高さを調整
+                window.addEventListener('resize', () => {
+                    this.adjustContainerHeight();
+                });
+            }
+
+            bindEvents() {
+                // ナビゲーションボタン
+                document.getElementById('prevBtn').addEventListener('click', () => this.prevQuestion());
+                document.getElementById('nextBtn').addEventListener('click', () => this.nextQuestion());
+
+                // 星評価（削除）
+
+                // ラジオボタン
+                document.querySelectorAll('.radio-option').forEach(option => {
+                    option.addEventListener('click', (e) => {
+                        const input = option.querySelector('input[type="radio"]');
+                        if (input) {
+                            input.checked = true;
+                            this.handleRadioSelection(option);
+                        }
+                    });
+                });
+
+                // チェックボックス（削除）
+                // スライダー（削除）
+                // テキストエリア（削除）
+            }
+
+            setupStarRating(ratingElement) {
+                // 削除 - 星評価は使用しない
+            }
+
+            handleRadioSelection(selectedOption) {
+                const group = selectedOption.closest('.radio-group');
+                const name = group.dataset.name;
+                const value = selectedOption.querySelector('input').value;
+
+                // 選択状態の更新
+                group.querySelectorAll('.radio-option').forEach(option => {
+                    option.classList.remove('selected');
+                });
+                selectedOption.classList.add('selected');
+
+                this.answers[name] = value;
+                this.saveAnswers();
+
+                // 次へボタンの状態を更新（選択後に有効化）
+                this.updateNextButtonState();
+
+                if (this.autoAdvance) {
+                    setTimeout(() => this.nextQuestion(), 600);
+                }
+            }
+
+            handleCheckboxSelection() {
+                // 削除 - チェックボックスは使用しない
+            }
+
+            nextQuestion() {
+                // 現在の質問に回答があるかチェック
+                const currentQ = document.querySelector(`[data-question="${this.currentQuestion}"]`);
+                if (currentQ) {
+                    const radioGroup = currentQ.querySelector('.radio-group');
+                    if (radioGroup) {
+                        const selectedRadio = radioGroup.querySelector('input[type="radio"]:checked');
+                        if (!selectedRadio) {
+                            // 選択されていない場合は警告表示
+                            this.showSelectionWarning();
+                            return;
+                        }
+                    }
+                }
+
+                if (this.currentQuestion < this.totalQuestions) {
+                    this.changeQuestion(this.currentQuestion + 1);
+                } else {
+                    this.submitSurvey();
+                }
+            }
+
+            showSelectionWarning() {
+                const nextBtn = document.getElementById('nextBtn');
+                const message = document.getElementById('selectionMessage');
+
+                // ボタンを振動させて注意を引く
+                nextBtn.style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    nextBtn.style.animation = '';
+                }, 500);
+
+                // メッセージを表示
+                message.style.opacity = '1';
+                setTimeout(() => {
+                    message.style.opacity = '0';
+                }, 2000);
+            }
+
+            prevQuestion() {
+                if (this.currentQuestion > 1) {
+                    this.changeQuestion(this.currentQuestion - 1);
+                }
+            }
+
+            changeQuestion(questionNumber) {
+                const currentQ = document.querySelector(`[data-question="${this.currentQuestion}"]`);
+                const nextQ = document.querySelector(`[data-question="${questionNumber}"]`);
+
+                if (currentQ && nextQ) {
+                    // アニメーション
+                    if (questionNumber > this.currentQuestion) {
+                        // 次へ進む場合
+                        // 次の質問を右側に配置してアニメーション準備
+                        nextQ.style.display = 'block';
+                        nextQ.classList.remove('prev', 'active');
+                        nextQ.classList.add('next');
+
+                        // 少し遅延を入れてからアニメーション開始
+                        setTimeout(() => {
+                            currentQ.classList.remove('active');
+                            currentQ.classList.add('prev');
+
+                            nextQ.classList.remove('next');
+                            nextQ.classList.add('active');
+
+                            setTimeout(() => {
+                                currentQ.style.display = 'none';
+                                this.adjustContainerHeight();
+                            }, 400);
+                        }, 50);
+                    } else {
+                        // 前へ戻る場合
+                        // 戻る質問を左側に配置してアニメーション準備
+                        nextQ.style.display = 'block';
+                        nextQ.classList.remove('next', 'active');
+                        nextQ.classList.add('prev');
+
+                        setTimeout(() => {
+                            currentQ.classList.remove('active');
+                            currentQ.classList.add('next');
+
+                            nextQ.classList.remove('prev');
+                            nextQ.classList.add('active');
+
+                            setTimeout(() => {
+                                currentQ.style.display = 'none';
+                                this.adjustContainerHeight();
+                            }, 400);
+                        }, 50);
+                    }
+
+                    this.currentQuestion = questionNumber;
+                    this.updateProgress();
+                    this.updateNavigation();
+                }
+            }
+
+            updateProgress() {
+                const progress = (this.currentQuestion / this.totalQuestions) * 100;
+                document.getElementById('progressFill').style.width = `${progress}%`;
+                document.getElementById('progressCounter').textContent = `${this.currentQuestion} / ${this.totalQuestions}`;
+            }
+
+            updateNavigation() {
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+
+                prevBtn.disabled = this.currentQuestion === 1;
+                nextBtn.textContent = this.currentQuestion === this.totalQuestions ? '送信' : '次へ';
+
+                // 次へボタンの状態を更新
+                this.updateNextButtonState();
+            }
+
+            updateNextButtonState() {
+                const nextBtn = document.getElementById('nextBtn');
+                const currentQ = document.querySelector(`[data-question="${this.currentQuestion}"]`);
+
+                if (currentQ) {
+                    const radioGroup = currentQ.querySelector('.radio-group');
+                    if (radioGroup) {
+                        const selectedRadio = radioGroup.querySelector('input[type="radio"]:checked');
+                        // 選択がない場合はボタンを無効化（視覚的にわかりやすくする）
+                        if (!selectedRadio && this.currentQuestion !== this.totalQuestions) {
+                            nextBtn.style.opacity = '0.6';
+                            nextBtn.style.cursor = 'not-allowed';
+                        } else {
+                            nextBtn.style.opacity = '1';
+                            nextBtn.style.cursor = 'pointer';
+                        }
+                    }
+                }
+            }
+
+            adjustContainerHeight() {
+                const container = document.getElementById('questionContainer');
+                const activeQuestion = container.querySelector('.question.active');
+
+                if (activeQuestion) {
+                    // 一時的にコンテナの高さを自動にして実際の高さを測定
+                    container.style.height = 'auto';
+                    const actualHeight = activeQuestion.scrollHeight;
+
+                    // PC時は最小高さ350px、モバイル時は200pxと実際の高さの大きい方を設定
+                    const isDesktop = window.innerWidth > 768;
+                    const minHeight = isDesktop ? 350 : 200;
+                    const newHeight = Math.max(minHeight, actualHeight);
+                    container.style.height = newHeight + 'px';
+                }
+            }
+
+            saveAnswers() {
+                localStorage.setItem('surveyAnswers', JSON.stringify(this.answers));
+            }
+
+            loadSavedAnswers() {
+                const saved = localStorage.getItem('surveyAnswers');
+                if (saved) {
+                    this.answers = JSON.parse(saved);
+                    this.restoreAnswers();
+                }
+            }
+
+            restoreAnswers() {
+                // ラジオボタンの復元
+                Object.keys(this.answers).forEach(key => {
+                    const radio = document.querySelector(`input[name="${key}"][value="${this.answers[key]}"]`);
+                    if (radio) {
+                        radio.checked = true;
+                        radio.closest('.radio-option').classList.add('selected');
+                    }
+                });
+            }
+
+            setupBeforeUnload() {
+                window.addEventListener('beforeunload', (e) => {
+                    if (Object.keys(this.answers).length > 0 && this.currentQuestion < this.totalQuestions) {
+                        e.preventDefault();
+                        e.returnValue = '';
+                        return 'アンケートの回答が保存されていません。ページを離れますか？';
+                    }
+                });
+            }
+
+            async submitSurvey() {
+                const loading = document.getElementById('loading');
+                const questionContainer = document.getElementById('questionContainer');
+                const navigation = document.querySelector('.navigation');
+                const progressSection = document.querySelector('.progress-section');
+
+                // UI更新
+                loading.style.display = 'block';
+                questionContainer.style.display = 'none';
+                navigation.style.display = 'none';
+                progressSection.style.display = 'none';
+
+                // データ準備
+                const surveyData = {
+                    timestamp: new Date().toLocaleString('ja-JP'),
+                    ...this.answers,
+                    user_agent: navigator.userAgent,
+                    page_url: window.location.href
+                };
+
+                try {
+                    // テスト用のダミー送信（実際はGoogle Apps Script URLを使用）
+                    await this.simulateSubmission(surveyData);
+
+                    // 成功時の処理
+                    loading.style.display = 'none';
+                    document.getElementById('completionScreen').classList.add('active');
+
+                    // ローカルストレージをクリア
+                    localStorage.removeItem('surveyAnswers');
+
+                } catch (error) {
+                    console.error('送信エラー:', error);
+                    loading.style.display = 'none';
+                    questionContainer.style.display = 'block';
+                    navigation.style.display = 'flex';
+                    progressSection.style.display = 'block';
+                    alert('送信に失敗しました。もう一度お試しください。');
+                }
+            }
+
+            // テスト用のダミー送信関数
+            async simulateSubmission(data) {
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        console.log('送信データ:', data);
+                        resolve();
+                    }, 2000);
+                });
+            }
+
+            // 実際のGoogle Apps Script送信関数（コメントアウト）
+            /*
+            async submitToGAS(data) {
+                const GAS_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
+                const response = await fetch(GAS_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    throw new Error('送信に失敗しました');
+                }
+
+                return response.json();
+            }
+            */
+        }
+
+        // アンケートシステムを初期化
+        document.addEventListener('DOMContentLoaded', () => {
+            new SurveySystem();
+        });
+    </script>
+</body>
+</html>
