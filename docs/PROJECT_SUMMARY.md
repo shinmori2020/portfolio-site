@@ -13,6 +13,7 @@
 - **chatbot.html** - AIチャットボット機能
 - **pricing-calculator.html** - 料金計算システム
 - **portfolio.html** - 制作実績ポートフォリオ
+- **website-evaluation-survey.html** - WEBサイト評価アンケート（Survey A/B）
 
 ### 2. **主要機能の詳細**
 
@@ -46,6 +47,15 @@
 - 日時選択機能
 - 確認画面付き送信フロー
 - データ永続化対応
+
+#### 📊 **WEBサイト評価アンケート（NEW）**
+- **Survey A（ページ版）** - 独立したアンケートページ
+- **Survey B（モーダル版）** - 離脱意図検知による自動表示
+- 10問の段階的質問フロー
+- プログレスバー付きインターフェース
+- LocalStorage/Cookie管理
+- レスポンシブ対応
+- カスタマイズ可能な表示条件
 
 ## 🎨 デザイン・UI/UX特徴
 

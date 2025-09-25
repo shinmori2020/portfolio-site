@@ -82,7 +82,8 @@
       "WebFetch(domain:github.com)",
       "Bash(start \"\" \"C:\\Users\\kiyos_000\\Desktop\\新しくポートフォリオにするプロフィールサイト\\html\\chatbot.html\")",
       "Bash(start \"\" \"C:\\Users\\kiyos_000\\Desktop\\新しくポートフォリオにするプロフィールサイト\\html\\faq.html\")",
-      "Read(//c/Users/kiyos_000/AppData/Roaming/Claude/**)"
+      "Read(//c/Users/kiyos_000/AppData/Roaming/Claude/**)",
+      "Read(//c/Users/kiyos_000/Pictures/Screenshots/**)"
     ],
     "deny": [],
     "ask": []

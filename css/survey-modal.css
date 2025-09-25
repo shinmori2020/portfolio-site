@@ -1,0 +1,180 @@
+/* Survey B - Modal Survey Styles */
+
+/* モーダルオーバーレイ */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.modal-overlay.show {
+    display: block;
+    opacity: 1;
+}
+
+/* モーダルコンテナ */
+.modal-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    max-width: 700px;
+    width: 90%;
+    max-height: 92vh;
+    height: auto;
+    overflow: hidden;
+    background: #1a1a1a;
+    border-radius: 0;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.show .modal-container {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* 閉じるボタン */
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #ffffff;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.close-modal:hover {
+    background: rgba(0, 255, 136, 0.2);
+    border-color: rgba(0, 255, 136, 0.5);
+}
+
+/* スキップボタン */
+.skip-survey {
+    padding: 10px 20px;
+    background: rgba(26, 26, 26, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.skip-survey:hover {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* モーダル用アンケートコンテナ */
+.modal-survey-container {
+    max-width: 100%;
+    height: 100%;
+    margin: 0;
+    background: transparent;
+    padding: 40px;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+/* モーダル版アンケート用の追加調整 */
+.modal-survey-container .question-container {
+    min-height: 320px;
+    margin-bottom: 20px;
+}
+
+.modal-survey-container .navigation {
+    margin-top: 60px;
+    margin-bottom: 0;
+    position: relative;
+}
+
+.modal-survey-container .radio-group {
+    margin-bottom: 30px;
+}
+
+.modal-survey-container .question {
+    padding-bottom: 20px;
+}
+
+/* モーダル用の調整 */
+.modal-overlay.show ~ body {
+    overflow: hidden;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .modal-container {
+        width: 95%;
+        max-height: 98vh;
+    }
+
+    .close-modal {
+        top: 10px;
+        right: 10px;
+        width: 35px;
+        height: 35px;
+        border-radius: 0;
+    }
+
+    .modal-survey-container {
+        padding: 30px 20px;
+    }
+
+    /* モーダル版のナビゲーション */
+    .modal-survey-container .navigation {
+        display: flex !important;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 80px !important;
+    }
+
+    .modal-survey-container .navigation .nav-btn,
+    .modal-survey-container .navigation .skip-survey {
+        width: 100% !important;
+    }
+
+    .modal-survey-container .navigation #nextBtn {
+        order: 1;
+    }
+
+    .modal-survey-container .navigation #prevBtn {
+        order: 2;
+    }
+
+    .modal-survey-container .navigation .skip-survey {
+        order: 3;
+    }
+
+    .modal-survey-container .radio-group {
+        margin-bottom: 50px !important;
+    }
+
+    .modal-survey-container .question-container {
+        min-height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-survey-container {
+        padding: 20px 15px;
+    }
+}

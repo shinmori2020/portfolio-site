@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="css/background-squares.css">
     <link rel="stylesheet" href="css/innovative-approach-split.css">
+    <!-- Survey Modal CSS -->
+    <link rel="stylesheet" href="css/survey-common.css">
+    <link rel="stylesheet" href="css/survey-modal.css">
 </head>
 <body>
     <!-- 固定背景の四角形 -->
@@ -690,7 +693,348 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <!-- 共通JS（ヘッダー、スムーズスクロール等） -->
     <script src="js/common.js"></script>
+    <!-- Survey Modal HTML (Survey B) -->
+    <div class="modal-overlay" id="surveyModal">
+        <div class="modal-container">
+            <button class="close-modal" id="closeModal">×</button>
+            <div class="modal-survey-container" id="modalSurveyContainer">
+                <!-- ヘッダー -->
+                <div class="survey-header">
+                    <h1 class="survey-title">WEBサイト評価アンケート</h1>
+                    <p class="survey-description">
+                        当サイトの改善のため、皆様のご意見をお聞かせください。<br>
+                        ご回答は約2-3分で完了します。
+                    </p>
+                </div>
+
+                <!-- プログレスバー -->
+                <div class="progress-section">
+                    <div class="progress-info">
+                        <span class="progress-text">進捗状況</span>
+                        <span class="progress-counter" id="progressCounter">1 / 10</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+
+                <!-- 質問セクション -->
+                <div class="question-container" id="questionContainer">
+                    <!-- 質問1: 使いやすさ -->
+                    <div class="question active" data-question="1">
+                        <h2 class="question-title">このサイトの使いやすさはどうですか？</h2>
+                        <div class="radio-group" data-name="usability">
+                            <label class="radio-option">
+                                <input type="radio" name="usability" value="とても使いやすい">
+                                <span class="radio-label">とても使いやすい</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="usability" value="使いやすい">
+                                <span class="radio-label">使いやすい</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="usability" value="普通">
+                                <span class="radio-label">普通</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="usability" value="やや使いにくい">
+                                <span class="radio-label">やや使いにくい</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="usability" value="使いにくい">
+                                <span class="radio-label">使いにくい</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 質問2: サイトの見た目 -->
+                    <div class="question" data-question="2">
+                        <h2 class="question-title">サイトの見た目は好みですか？</h2>
+                        <div class="radio-group" data-name="design_preference">
+                            <label class="radio-option">
+                                <input type="radio" name="design_preference" value="とても好き">
+                                <span class="radio-label">とても好き</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="design_preference" value="まあまあ好き">
+                                <span class="radio-label">まあまあ好き</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="design_preference" value="どちらでもない">
+                                <span class="radio-label">どちらでもない</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="design_preference" value="あまり好きではない">
+                                <span class="radio-label">あまり好きではない</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="design_preference" value="全く好きではない">
+                                <span class="radio-label">全く好きではない</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 質問3: 情報の探しやすさ -->
+                    <div class="question" data-question="3">
+                        <h2 class="question-title">探している情報はすぐに見つかりましたか？</h2>
+                        <div class="radio-group" data-name="info_findability">
+                            <label class="radio-option">
+                                <input type="radio" name="info_findability" value="すぐ見つかった（1分以内）">
+                                <span class="radio-label">すぐ見つかった（1分以内）</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="info_findability" value="少し探した（2-3分）">
+                                <span class="radio-label">少し探した（2-3分）</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="info_findability" value="普通（3-5分）">
+                                <span class="radio-label">普通（3-5分）</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="info_findability" value="時間がかかった（5分以上）">
+                                <span class="radio-label">時間がかかった（5分以上）</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="info_findability" value="見つからなかった">
+                                <span class="radio-label">見つからなかった</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 質問4: 文字の読みやすさ -->
+                    <div class="question" data-question="4">
+                        <h2 class="question-title">文字の大きさは読みやすいですか？</h2>
+                        <div class="radio-group" data-name="text_readability">
+                            <label class="radio-option">
+                                <input type="radio" name="text_readability" value="ちょうど良い">
+                                <span class="radio-label">ちょうど良い</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="text_readability" value="やや読みやすい">
+                                <span class="radio-label">やや読みやすい</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="text_readability" value="普通">
+                                <span class="radio-label">普通</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="text_readability" value="やや読みにくい">
+                                <span class="radio-label">やや読みにくい</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="text_readability" value="読みにくい">
+                                <span class="radio-label">読みにくい</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 質問5: ページの表示速度 -->
+                    <div class="question" data-question="5">
+                        <h2 class="question-title">ページの表示速度は速いですか？</h2>
+                        <div class="radio-group" data-name="page_speed">
+                            <label class="radio-option">
+                                <input type="radio" name="page_speed" value="とても速い（1秒以内）">
+                                <span class="radio-label">とても速い（1秒以内）</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="page_speed" value="速い（2-3秒）">
+                                <span class="radio-label">速い（2-3秒）</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="page_speed" value="普通（4-5秒）">
+                                <span class="radio-label">普通（4-5秒）</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="page_speed" value="遅い（6-10秒）">
+                                <span class="radio-label">遅い（6-10秒）</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="page_speed" value="とても遅い（10秒以上）">
+                                <span class="radio-label">とても遅い（10秒以上）</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 質問6: デバイス -->
+                    <div class="question" data-question="6">
+                        <h2 class="question-title">どのデバイスで閲覧していますか？</h2>
+                        <div class="radio-group" data-name="device">
+                            <label class="radio-option">
+                                <input type="radio" name="device" value="スマートフォン">
+                                <span class="radio-label">スマートフォン</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="device" value="タブレット">
+                                <span class="radio-label">タブレット</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="device" value="ノートPC">
+                                <span class="radio-label">ノートPC</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="device" value="デスクトップPC">
+                                <span class="radio-label">デスクトップPC</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="device" value="その他">
+                                <span class="radio-label">その他</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 質問7: 競合比較 -->
+                    <div class="question" data-question="7">
+                        <h2 class="question-title">競合他社と比べてこのサイトは？</h2>
+                        <div class="radio-group" data-name="competitor_comparison">
+                            <label class="radio-option">
+                                <input type="radio" name="competitor_comparison" value="かなり優れている">
+                                <span class="radio-label">かなり優れている</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="competitor_comparison" value="優れている">
+                                <span class="radio-label">優れている</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="competitor_comparison" value="同等">
+                                <span class="radio-label">同等</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="competitor_comparison" value="やや劣る">
+                                <span class="radio-label">やや劣る</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="competitor_comparison" value="かなり劣る">
+                                <span class="radio-label">かなり劣る</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 質問8: サイトの印象 -->
+                    <div class="question" data-question="8">
+                        <h2 class="question-title">このサイトの印象を一言で表すと？</h2>
+                        <div class="radio-group" data-name="site_impression">
+                            <label class="radio-option">
+                                <input type="radio" name="site_impression" value="プロフェッショナル">
+                                <span class="radio-label">プロフェッショナル</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="site_impression" value="親しみやすい">
+                                <span class="radio-label">親しみやすい</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="site_impression" value="シンプル">
+                                <span class="radio-label">シンプル</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="site_impression" value="情報が多い">
+                                <span class="radio-label">情報が多い</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="site_impression" value="わかりにくい">
+                                <span class="radio-label">わかりにくい</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 質問9: お問い合わせ意向 -->
+                    <div class="question" data-question="9">
+                        <h2 class="question-title">お問い合わせしたいと思いますか？</h2>
+                        <div class="radio-group" data-name="contact_intention">
+                            <label class="radio-option">
+                                <input type="radio" name="contact_intention" value="今すぐしたい">
+                                <span class="radio-label">今すぐしたい</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="contact_intention" value="近いうちにしたい">
+                                <span class="radio-label">近いうちにしたい</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="contact_intention" value="検討中">
+                                <span class="radio-label">検討中</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="contact_intention" value="情報収集のみ">
+                                <span class="radio-label">情報収集のみ</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="contact_intention" value="予定なし">
+                                <span class="radio-label">予定なし</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 質問10: 総合評価 -->
+                    <div class="question" data-question="10">
+                        <h2 class="question-title">このサイトを5段階で評価すると？</h2>
+                        <div class="radio-group" data-name="overall_rating">
+                            <label class="radio-option">
+                                <input type="radio" name="overall_rating" value="★★★★★（とても良い）">
+                                <span class="radio-label">★★★★★（とても良い）</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="overall_rating" value="★★★★☆（良い）">
+                                <span class="radio-label">★★★★☆（良い）</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="overall_rating" value="★★★☆☆（普通）">
+                                <span class="radio-label">★★★☆☆（普通）</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="overall_rating" value="★★☆☆☆（改善が必要）">
+                                <span class="radio-label">★★☆☆☆（改善が必要）</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="overall_rating" value="★☆☆☆☆（大幅な改善が必要）">
+                                <span class="radio-label">★☆☆☆☆（大幅な改善が必要）</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ナビゲーション -->
+                <div class="navigation">
+                    <button class="nav-btn" id="prevBtn" disabled>戻る</button>
+                    <button class="skip-survey" id="skipSurvey">今回はスキップ</button>
+                    <button class="nav-btn primary" id="nextBtn">次へ</button>
+                </div>
+
+                <!-- 選択メッセージ -->
+                <div id="selectionMessage" style="text-align: center; margin-top: 20px; color: #00ff88; opacity: 0; transition: opacity 0.3s; font-size: 0.9rem;">
+                    ※ 選択してから次へ進んでください
+                </div>
+
+                <!-- 完了画面 -->
+                <div class="completion-screen" id="completionScreen">
+                    <div class="completion-icon">✓</div>
+                    <h2 class="completion-title">アンケート完了</h2>
+                    <p class="completion-text">
+                        貴重なご意見をありがとうございました！<br>
+                        いただいたフィードバックは、サイト改善に活用させていただきます。
+                    </p>
+                </div>
+
+                <!-- ローディング -->
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>送信中...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ページ固有JS -->
     <script src="js/script.js"></script>
+
+    <!-- Survey Modal JS -->
+    <script src="js/survey-modal.js"></script>
+    <script>
+        // モーダルアンケート初期化
+        document.addEventListener('DOMContentLoaded', () => {
+            initModalSurvey({
+                minTimeOnSite: 30000,     // 30秒後に表示（本番用）
+                enableCookieCheck: true    // Cookie確認有効（本番用）
+            });
+        });
+    </script>
 </body>
 </html>
