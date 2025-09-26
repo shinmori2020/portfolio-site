@@ -1,0 +1,146 @@
+/**
+ * contact-link.css - お問い合わせリンクセクション用CSS
+ */
+
+.contact-link {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* index.htmlでfooterとの間の隙間をなくす */
+body.index-page .contact-link {
+    margin-bottom: 0;
+}
+
+.contact-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #00ff88, transparent);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.contact-link__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.contact-link__title {
+    font-size: 2.5rem;
+    color: #00ff88;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.contact-link__description {
+    font-size: 1.1rem;
+    color: #ccc;
+    margin-bottom: 50px;
+    line-height: 1.8;
+}
+
+/* ボタンコンテナ */
+.contact-link__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* portfolio-ctaのボタンスタイルを適用 */
+.contact-link .btn {
+    padding: 18px 40px;
+    border: 2px solid rgba(0, 255, 136, 0.3);
+    border-radius: 0;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    flex: 1;
+    backdrop-filter: blur(10px);
+    white-space: nowrap;
+}
+
+.contact-link .btn--primary {
+    background: rgba(0, 255, 136, 0.1);
+    color: #00ff88;
+    border-color: rgba(0, 255, 136, 0.3);
+}
+
+.contact-link .btn--primary:hover {
+    background: rgba(0, 255, 136, 0.2);
+    border-color: #00ff88;
+}
+
+.contact-link .btn--outline {
+    background: transparent;
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.contact-link .btn--outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-color: #fff;
+}
+
+@media (max-width: 768px) {
+    .contact-link {
+        padding: 60px 0;
+    }
+
+    .contact-link__title {
+        font-size: 2rem;
+        margin-bottom: 16px;
+    }
+
+    .contact-link__description {
+        font-size: 1rem;
+        margin-bottom: 40px;
+    }
+
+    .contact-link__buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact-link .btn {
+        width: 100%;
+        max-width: 320px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-link {
+        padding: 50px 0;
+    }
+
+    .contact-link__title {
+        font-size: 1.6rem;
+    }
+
+    .contact-link__description {
+        font-size: 0.9rem;
+        padding: 0 20px;
+    }
+
+    .contact-link .btn {
+        padding: 16px 30px;
+        font-size: 1rem;
+    }
+}

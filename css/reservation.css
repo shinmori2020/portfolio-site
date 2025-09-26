@@ -1,17 +1,8 @@
-/* リセットスタイル */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 /* ベーススタイル */
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-    color: #ffffff;
+body.reservation-page {
+    /* base.cssのスタイルを継承し、必要な部分のみ上書き */
+    /* background と color はbase.cssから継承 */
     min-height: 100vh;
-    line-height: 1.6;
 }
 
 /* コンテナ */
@@ -19,6 +10,7 @@ body {
     max-width: 1400px;
     margin: 0 auto;
     padding: 40px 20px;
+    padding-top: 110px; /* ヘッダーの高さ分の余白を追加 */
 }
 
 /* ヘッダー */
@@ -221,7 +213,9 @@ body {
     letter-spacing: 1px;
 }
 
-.form-group input,
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
 .form-group select,
 .form-group textarea {
     width: 100%;
@@ -231,9 +225,22 @@ body {
     color: #ffffff;
     font-size: 1rem;
     transition: all 0.3s ease;
+    border-radius: 0; /* 角丸をなしに */
+    font-family: inherit; /* フォントを継承 */
 }
 
-.form-group input:focus,
+/* selectボックスの矢印を復元 */
+.form-group select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2300ff88' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    padding-right: 40px;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="tel"]:focus,
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
@@ -244,11 +251,11 @@ body {
 .form-group input.error,
 .form-group select.error,
 .form-group textarea.error {
-    border-color: #ff4444;
+    border-color: #00cc70; /* 緑系の警告色（少し暗めの緑） */
 }
 
 .error-message {
-    color: #ff4444;
+    color: #00cc70; /* 緑系の警告色（少し暗めの緑） */
     font-size: 0.85rem;
     margin-top: 5px;
     display: none;
@@ -272,10 +279,59 @@ body {
     align-items: center;
 }
 
+/* カスタムチェックボックス */
 .checkbox-item input[type="checkbox"] {
-    width: auto;
-    margin-right: 10px;
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+    margin-right: 12px;
     cursor: pointer;
+    position: relative;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #0a0a0a;
+    border: 2px solid #333;
+    border-radius: 0; /* 角丸をなしに */
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* チェックボックス - ホバー時 */
+.checkbox-item input[type="checkbox"]:hover {
+    border-color: #00ff88;
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+}
+
+/* チェックボックス - チェック時 */
+.checkbox-item input[type="checkbox"]:checked {
+    background: rgba(0, 255, 136, 0.1);
+    border-color: #00ff88;
+}
+
+/* チェックマークアイコン - CSSボーダーで作成 */
+.checkbox-item input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid #00ff88;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* チェックボックス - フォーカス時（アウトラインを削除） */
+.checkbox-item input[type="checkbox"]:focus {
+    outline: none; /* フォーカス時のアウトラインを削除 */
+}
+
+/* チェックボックス - アクティブ時のスタイルを無効化 */
+.checkbox-item input[type="checkbox"]:active {
+    transform: none; /* クリック時の変形を無効化 */
 }
 
 .checkbox-item label {
@@ -293,13 +349,16 @@ body {
     background: rgba(0, 255, 136, 0.1);
     color: #00ff88;
     border: 2px solid rgba(0, 255, 136, 0.3);
+    border-radius: 0; /* 角丸をなしに */
     font-size: 1.1rem;
     font-weight: 600;
+    font-family: inherit; /* フォントを継承 */
     cursor: pointer;
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     text-transform: uppercase;
     letter-spacing: 2px;
     text-decoration: none;
+    display: block; /* ブロック要素として表示 */
 }
 
 .submit-button:hover {
@@ -524,8 +583,8 @@ body {
 
 /* エラーメッセージ */
 .error-banner {
-    background: rgba(255, 68, 68, 0.2);
-    border: 2px solid #ff4444;
+    background: rgba(0, 204, 112, 0.1); /* 緑系の背景（少し暗めの緑） */
+    border: 2px solid #00cc70; /* 緑系のボーダー（少し暗めの緑） */
     padding: 20px;
     margin: 20px 0;
     display: none;
@@ -537,6 +596,6 @@ body {
 }
 
 .error-banner h4 {
-    color: #ff4444;
+    color: #00cc70; /* 緑系のテキスト色（少し暗めの緑） */
     margin-bottom: 10px;
 }

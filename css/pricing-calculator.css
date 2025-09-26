@@ -16,11 +16,12 @@ body {
     color: #fff;
     min-height: 100vh;
     padding: 20px;
-    overflow-x: hidden;
+    /* overflow-x: hidden; sticky要素が動作しないため削除 */
 }
 
 html {
     scroll-behavior: smooth;
+    overflow-x: visible !important; /* base.cssのoverflow-x: hiddenを上書き */
 }
 
 /* ======================================
@@ -60,7 +61,7 @@ html {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0;
-    align-items: start;
+    align-items: stretch; /* startからstretchに変更 */
 }
 
 /* pricing-calculator__form */

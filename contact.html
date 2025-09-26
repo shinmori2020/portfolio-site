@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お問い合わせ - WEB制作サービス</title>
+    <meta name="description" content="WEB制作のご相談・お見積もりは無料です。お気軽にお問い合わせください。">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/destyle.css@4.0.0/destyle.min.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/contact.css">
+    <link rel="stylesheet" href="css/footer-grid.css">
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="header__container">
+            <div class="header__logo">
+                LOGO
+            </div>
+            <button class="header__hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="header__nav" id="nav">
+                <div class="header__overlay"></div>
+                <ul class="header__menu">
+                    <li class="header__menu-item"><a href="index.html" class="header__menu-link">Home</a></li>
+                    <li class="header__menu-item"><a href="index.html#works" class="header__menu-link">Works</a></li>
+                    <li class="header__menu-item"><a href="index.html#skills" class="header__menu-link">Skills</a></li>
+                    <li class="header__menu-item"><a href="index.html#about" class="header__menu-link">About</a></li>
+                    <li class="header__menu-item"><a href="contact.html" class="header__menu-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- お問い合わせセクション -->
+    <section class="contact" id="contact">
+        <h2 class="contact__title section-title">お問い合わせ</h2>
+        <p class="contact__description">ご不明な点やご相談がございましたら、お気軽にお問い合わせください。<br>専門スタッフが迅速にご対応いたします。</p>
+
+        <div class="contact__container">
+            <div class="contact__card">
+                <div class="contact__form-container">
+                    <div class="contact__message contact__message--success" id="contactSuccessMessage">
+                        お問い合わせを送信しました。ありがとうございます。
+                    </div>
+
+                    <div class="contact__message contact__message--error" id="contactErrorMessage">
+                        送信に失敗しました。もう一度お試しください。
+                    </div>
+
+                    <form id="contactForm">
+                        <div class="contact__form-group">
+                            <label for="contactName" class="contact__label">お名前 <span class="contact__required">*</span></label>
+                            <input type="text" id="contactName" name="name" class="contact__input" required placeholder="山田 太郎">
+                        </div>
+
+                        <div class="contact__form-group">
+                            <label for="contactEmail" class="contact__label">メールアドレス <span class="contact__required">*</span></label>
+                            <input type="email" id="contactEmail" name="email" class="contact__input" required placeholder="example@company.com">
+                        </div>
+
+                        <div class="contact__form-group">
+                            <label for="contactCompany" class="contact__label">会社名・団体名</label>
+                            <input type="text" id="contactCompany" name="company" class="contact__input" placeholder="株式会社サンプル">
+                        </div>
+
+                        <div class="contact__form-group">
+                            <label for="contactPhone" class="contact__label">電話番号</label>
+                            <input type="tel" id="contactPhone" name="phone" class="contact__input" placeholder="03-1234-5678">
+                        </div>
+
+                        <div class="contact__form-group">
+                            <label for="contactSchedule" class="contact__label">希望納期・スケジュール</label>
+                            <input type="text" id="contactSchedule" name="schedule" class="contact__input" placeholder="例：○月末まで、急ぎ、特に急がない など">
+                        </div>
+
+                        <div class="contact__form-group contact__form-group--dropdown">
+                            <label for="contactSubject" class="contact__label">お問い合わせ種別 <span class="contact__required">*</span></label>
+                            <select id="contactSubject" name="subject" class="contact__select" required style="display: none;">
+                                <option value="">お問い合わせ内容を選択してください</option>
+                                <option value="service">サービスについて</option>
+                                <option value="pricing">料金について</option>
+                                <option value="support">サポートについて</option>
+                                <option value="partnership">パートナーシップについて</option>
+                                <option value="other">その他</option>
+                            </select>
+
+                            <div class="contact__select-wrapper">
+                                <div class="contact__select-button" id="customSelectButton">
+                                    <span class="contact__select-text">お問い合わせ内容を選択してください</span>
+                                    <span class="contact__select-arrow">▼</span>
+                                </div>
+                                <div class="contact__select-dropdown" id="customSelectDropdown">
+                                    <div class="contact__option" data-value="service">サービスについて</div>
+                                    <div class="contact__option" data-value="pricing">料金について</div>
+                                    <div class="contact__option" data-value="support">サポートについて</div>
+                                    <div class="contact__option" data-value="partnership">パートナーシップについて</div>
+                                    <div class="contact__option" data-value="other">その他</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact__form-group">
+                            <label class="contact__label">サイトの種類</label>
+                            <div class="contact__radio-group">
+                                <div class="contact__radio-item">
+                                    <input type="radio" id="siteType1" name="siteType" value="landing" class="contact__radio">
+                                    <label for="siteType1" class="contact__radio-label">ランディングページ（LP）</label>
+                                </div>
+                                <div class="contact__radio-item">
+                                    <input type="radio" id="siteType2" name="siteType" value="corporate" class="contact__radio">
+                                    <label for="siteType2" class="contact__radio-label">企業・コーポレートサイト</label>
+                                </div>
+                                <div class="contact__radio-item">
+                                    <input type="radio" id="siteType3" name="siteType" value="wordpress" class="contact__radio">
+                                    <label for="siteType3" class="contact__radio-label">WordPress制作</label>
+                                </div>
+                                <div class="contact__radio-item">
+                                    <input type="radio" id="siteType4" name="siteType" value="ecommerce" class="contact__radio">
+                                    <label for="siteType4" class="contact__radio-label">ECサイト・ショッピングサイト</label>
+                                </div>
+                                <div class="contact__radio-item">
+                                    <input type="radio" id="siteType5" name="siteType" value="other" class="contact__radio">
+                                    <label for="siteType5" class="contact__radio-label">その他・相談したい</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact__form-group">
+                            <label class="contact__label">ご予算 <span class="contact__required">*</span></label>
+                            <div class="contact__radio-group">
+                                <div class="contact__radio-item">
+                                    <input type="radio" id="budget1" name="budget" value="under-5" class="contact__radio" required>
+                                    <label for="budget1" class="contact__radio-label">5万円未満</label>
+                                </div>
+                                <div class="contact__radio-item">
+                                    <input type="radio" id="budget2" name="budget" value="5-10" class="contact__radio" required>
+                                    <label for="budget2" class="contact__radio-label">5万円～10万円</label>
+                                </div>
+                                <div class="contact__radio-item">
+                                    <input type="radio" id="budget3" name="budget" value="10-20" class="contact__radio" required>
+                                    <label for="budget3" class="contact__radio-label">10万円～20万円</label>
+                                </div>
+                                <div class="contact__radio-item">
+                                    <input type="radio" id="budget4" name="budget" value="20-30" class="contact__radio" required>
+                                    <label for="budget4" class="contact__radio-label">20万円～30万円</label>
+                                </div>
+                                <div class="contact__radio-item">
+                                    <input type="radio" id="budget5" name="budget" value="30-50" class="contact__radio" required>
+                                    <label for="budget5" class="contact__radio-label">30万円～50万円</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact__form-group">
+                            <label for="contactPages" class="contact__label">希望ページ数</label>
+                            <input type="text" id="contactPages" name="pages" class="contact__input" placeholder="例：5ページ程度、10ページ以内、未定 など">
+                        </div>
+
+                        <div class="contact__form-group">
+                            <label for="contactMessage" class="contact__label">メッセージ <span class="contact__required">*</span></label>
+                            <textarea id="contactMessage" name="message" class="contact__textarea" required placeholder="お問い合わせ内容を詳しくご記入ください。ご希望の予算や納期などがございましたら、合わせてお知らせください。"></textarea>
+                        </div>
+
+                        <button type="submit" class="contact__button">
+                            送信する
+                        </button>
+
+                        <div class="contact__privacy-note">
+                            <p>
+                                ご入力いただいた個人情報は、お問い合わせへの対応以外の目的では使用いたしません。
+                                詳しくは<a href="#" onclick="return false;">プライバシーポリシー</a>をご確認ください。
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <!-- グラデーションライン -->
+        <div class="footer__gradient-line"></div>
+
+        <div class="footer__container">
+            <div class="footer__grid">
+                <!-- カラム1: ブランド -->
+                <div class="footer__column footer__column--brand">
+                    <h3 class="footer__logo">LOGO</h3>
+                    <div class="footer__social">
+                        <a href="#" class="footer__social-link" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="footer__social-link" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="footer__social-link" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- カラム2: サービス -->
+                <div class="footer__column">
+                    <h4 class="footer__heading">サービス</h4>
+                    <ul class="footer__links">
+                        <li><a href="index.html#services" class="footer__link">LP制作</a></li>
+                        <li><a href="index.html#services" class="footer__link">WEBサイト制作</a></li>
+                        <li><a href="index.html#services" class="footer__link">WordPress制作</a></li>
+                        <li><a href="pricing-calculator.html" class="footer__link">料金プラン</a></li>
+                    </ul>
+                </div>
+
+                <!-- カラム3: リソース -->
+                <div class="footer__column">
+                    <h4 class="footer__heading">リソース</h4>
+                    <ul class="footer__links">
+                        <li><a href="portfolio.html" class="footer__link">ポートフォリオ</a></li>
+                        <li><a href="faq.html" class="footer__link">よくある質問</a></li>
+                        <li><a href="index.html#testimonials" class="footer__link">お客様の声</a></li>
+                        <li><a href="#" class="footer__link footer__link--disabled">ブログ</a></li>
+                    </ul>
+                </div>
+
+                <!-- カラム4: コンタクト -->
+                <div class="footer__column">
+                    <h4 class="footer__heading">お問い合わせ</h4>
+                    <ul class="footer__contact">
+                        <li class="footer__contact-item">
+                            <span class="footer__contact-label">メール：</span>
+                            <a href="mailto:info@example.com" class="footer__contact-link">info@example.com</a>
+                        </li>
+                        <li class="footer__contact-item">
+                            <span class="footer__contact-label">営業時間：</span>
+                            <span>9:00 - 18:00（平日）</span>
+                        </li>
+                        <li class="footer__contact-item">
+                            <span class="footer__contact-label">対応エリア：</span>
+                            <span>全国対応</span>
+                        </li>
+                    </ul>
+                    <a href="contact.html" class="footer__cta-button">
+                        お問い合わせはこちら
+                    </a>
+                </div>
+            </div>
+
+            <!-- 最下部 -->
+            <div class="footer__bottom">
+                <div class="footer__bottom-links">
+                    <a href="#" class="footer__bottom-link">プライバシーポリシー</a>
+                    <span class="footer__separator">|</span>
+                    <a href="#" class="footer__bottom-link">利用規約</a>
+                </div>
+                <div class="footer__copyright">
+                    <p>© 2024 Your Company. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/common.js"></script>
+    <script src="js/contact-form.js"></script>
+</body>
+</html>

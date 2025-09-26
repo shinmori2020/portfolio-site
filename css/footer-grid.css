@@ -1,0 +1,357 @@
+/**
+ * footer-grid.css - 4カラムグリッドフッター
+ */
+
+.footer {
+    background: #0a0a0a;
+    padding: 80px 0 0;
+    margin-top: 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* index.htmlでcontact-linkセクションの直後の場合 */
+body.index-page .footer {
+    margin-top: 0;
+}
+
+/* pricing-calculator.htmlでsticky要素を正常に動作させるため */
+body.pricing-page .footer {
+    overflow: visible;
+}
+
+/* グラデーションライン */
+.footer__gradient-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+        transparent,
+        #00ff88 20%,
+        #00ff88 80%,
+        transparent
+    );
+    animation: gradient-shimmer 3s ease-in-out infinite;
+}
+
+@keyframes gradient-shimmer {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+.footer__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 4カラムグリッド */
+.footer__grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+    gap: 60px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer__column {
+    animation: fade-in-up 0.6s ease-out;
+    animation-fill-mode: both;
+}
+
+.footer__column:nth-child(1) { animation-delay: 0.1s; }
+.footer__column:nth-child(2) { animation-delay: 0.2s; }
+.footer__column:nth-child(3) { animation-delay: 0.3s; }
+.footer__column:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* カラム1: ブランド */
+.footer__logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #00ff88;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #00ff88, #00cc66);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+.footer__social {
+    display: flex;
+    gap: 16px;
+}
+
+.footer__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.footer__social-link::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 50%;
+    padding: 1px;
+    background: linear-gradient(135deg, #00ff88, #00cc66);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.footer__social-link:hover::before {
+    opacity: 1;
+}
+
+.footer__social-link svg {
+    fill: #888;
+    transition: fill 0.3s ease, transform 0.3s ease;
+}
+
+.footer__social-link:hover {
+    /* transform: translateY(-3px); を削除して浮き上がりを防止 */
+    background: rgba(0, 255, 136, 0.1);
+}
+
+.footer__social-link:hover svg {
+    fill: #00ff88;
+    transform: scale(1.1);
+}
+
+/* SNS浮遊アニメーション - 削除済み */
+
+/* カラム2,3,4: 共通スタイル */
+.footer__heading {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer__heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: rgba(0, 255, 136, 0.3);
+}
+
+.footer__links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer__links li {
+    margin-bottom: 12px;
+}
+
+.footer__link {
+    color: #888;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+    position: relative;
+}
+
+.footer__link::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #00ff88;
+    transition: width 0.3s ease;
+}
+
+.footer__link:hover {
+    color: #00ff88;
+}
+
+.footer__link:hover::before {
+    width: 100%;
+}
+
+.footer__link--disabled {
+    color: #555;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.footer__link--disabled:hover {
+    color: #555;
+}
+
+/* カラム4: コンタクト */
+.footer__contact {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+}
+
+.footer__contact-item {
+    margin-bottom: 12px;
+    color: #888;
+    font-size: 0.95rem;
+}
+
+.footer__contact-label {
+    color: #ccc;
+    font-weight: 500;
+}
+
+.footer__contact-link {
+    color: #00ff88;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer__contact-link:hover {
+    color: #00cc66;
+    text-decoration: underline;
+}
+
+.footer__cta-button {
+    display: inline-block;
+    padding: 12px 28px;
+    background: linear-gradient(135deg, #00ff88, #00cc66);
+    color: #000;
+    text-decoration: none;
+    border-radius: 0;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.2);
+}
+
+.footer__cta-button:hover {
+    background: linear-gradient(135deg, #00cc66, #00ff88);
+    box-shadow: 0 6px 20px rgba(0, 255, 136, 0.3);
+}
+
+/* 最下部 */
+.footer__bottom {
+    padding: 30px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer__bottom-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.footer__bottom-link {
+    color: #666;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer__bottom-link:hover {
+    color: #00ff88;
+}
+
+.footer__separator {
+    color: #444;
+}
+
+.footer__copyright {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.footer__copyright p {
+    margin: 0;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 992px) {
+    .footer__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+
+    .footer__column--brand {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 60px 0 0;
+    }
+
+    .footer__grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .footer__column--brand {
+        grid-column: span 1;
+        text-align: center;
+    }
+
+    .footer__social {
+        justify-content: center;
+    }
+
+    .footer__bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .footer__bottom-links {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .footer__separator {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer__logo {
+        font-size: 1.5rem;
+    }
+
+    .footer__heading {
+        font-size: 1rem;
+    }
+
+    .footer__cta-button {
+        width: 100%;
+        text-align: center;
+    }
+}

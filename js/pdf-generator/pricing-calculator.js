@@ -739,17 +739,28 @@ function syncPriceDisplayWidth() {
 function setupMobilePriceDisplay() {
     const priceDisplay = document.querySelector('.pricing-calculator__price-display');
     const resultContainer = document.querySelector('.pricing-calculator__result');
+    const footer = document.querySelector('.footer');
 
     if (!priceDisplay || !resultContainer) return;
 
     // モバイルサイズかチェック
     const isMobile = () => window.innerWidth <= 768;
 
+    // フッターが表示されているかチェックする関数
+    const isFooterVisible = () => {
+        if (!footer) return false;
+        const footerRect = footer.getBoundingClientRect();
+        return footerRect.top < window.innerHeight;
+    };
+
     // IntersectionObserverを使用して本来の位置を監視
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (isMobile()) {
-                if (entry.isIntersecting) {
+                // フッターが見えている場合は常に固定解除
+                if (isFooterVisible()) {
+                    priceDisplay.classList.add('pricing-calculator__price-display--in-place');
+                } else if (entry.isIntersecting) {
                     // 本来の位置が見えたら固定解除
                     priceDisplay.classList.add('pricing-calculator__price-display--in-place');
                 } else {
@@ -769,6 +780,21 @@ function setupMobilePriceDisplay() {
     if (isMobile()) {
         observer.observe(resultContainer);
     }
+
+    // スクロール時にフッターチェック
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        if (!isMobile()) return;
+
+        // デバウンス処理
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            if (isFooterVisible()) {
+                priceDisplay.classList.add('pricing-calculator__price-display--in-place');
+                syncPriceDisplayWidth();
+            }
+        }, 100);
+    });
 
     // ウィンドウリサイズ時の処理
     window.addEventListener('resize', () => {

@@ -1,3 +1,34 @@
+// Intersection Observerでフッター表示時にチャットボットを非表示にする
+document.addEventListener('DOMContentLoaded', function() {
+    const chatbotBar = document.getElementById('chatbot');
+    const footer = document.querySelector('.footer');
+
+    if (chatbotBar && footer) {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.3 // フッターが30%見えたら動作
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // フッターが見えたらチャットボットをフェードアウト
+                    chatbotBar.style.opacity = '0';
+                    chatbotBar.style.pointerEvents = 'none';
+                    chatbotBar.style.transition = 'opacity 0.3s ease';
+                } else {
+                    // フッターが見えなくなったら再表示
+                    chatbotBar.style.opacity = '1';
+                    chatbotBar.style.pointerEvents = 'auto';
+                }
+            });
+        }, observerOptions);
+
+        observer.observe(footer);
+    }
+});
+
 // キーワードマッチング機能
 const KeywordMatcher = {
     // 同義語辞書

@@ -1,0 +1,172 @@
+/**
+ * footer-simple.css - シンプルでミニマルなフッターデザイン
+ */
+
+.footer {
+    background: #0a0a0a;
+    border-top: 1px solid rgba(0, 255, 136, 0.2);
+    padding: 60px 0 30px;
+    margin-top: 80px;
+}
+
+.footer__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* シンプルなリンクグリッド */
+.footer__nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.footer__nav-row {
+    display: contents; /* グリッドアイテムとして扱う */
+}
+
+.footer__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    text-decoration: none;
+    color: #888;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer__button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+    transition: width 0.3s ease;
+}
+
+.footer__button:hover {
+    color: #00ff88;
+    border-color: rgba(0, 255, 136, 0.3);
+    transform: translateY(-2px);
+}
+
+.footer__button:hover::before {
+    width: 100%;
+}
+
+.footer__button-icon {
+    font-size: 0.8rem;
+    color: #00ff88;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.footer__button:hover .footer__button-icon {
+    opacity: 1;
+}
+
+.footer__button-text {
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
+
+/* 下部セクション */
+.footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* SNSリンク（シンプルなアイコン） */
+.footer__social {
+    display: flex;
+    gap: 24px;
+}
+
+.footer__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.footer__social-link svg {
+    fill: #666;
+    transition: fill 0.3s ease, transform 0.3s ease;
+    width: 20px;
+    height: 20px;
+}
+
+.footer__social-link:hover svg {
+    fill: #00ff88;
+    transform: scale(1.15);
+}
+
+/* コピーライト */
+.footer__copyright {
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.footer__copyright p {
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+    .footer {
+        padding: 50px 0 30px;
+    }
+
+    .footer__nav {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .footer__bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .footer__social {
+        order: -1;
+    }
+
+    .footer__button {
+        padding: 10px 16px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer__nav {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .footer__button {
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+    }
+}

@@ -1,3 +1,6 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap');
+
 /* Base Styles */
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
@@ -31,7 +34,7 @@ body {
 /* Logo */
 .header__logo {
     font-size: 24px;
-    font-weight: bold;
+    font-weight: 700; /* boldの代わりに数値で指定 */
     color: #333;
 }
 
@@ -211,7 +214,10 @@ html {
     box-sizing: border-box;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap');
+html {
+    overflow-x: hidden;
+    width: 100%;
+}
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
@@ -221,6 +227,9 @@ body {
     color: #fff;
     min-height: 100vh;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
 }
 
 /* ===== COMMON STYLES ===== */
