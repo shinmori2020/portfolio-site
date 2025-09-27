@@ -1,8 +1,6 @@
 /* Contact Form Styles */
 
 .contact {
-    max-width: 1200px;
-    margin: 0 auto;
     padding: 80px 0;
 }
 
@@ -21,11 +19,7 @@
     margin-bottom: 50px;
 }
 
-.contact__container {
-    max-width: 1200px;
-    margin: 0 auto;
-    overflow: hidden;
-}
+/* .contact__container は削除済み（HTMLから削除） */
 
 .contact__card {
     position: relative;
@@ -83,7 +77,6 @@
     color: #fff;
     font-size: 0.95rem;
     letter-spacing: 0.02em;
-    transition: all 0.3s ease;
 }
 
 .contact__required {
@@ -92,7 +85,7 @@
 
 .contact__input, .contact__textarea, .contact__select {
     width: 100%;
-    padding: 16px 0;
+    padding: 16px;
     border: none;
     border-bottom: 2px solid #333;
     font-size: 16px;
@@ -138,7 +131,7 @@
 
 .contact__select-button {
     width: 100%;
-    padding: 16px 0;
+    padding: 16px;
     border: none;
     border-bottom: 2px solid #333;
     background: transparent;
@@ -316,13 +309,7 @@
 }
 
 /* Focus and validation for radio group */
-.contact__form-group:has(.contact__radio:focus) {
-    border-color: #00ff88;
-}
-
-.contact__form-group:has(.contact__radio:focus)::before {
-    background: #00ff88;
-}
+/* ラジオボタンフォーカス時のボーダー変更を無効化 */
 
 /* Responsive design for radio buttons - moved to main 768px section */
 
@@ -410,20 +397,14 @@
     }
 }
 
-@media (max-width: 1200px) {
-    .contact {
-        padding: 80px 20px 0;
-    }
-}
+/* 1200pxのメディアクエリはpage-containerで処理されるため削除 */
 
 @media (max-width: 768px) {
     .contact {
-        padding: 60px 25px;
+        padding: 60px 0;
     }
     
-    .contact__container {
-        max-width: 100%;
-    }
+    /* .contact__container は削除済み */
     
     .contact__title {
         font-size: 2rem;
@@ -445,7 +426,7 @@
 
 @media (max-width: 480px) {
     .contact {
-        padding: 40px 15px;
+        padding: 40px 0;
     }
     
     .contact__title {
@@ -468,7 +449,6 @@
 /* Focus and validation styles */
 .contact__form-group:focus-within .contact__label {
     color: #fff;
-    transform: scale(1.02);
 }
 
 .contact__input:invalid:not(:placeholder-shown),

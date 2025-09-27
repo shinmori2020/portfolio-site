@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>制作実績 - WEB制作サービス</title>
     <meta name="description" content="医療、美容、飲食、企業、ECサイトなど、様々な業界のWEB制作実績をご紹介。Before/Afterで効果を実感いただけます。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+    <!-- destyle.css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/destyle.css@4.0.0/destyle.min.css">
     <!-- CSS読み込み -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/portfolio.css">
@@ -13,16 +18,39 @@
 </head>
 <body>
     <!-- ヘッダー -->
-    <header class="portfolio-header">
-        <h1 class="portfolio-header__title">制作実績</h1>
-        <p class="portfolio-header__subtitle">
+    <header class="header">
+        <div class="header__container">
+            <div class="header__logo">
+                LOGO
+            </div>
+            <button class="header__hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="header__nav" id="nav">
+                <div class="header__overlay"></div>
+                <ul class="header__menu">
+                    <li class="header__menu-item"><a href="index.html#works" class="header__menu-link">Works</a></li>
+                    <li class="header__menu-item"><a href="index.html#skills" class="header__menu-link">Skills</a></li>
+                    <li class="header__menu-item"><a href="index.html#about" class="header__menu-link">About</a></li>
+                    <li class="header__menu-item"><a href="index.html#contact" class="header__menu-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ページヘッダー -->
+    <div class="page-header portfolio-header">
+        <h1 class="page-header__title">制作実績</h1>
+        <p class="page-header__subtitle">
             医療、美容、飲食、企業、ECサイトまで、幅広い業界のWEB制作を手がけています。
             実際の改善効果をBefore/Afterでご確認ください。
         </p>
-    </header>
+    </div>
 
     <!-- メインコンテンツ -->
-    <main class="container">
+    <main class="page-container">
         <!-- フィルター -->
         <section class="portfolio-filters">
             <div class="filter-buttons">
@@ -202,5 +230,7 @@
 
     <!-- JavaScript読み込み -->
     <script src="js/portfolio.js"></script>
+    <!-- 共通JS（ヘッダー、スムーズスクロール等） -->
+    <script src="js/common.js"></script>
 </body>
 </html>

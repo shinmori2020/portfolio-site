@@ -1,48 +1,17 @@
-/* リセット & 基本スタイル */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* portfolio.css - ポートフォリオページ固有のスタイル */
+/* リセットスタイルはdestyle.cssとbase.cssで定義済み */
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background: #0a0a0a;
-    color: #ffffff;
-    line-height: 1.6;
-    overflow-x: hidden;
-}
-
-/* ヘッダー */
-.portfolio-header {
-    text-align: center;
-    padding: 80px 20px 60px;
-    background: linear-gradient(135deg, rgba(0, 255, 136, 0.03) 0%, rgba(0, 255, 136, 0.01) 100%);
-}
-
-.portfolio-header__title {
-    font-size: 3rem;
-    font-weight: 600;
-    margin-bottom: 20px;
+/* ポートフォリオページ固有のヘッダースタイル */
+/* 基本スタイルはbase.cssの.page-headerを使用 */
+.portfolio-header .page-header__title {
+    /* グラデーションテキスト効果を追加 */
     background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
-.portfolio-header__subtitle {
-    font-size: 1.2rem;
-    color: #999;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-/* コンテナ */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
+/* コンテナスタイルはbase.cssの.page-containerを使用 */
 
 /* フィルターセクション */
 .portfolio-filters {
@@ -733,13 +702,13 @@ body {
 
 /* レスポンシブ */
 @media (max-width: 1200px) {
-    .container {
+    .page-container {
         padding: 0 20px;
     }
 }
 
 @media (max-width: 768px) {
-    .container {
+    .page-container {
         padding: 0 20px;
     }
 
@@ -795,7 +764,7 @@ body {
 }
 
 @media (max-width: 480px) {
-    .container {
+    .page-container {
         padding: 0 15px;
     }
 

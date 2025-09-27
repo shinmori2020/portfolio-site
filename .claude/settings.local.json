@@ -88,7 +88,12 @@
       "mcp__ide__getDiagnostics",
       "Bash(dir:*)",
       "Bash(start \"\" \"C:\\Users\\kiyos_000\\Desktop\\新しくポートフォリオにするプロフィールサイト\\html\\reservation.html\")",
-      "WebFetch(domain:cdn.jsdelivr.net)"
+      "WebFetch(domain:cdn.jsdelivr.net)",
+      "Bash(xcopy:*)",
+      "Bash(start \"\" \"C:\\Users\\kiyos_000\\Desktop\\新しくポートフォリオにするプロフィールサイト\\html\\portfolio.html\")",
+      "Bash(del \"C:\\Users\\kiyos_000\\Desktop\\新しくポートフォリオにするプロフィールサイト\\html\\css\\faq-inline.css\")",
+      "Bash(findstr:*)",
+      "Bash(cmd /c:*)"
     ],
     "deny": [],
     "ask": []
