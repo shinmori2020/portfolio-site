@@ -1,0 +1,28 @@
+/* index.html専用CSSファイルの統合 */
+
+/* 背景の四角形 */
+@import url('../components/background-squares.css');
+
+/* コンタクトリンク */
+@import url('../components/contact-link.css');
+
+/* ヒーローセクション */
+@import url('../components/hero.css');
+
+/* 革新的アプローチの分割レイアウト */
+@import url('./innovative-approach-split.css');
+
+/* サービス表示 */
+@import url('../components/services.css');
+
+/* 分割レイアウト */
+@import url('./split-layout.css');
+
+/* 証言・レビュー */
+@import url('../components/testimonials.css');
+
+/* タイムライン */
+@import url('../components/timeline-tabs.css');
+
+/* ワークフロー */
+@import url('../components/workflow.css');

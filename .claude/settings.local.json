@@ -93,7 +93,12 @@
       "Bash(start \"\" \"C:\\Users\\kiyos_000\\Desktop\\新しくポートフォリオにするプロフィールサイト\\html\\portfolio.html\")",
       "Bash(del \"C:\\Users\\kiyos_000\\Desktop\\新しくポートフォリオにするプロフィールサイト\\html\\css\\faq-inline.css\")",
       "Bash(findstr:*)",
-      "Bash(cmd /c:*)"
+      "Bash(cmd /c:*)",
+      "Bash(move docsCSS_MANAGEMENT_GUIDELINES.md docsguidelines )",
+      "Bash(move docsCSS_REFACTORING_GUIDE.md docsguidelines )",
+      "Bash(move docsCSS_REFACTORING_TODO.md docsguidelines)",
+      "Bash(tree:*)",
+      "Bash(comm:*)"
     ],
     "deny": [],
     "ask": []
