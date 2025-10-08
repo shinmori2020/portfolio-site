@@ -317,7 +317,7 @@
     background: #6c757d;
     color: #fff;
     border: 1px solid #555;
-    padding: 18px 50px;
+    padding: 18px 20px;
     font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
@@ -327,7 +327,7 @@
     margin-bottom: 30px;
 }
 
-.contact__button:hover {
+.contact__button:hover:not(:disabled) {
     background: #00ff88;
     color: #000;
     border-color: #00ff88;
@@ -453,12 +453,25 @@
 
 .contact__input:invalid:not(:placeholder-shown),
 .contact__textarea:invalid:not(:placeholder-shown) {
-    border-bottom-color: #ff4444;
+    border-bottom-color: #00cc70;
 }
 
 .contact__input:valid:not(:placeholder-shown),
 .contact__textarea:valid:not(:placeholder-shown) {
     border-bottom-color: #333;
+}
+
+/* オートフィル時の背景色を上書き */
+.contact__input:-webkit-autofill,
+.contact__input:-webkit-autofill:hover,
+.contact__input:-webkit-autofill:focus,
+.contact__textarea:-webkit-autofill,
+.contact__textarea:-webkit-autofill:hover,
+.contact__textarea:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+    -webkit-text-fill-color: #fff !important;
+    background-color: transparent !important;
+    transition: background-color 5000s ease-in-out 0s;
 }
 
 @keyframes focusGlow {

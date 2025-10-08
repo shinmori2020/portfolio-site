@@ -10,7 +10,364 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/destyle.css@4.0.0/destyle.min.css">
     <link rel="stylesheet" href="css/base/base.css">
     <link rel="stylesheet" href="css/pages/contact.css">
-    
+
+    <style>
+        /* プライバシーポリシー同意チェックボックスのスタイル */
+        .contact__privacy-consent {
+            margin: 24px 0;
+            padding: 20px;
+            background: rgba(0, 255, 136, 0.05);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            border-radius: 8px;
+        }
+
+        .contact__privacy-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .contact__privacy-checkbox {
+            appearance: none;
+            width: 0;
+            height: 0;
+            margin: 0;
+            flex-shrink: 0;
+            position: absolute;
+        }
+
+        .contact__privacy-checkmark {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .contact__privacy-checkbox:disabled + .contact__privacy-checkmark {
+            border-color: #ccc;
+            background: #f5f5f5;
+            cursor: not-allowed;
+        }
+
+        .contact__privacy-checkbox:enabled + .contact__privacy-checkmark {
+            border-color: #00ff88;
+            cursor: pointer;
+        }
+
+        .contact__privacy-checkbox:enabled + .contact__privacy-checkmark:hover {
+            border-color: #00cc66;
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .contact__privacy-checkbox:checked + .contact__privacy-checkmark {
+            background: #00ff88;
+            border-color: #00ff88;
+        }
+
+        .contact__privacy-checkbox:checked + .contact__privacy-checkmark::after {
+            content: '✓';
+            color: #000;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .contact__privacy-text {
+            color: #fff;
+        }
+
+        .contact__privacy-link {
+            color: #00ff88;
+            text-decoration: underline;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .contact__privacy-link:hover {
+            color: #00cc66;
+        }
+
+        .contact__privacy-status {
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* 送信ボタンの無効化スタイル */
+        .contact__button:disabled {
+            background: #ccc !important;
+            cursor: not-allowed !important;
+            opacity: 0.6;
+        }
+
+        /* プライバシーポリシーモーダル */
+        .privacy-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10000;
+        }
+
+        .privacy-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .privacy-modal__overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+        }
+
+        .privacy-modal__container {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .privacy-modal__header {
+            padding: 25px;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #1a1a1a;
+        }
+
+        .privacy-modal__title {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .privacy-modal__close {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #aaa;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .privacy-modal__close:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .privacy-modal__content {
+            flex: 1;
+            padding: 25px;
+            overflow-y: auto;
+            max-height: 60vh;
+            color: #ccc;
+            line-height: 1.6;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 255, 136, 0.3) #1a1a1a;
+        }
+
+        .privacy-modal__content::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        .privacy-modal__content::-webkit-scrollbar-track {
+            background: #1a1a1a;
+            border-left: 1px solid #333;
+        }
+
+        .privacy-modal__content::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 136, 0.3);
+            border: none;
+            transition: background 0.3s ease;
+        }
+
+        .privacy-modal__content::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 255, 136, 0.6);
+        }
+
+        .privacy-modal__content::-webkit-scrollbar-thumb:active {
+            background: #00ff88;
+        }
+
+        .privacy-policy h3 {
+            color: #fff;
+            margin: 24px 0 12px 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .privacy-policy h3:first-child {
+            margin-top: 0;
+        }
+
+        .privacy-policy p {
+            margin: 12px 0;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        .privacy-policy ul {
+            margin: 12px 0;
+            padding-left: 24px;
+        }
+
+        .privacy-policy li {
+            margin: 6px 0;
+            color: #ccc;
+            line-height: 1.5;
+        }
+
+        .privacy-policy__date {
+            margin-top: 32px;
+            padding-top: 16px;
+            border-top: 1px solid #333;
+            font-size: 0.9rem;
+            color: #aaa;
+            text-align: right;
+        }
+
+        .privacy-modal__footer {
+            padding: 25px;
+            border-top: 1px solid #333;
+            background: #1a1a1a;
+        }
+
+        .privacy-modal__scroll-notice {
+            position: absolute;
+            bottom: 120px;
+            left: 25px;
+            right: 25px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid #00ff88;
+            color: #00ff88;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 500;
+            opacity: 1;
+            transition: all 0.5s ease;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        .privacy-modal__scroll-notice.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .privacy-modal__scroll-notice.hidden {
+            display: none;
+        }
+
+        .privacy-modal__actions {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+        }
+
+        .privacy-modal__button {
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .privacy-modal__button--agree {
+            flex: 1;
+            padding: 18px 40px;
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            font-weight: 600;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .privacy-modal__button--agree:hover:not(:disabled) {
+            background: rgba(0, 255, 136, 0.2);
+            border-color: #00ff88;
+        }
+
+        .privacy-modal__button--agree:disabled {
+            background: rgba(0, 255, 136, 0.05);
+            color: rgba(0, 255, 136, 0.3);
+            cursor: not-allowed;
+            border-color: rgba(0, 255, 136, 0.1);
+        }
+
+        .privacy-modal__button--cancel {
+            flex: 1;
+            padding: 15px 30px;
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .privacy-modal__button--cancel:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #fff;
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .privacy-modal__container {
+                width: 95%;
+                max-height: 95vh;
+            }
+
+            .privacy-modal__header,
+            .privacy-modal__footer {
+                padding: 16px 20px;
+            }
+
+            .privacy-modal__content {
+                padding: 20px;
+            }
+
+            .privacy-modal__title {
+                font-size: 1.3rem;
+            }
+
+            .privacy-modal__actions {
+                flex-direction: column;
+            }
+
+            .privacy-modal__button {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- ヘッダー -->
@@ -167,20 +524,106 @@
                             <textarea id="contactMessage" name="message" class="contact__textarea" required placeholder="お問い合わせ内容を詳しくご記入ください。ご希望の予算や納期などがございましたら、合わせてお知らせください。"></textarea>
                         </div>
 
-                        <button type="submit" class="contact__button">
+                        <!-- プライバシーポリシー同意チェックボックス -->
+                        <div class="contact__form-group contact__privacy-consent">
+                            <label class="contact__privacy-label">
+                                <input type="checkbox" id="privacyConsent" class="contact__privacy-checkbox" disabled>
+                                <span class="contact__privacy-checkmark"></span>
+                                <span class="contact__privacy-text">
+                                    <a href="#" id="privacyPolicyLink" class="contact__privacy-link">プライバシーポリシー</a>を最後まで読み、同意します
+                                </span>
+                            </label>
+                            <div class="contact__privacy-status" id="privacyStatus">
+                                プライバシーポリシーをお読みください
+                            </div>
+                        </div>
+
+                        <button type="submit" class="contact__button" id="submitButton" disabled>
                             送信する
                         </button>
 
                         <div class="contact__privacy-note">
                             <p>
                                 ご入力いただいた個人情報は、お問い合わせへの対応以外の目的では使用いたしません。
-                                詳しくは<a href="#" onclick="return false;">プライバシーポリシー</a>をご確認ください。
                             </p>
                         </div>
                     </form>
                 </div>
             </div>
         </section>
+    </div>
+
+    <!-- プライバシーポリシーモーダル -->
+    <div class="privacy-modal" id="privacyModal">
+        <div class="privacy-modal__overlay"></div>
+        <div class="privacy-modal__container">
+            <div class="privacy-modal__header">
+                <h2 class="privacy-modal__title">プライバシーポリシー</h2>
+                <button class="privacy-modal__close" id="closePrivacyModal">&times;</button>
+            </div>
+            <div class="privacy-modal__content" id="privacyContent">
+                <div class="privacy-policy">
+                    <h3>1. 個人情報の収集について</h3>
+                    <p>当サイトでは、お客様からのお問い合わせに対応するため、以下の個人情報を収集させていただきます。</p>
+                    <ul>
+                        <li>お名前</li>
+                        <li>メールアドレス</li>
+                        <li>電話番号</li>
+                        <li>会社名・組織名</li>
+                        <li>お問い合わせ内容</li>
+                    </ul>
+
+                    <h3>2. 個人情報の利用目的</h3>
+                    <p>収集した個人情報は、以下の目的でのみ利用いたします。</p>
+                    <ul>
+                        <li>お問い合わせへの回答・対応</li>
+                        <li>サービスに関する情報提供</li>
+                        <li>お見積もりの作成・提供</li>
+                        <li>アフターサポートの提供</li>
+                    </ul>
+
+                    <h3>3. 個人情報の第三者提供</h3>
+                    <p>お客様の個人情報を、お客様の同意なく第三者に提供することはありません。ただし、以下の場合を除きます。</p>
+                    <ul>
+                        <li>法令に基づく場合</li>
+                        <li>人の生命、身体または財産の保護のために必要がある場合</li>
+                        <li>公衆衛生の向上または児童の健全な育成の推進のために特に必要がある場合</li>
+                    </ul>
+
+                    <h3>4. 個人情報の管理</h3>
+                    <p>当社では、個人情報の正確性を保ち、これを安全に管理いたします。個人情報への不正アクセス、紛失、破壊、改ざん、漏洩などを防ぐため、必要かつ適切な安全管理措置を講じます。</p>
+
+                    <h3>5. 個人情報の開示・訂正・削除</h3>
+                    <p>お客様ご本人から個人情報の開示・訂正・削除等をお求めいただいた場合には、遅滞なく対応させていただきます。</p>
+
+                    <h3>6. Cookie（クッキー）について</h3>
+                    <p>当サイトでは、サービス向上のためCookieを使用する場合があります。Cookieの使用を希望されない場合は、ブラウザの設定でCookieを無効にすることができます。</p>
+
+                    <h3>7. お問い合わせ窓口</h3>
+                    <p>個人情報の取り扱いに関するお問い合わせは、以下までご連絡ください。</p>
+                    <p>
+                        〒000-0000 東京都○○区○○<br>
+                        株式会社○○○○<br>
+                        電話：03-0000-0000<br>
+                        メール：privacy@example.com
+                    </p>
+
+                    <h3>8. プライバシーポリシーの変更</h3>
+                    <p>本プライバシーポリシーは、法令の変更等に伴い、予告なく変更する場合があります。変更後のプライバシーポリシーは、当サイトに掲載した時点で効力を生じるものとします。</p>
+
+                    <p class="privacy-policy__date">制定日：2024年1月1日<br>最終更新：2024年9月29日</p>
+                </div>
+            </div>
+            <div class="privacy-modal__footer">
+                <div class="privacy-modal__actions">
+                    <button class="privacy-modal__button privacy-modal__button--cancel" id="cancelPrivacy">キャンセル</button>
+                    <button class="privacy-modal__button privacy-modal__button--agree" id="agreePrivacy" disabled>同意する</button>
+                </div>
+            </div>
+            <div class="privacy-modal__scroll-notice" id="scrollNotice">
+                最後までお読みください
+            </div>
+        </div>
     </div>
 
     <!-- フッター -->
@@ -274,5 +717,210 @@
     <!-- JavaScript -->
     <script src="js/base/common.js"></script>
     <script src="js/components/contact-form.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM要素の取得
+            const privacyPolicyLink = document.getElementById('privacyPolicyLink');
+            const privacyModal = document.getElementById('privacyModal');
+            const closePrivacyModal = document.getElementById('closePrivacyModal');
+            const privacyContent = document.getElementById('privacyContent');
+            const scrollNotice = document.getElementById('scrollNotice');
+            const agreeButton = document.getElementById('agreePrivacy');
+            const cancelButton = document.getElementById('cancelPrivacy');
+            const privacyConsent = document.getElementById('privacyConsent');
+            const submitButton = document.getElementById('submitButton');
+            const privacyStatus = document.getElementById('privacyStatus');
+            const contactForm = document.getElementById('contactForm');
+
+            let hasScrolledToBottom = false;
+
+            // プライバシーポリシーリンクのクリック
+            privacyPolicyLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                openPrivacyModal();
+            });
+
+            // モーダルを開く
+            function openPrivacyModal() {
+                privacyModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                document.documentElement.style.overflow = 'hidden';
+                document.body.style.position = 'fixed';
+                document.body.style.width = '100%';
+
+                // スクロール状態をリセット
+                hasScrolledToBottom = false;
+                agreeButton.disabled = true;
+                scrollNotice.classList.remove('hidden');
+                scrollNotice.classList.remove('fade-out');
+                privacyContent.scrollTop = 0;
+            }
+
+            // モーダルを閉じる
+            function closeModal() {
+                privacyModal.classList.remove('active');
+                document.body.style.overflow = '';
+                document.documentElement.style.overflow = '';
+                document.body.style.position = '';
+                document.body.style.width = '';
+            }
+
+            // 閉じるボタンのクリック
+            closePrivacyModal.addEventListener('click', closeModal);
+
+            // オーバーレイクリックで閉じる
+            privacyModal.addEventListener('click', function(e) {
+                if (e.target === privacyModal) {
+                    closeModal();
+                }
+            });
+
+            // ESCキーで閉じる
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && privacyModal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+
+            // スクロール検知
+            privacyContent.addEventListener('scroll', function() {
+                const scrollTop = privacyContent.scrollTop;
+                const scrollHeight = privacyContent.scrollHeight;
+                const clientHeight = privacyContent.clientHeight;
+
+                // 最下部まで読んだかチェック（余裕を持って50px以内）
+                if (scrollTop + clientHeight >= scrollHeight - 50) {
+                    if (!hasScrolledToBottom) {
+                        hasScrolledToBottom = true;
+                        agreeButton.disabled = false;
+
+                        // 自然にフェードアウト（高さは維持）
+                        scrollNotice.classList.add('fade-out');
+
+                        // 視覚的フィードバック（アニメーションのみ）
+                        agreeButton.style.animation = 'pulse 1s ease-in-out';
+
+                        // アニメーション削除
+                        setTimeout(() => {
+                            agreeButton.style.animation = '';
+                        }, 1000);
+                    }
+                }
+            });
+
+            // 同意ボタンのクリック
+            agreeButton.addEventListener('click', function() {
+                if (hasScrolledToBottom) {
+                    // チェックボックスを有効化＆チェック
+                    privacyConsent.disabled = false;
+                    privacyConsent.checked = true;
+
+                    // ステータス更新
+                    privacyStatus.textContent = '✓ プライバシーポリシーに同意済み';
+                    privacyStatus.style.color = '#00ff88';
+
+                    // 送信ボタンを有効化
+                    checkFormValidity();
+
+                    // モーダルを閉じる
+                    closeModal();
+
+                    // 成功メッセージ
+                    showSuccessMessage('プライバシーポリシーに同意いただきありがとうございます。');
+                }
+            });
+
+            // キャンセルボタンのクリック
+            cancelButton.addEventListener('click', closeModal);
+
+            // チェックボックスの変更
+            privacyConsent.addEventListener('change', function() {
+                checkFormValidity();
+
+                if (!this.checked) {
+                    privacyStatus.textContent = 'プライバシーポリシーをお読みください';
+                    privacyStatus.style.color = '#666';
+                }
+            });
+
+            // フォームの有効性をチェック
+            function checkFormValidity() {
+                const isFormValid = contactForm.checkValidity();
+                const isPrivacyAgreed = privacyConsent.checked;
+
+                submitButton.disabled = !(isFormValid && isPrivacyAgreed);
+            }
+
+            // フォーム要素の変更を監視
+            const formInputs = contactForm.querySelectorAll('input, select, textarea');
+            formInputs.forEach(input => {
+                input.addEventListener('input', checkFormValidity);
+                input.addEventListener('change', checkFormValidity);
+            });
+
+            // フォーム送信時の追加チェック
+            contactForm.addEventListener('submit', function(e) {
+                if (!privacyConsent.checked) {
+                    e.preventDefault();
+                    showErrorMessage('プライバシーポリシーに同意してください。');
+                    return false;
+                }
+            });
+
+            // 成功メッセージ表示
+            function showSuccessMessage(message) {
+                const messageDiv = document.createElement('div');
+                messageDiv.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #00ff88;
+                    color: #000;
+                    padding: 16px 24px;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 12px rgba(0, 255, 136, 0.3);
+                    z-index: 10001;
+                    font-weight: 500;
+                    max-width: 350px;
+                    word-wrap: break-word;
+                `;
+                messageDiv.textContent = message;
+                document.body.appendChild(messageDiv);
+
+                setTimeout(() => {
+                    messageDiv.remove();
+                }, 3000);
+            }
+
+            // エラーメッセージ表示
+            function showErrorMessage(message) {
+                const messageDiv = document.createElement('div');
+                messageDiv.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #ff6b6b;
+                    color: #fff;
+                    padding: 16px 24px;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+                    z-index: 10001;
+                    font-weight: 500;
+                    max-width: 350px;
+                    word-wrap: break-word;
+                `;
+                messageDiv.textContent = message;
+                document.body.appendChild(messageDiv);
+
+                setTimeout(() => {
+                    messageDiv.remove();
+                }, 3000);
+            }
+
+            // 初期フォーム状態チェック
+            checkFormValidity();
+        });
+    </script>
 </body>
 </html>
