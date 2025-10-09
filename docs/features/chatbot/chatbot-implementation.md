@@ -175,8 +175,8 @@ const popularQuestions = [
     <title>チャットボット デモ - WEB制作サービス</title>
 
     <!-- CSS読み込み -->
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/chatbot.css">
+    <link rel="stylesheet" href="css/base/base.css">
+    <link rel="stylesheet" href="css/pages/chatbot.css">
 </head>
 <body>
     <!-- チャットボット構造 -->
@@ -206,8 +206,8 @@ const popularQuestions = [
     </div>
 
     <!-- JavaScript読み込み -->
-    <script src="js/chatbot-enhanced.js"></script>
-    <script src="js/chatbot.js"></script>
+    <script src="js/features/chatbot-enhanced.js"></script>
+    <script src="js/features/chatbot.js"></script>
 </body>
 </html>
 ```

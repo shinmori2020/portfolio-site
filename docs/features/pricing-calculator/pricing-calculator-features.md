@@ -141,7 +141,7 @@ git push origin main
 ### PDF生成の仕組み
 
 ```javascript
-// js/pdf-generator/pdf-generator-modern.js
+// js/features/pdf-generator/pdf-generator-modern.js
 
 // 日本語テキストを画像化して埋め込む
 function createModernJapaneseImage(text, fontSize, color) {

@@ -15,7 +15,7 @@ WEBサイト開発において、後からCSS整理に時間を浪費しない�
 
 2. **モジュール化の原則**
    - ページ固有のスタイルは専用CSSファイルを作成する（例：contact.css, about.css）
-   - コンポーネント単位でCSSを分離する（例：header.css, footer.css, modal.css）
+   - コンポーネント単位でCSSを分離する（例：components/header.css, base/base.css, components/modal.css）
 
 3. **インラインCSSの禁止**
    - <style>タグ内への直接記述は避ける
@@ -65,7 +65,7 @@ css/
 │   └── typography.css     # フォント関連
 ├── layout/
 │   ├── header.css         # ヘッダーレイアウト
-│   ├── footer.css         # フッターレイアウト
+│   └── base.css           # 基本レイアウト（header/footer含む）
 │   └── grid.css           # グリッドシステム
 ├── components/
 │   ├── buttons.css        # ボタンコンポーネント

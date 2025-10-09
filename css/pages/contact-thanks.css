@@ -1,0 +1,177 @@
+/* Contact Thanks Page Styles */
+
+.thanks {
+    padding: 80px 20px;
+}
+
+.thanks__container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.thanks__title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.thanks__message {
+    font-size: 1.1rem;
+    color: #ccc;
+    line-height: 1.8;
+    margin-bottom: 40px;
+}
+
+.thanks__summary {
+    background: rgba(0, 255, 136, 0.05);
+    border: 1px solid rgba(0, 255, 136, 0.2);
+    padding: 24px;
+    margin-bottom: 40px;
+    text-align: left;
+}
+
+.thanks__summary-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #00ff88;
+    margin-bottom: 16px;
+}
+
+.thanks__summary-item {
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    color: #ccc;
+    line-height: 1.6;
+}
+
+.thanks__summary-label {
+    color: #999;
+    margin-right: 8px;
+}
+
+.thanks__services {
+    margin: 80px auto 0;
+    max-width: 1200px;
+    padding: 50px;
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.05), rgba(0, 204, 112, 0.05));
+    border: 2px solid rgba(0, 255, 136, 0.2);
+    text-align: center;
+}
+
+.thanks__services-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #00ff88;
+    margin-bottom: 15px;
+}
+
+.thanks__services-text {
+    color: #ccc;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
+
+.thanks__service-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.thanks__service-link {
+    padding: 16px 32px;
+    background: rgba(0, 255, 136, 0.1);
+    color: #00ff88;
+    border: 2px solid rgba(0, 255, 136, 0.3);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.thanks__service-link:hover {
+    background: rgba(0, 255, 136, 0.2);
+    border-color: #00ff88;
+}
+
+.thanks__buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.thanks__button {
+    flex: 1;
+    padding: 16px 32px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.thanks__button--primary {
+    background: rgba(0, 255, 136, 0.1);
+    color: #00ff88;
+    border: 2px solid rgba(0, 255, 136, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.thanks__button--primary:hover {
+    background: rgba(0, 255, 136, 0.2);
+    border-color: #00ff88;
+}
+
+.thanks__button--secondary {
+    background: transparent;
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.thanks__button--secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #fff;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .thanks__container {
+        padding: 0;
+    }
+
+    .thanks__title {
+        font-size: 1.6rem;
+    }
+
+    .thanks__message {
+        font-size: 1rem;
+    }
+
+    .thanks__buttons {
+        flex-direction: column;
+    }
+
+    .thanks__services {
+        padding: 30px 20px;
+    }
+
+    .thanks__services-title {
+        font-size: 1.5rem;
+    }
+
+    .thanks__service-links {
+        flex-direction: column;
+    }
+
+    .thanks__service-link {
+        width: 100%;
+    }
+}

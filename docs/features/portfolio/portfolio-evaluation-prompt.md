@@ -18,7 +18,7 @@ WEB制作サービスのポートフォリオサイトの評価と改善提案�
 
 /js/
 ├── common.js               # 共通機能
-├── script.js               # メインスクリプト
+├── index.js                # メインスクリプト（旧script.js）
 ├── needs-diagnosis.js      # 診断ロジック
 └── chatbot-enhanced.js     # チャットボット拡張（200+パターン）
 

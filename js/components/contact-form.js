@@ -141,25 +141,38 @@ function initContactForm() {
             data[key] = value;
         });
 
+        // お問い合わせ種別のテキストを取得
+        const subjectSelect = document.getElementById('contactSubject');
+        const subjectText = subjectSelect.options[subjectSelect.selectedIndex]?.text || '';
+
+        // サイトの種類のテキストを取得
+        const siteTypeRadio = document.querySelector('input[name="siteType"]:checked');
+        const siteTypeText = siteTypeRadio ? document.querySelector(`label[for="${siteTypeRadio.id}"]`)?.textContent : '';
+
+        // 予算のテキストを取得
+        const budgetRadio = document.querySelector('input[name="budget"]:checked');
+        const budgetText = budgetRadio ? document.querySelector(`label[for="${budgetRadio.id}"]`)?.textContent : '';
+
+        // 送信内容をsessionStorageに保存
+        const submissionData = {
+            name: data.name || '',
+            email: data.email || '',
+            company: data.company || '',
+            phone: data.phone || '',
+            schedule: data.schedule || '',
+            subject: subjectText,
+            siteType: siteTypeText,
+            budget: budgetText,
+            pages: data.pages || '',
+            message: data.message || '',
+            timestamp: new Date().toISOString()
+        };
+        sessionStorage.setItem('contactFormSubmission', JSON.stringify(submissionData));
+
         // 送信シミュレーション（実際の送信処理に置き換え）
         setTimeout(() => {
-            // 成功メッセージを表示
-            successMessage.classList.add('show');
-
-            // フォームをリセット
-            contactForm.reset();
-
-            // カスタムセレクトをリセット
-            const customSelectText = document.querySelector('.contact__select-text');
-            if (customSelectText) {
-                customSelectText.textContent = 'お問い合わせ内容を選択してください';
-                customSelectText.classList.remove('selected');
-            }
-
-            // 3秒後にメッセージを非表示
-            setTimeout(() => {
-                successMessage.classList.remove('show');
-            }, 3000);
+            // サンクスページに遷移
+            window.location.href = 'contact-thanks.html';
         }, 1000);
     });
 }

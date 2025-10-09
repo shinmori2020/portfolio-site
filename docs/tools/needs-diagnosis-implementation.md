@@ -359,8 +359,8 @@ function showScreen(screenId, callback) {
     <title>ニーズ診断ツール - あなたに最適なWEB制作プランをご提案</title>
 
     <!-- CSS読み込み -->
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/needs-diagnosis.css">
+    <link rel="stylesheet" href="css/base/base.css">
+    <link rel="stylesheet" href="css/pages/needs-diagnosis.css">
 </head>
 <body>
     <!-- ヘッダー -->
@@ -436,8 +436,8 @@ function showScreen(screenId, callback) {
     </div>
 
     <!-- JavaScript読み込み -->
-    <script src="js/needs-diagnosis.js"></script>
-    <script src="js/common.js"></script>
+    <script src="js/pages/needs-diagnosis.js"></script>
+    <script src="js/base/common.js"></script>
 </body>
 </html>
 ```

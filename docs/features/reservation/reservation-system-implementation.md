@@ -506,8 +506,8 @@ function resetForm() {
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.css' rel='stylesheet' />
 
     <!-- CSS読み込み -->
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/reservation.css">
+    <link rel="stylesheet" href="css/base/base.css">
+    <link rel="stylesheet" href="css/pages/reservation.css">
 
     <!-- 外部ライブラリJS -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
@@ -568,7 +568,7 @@ function resetForm() {
     </div>
 
     <!-- JavaScript読み込み -->
-    <script src="js/reservation.js"></script>
+    <script src="js/pages/reservation.js"></script>
 </body>
 </html>
 ```

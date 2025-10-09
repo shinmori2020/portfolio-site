@@ -620,9 +620,8 @@ class FAQDataManager {
     <meta name="description" content="WEB制作サービスに関するよくある質問をまとめました。料金、納期、サポートなど、お客様の疑問にお答えします。">
 
     <!-- CSS読み込み -->
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/faq.css">
-    <link rel="stylesheet" href="css/faq-inline.css">
+    <link rel="stylesheet" href="css/base/base.css">
+    <link rel="stylesheet" href="css/pages/faq.css">
 </head>
 <body>
     <!-- ヘッダー -->
@@ -692,7 +691,7 @@ class FAQDataManager {
     </div>
 
     <!-- JavaScript読み込み -->
-    <script src="js/faq.js"></script>
+    <script src="js/pages/faq.js"></script>
 </body>
 </html>
 ```

@@ -56,7 +56,7 @@ html/
 
 ```html
 <!-- body末尾に追加 -->
-<script src="js/survey-modal.js"></script>
+<script src="js/survey/survey-modal.js"></script>
 <script>
     // 初期化
     initModalSurvey({

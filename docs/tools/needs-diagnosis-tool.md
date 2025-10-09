@@ -169,7 +169,7 @@ async function sendResultByEmail() {
 
 ### 質問の追加・変更
 
-`questions`配列を編集（js/needs-diagnosis.js 11-127行目）：
+`questions`配列を編集（js/pages/needs-diagnosis.js 11-127行目）：
 
 ```javascript
 const questions = [
@@ -190,7 +190,7 @@ const questions = [
 
 ### デザインカスタマイズ
 
-CSS変数を変更（css/needs-diagnosis.css 8-15行目）
+CSS変数を変更（css/pages/needs-diagnosis.css 8-15行目）
 
 ## 📊 パフォーマンス最適化
 

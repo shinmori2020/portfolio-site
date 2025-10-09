@@ -301,7 +301,7 @@ function showServiceTab(tabNumber) {
 
 **作成日**: 2025-09-03  
 **最終更新**: 2025-09-04  
-**対象ファイル**: `css/timeline-tabs.css`, `css/services.css`, `css/workflow.css`, `css/testimonials.css`, `index.html`, `js/script.js`  
+**対象ファイル**: `css/components/timeline-tabs.css`, `css/components/services.css`, `css/components/workflow.css`, `css/components/testimonials.css`, `index.html`, `js/pages/index.js`  
 **実装者**: Claude Code Assistant  
 **ステータス**: ✅ 完了（5セクション: reasons, service-guide, services, workflow, testimonials）  
 
