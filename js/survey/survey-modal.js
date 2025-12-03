@@ -1,5 +1,81 @@
 /* Survey B - Modal Survey JavaScript */
 
+// アンケートモーダルHTML動的生成
+function createSurveyModalHTML() {
+    const container = document.getElementById('surveyModalContainer');
+    if (!container) return;
+
+    const questions = [
+        {name: 'usability', title: 'このサイトの使いやすさはどうですか？', options: ['とても使いやすい', '使いやすい', '普通', 'やや使いにくい', '使いにくい']},
+        {name: 'design_preference', title: 'サイトの見た目は好みですか？', options: ['とても好き', 'まあまあ好き', 'どちらでもない', 'あまり好きではない', '全く好きではない']},
+        {name: 'info_findability', title: '探している情報はすぐに見つかりましたか？', options: ['すぐ見つかった（1分以内）', '少し探した（2-3分）', '普通（3-5分）', '時間がかかった（5分以上）', '見つからなかった']},
+        {name: 'text_readability', title: '文字の大きさは読みやすいですか？', options: ['ちょうど良い', 'やや読みやすい', '普通', 'やや読みにくい', '読みにくい']},
+        {name: 'page_speed', title: 'ページの表示速度は速いですか？', options: ['とても速い（1秒以内）', '速い（2-3秒）', '普通（4-5秒）', '遅い（6-10秒）', 'とても遅い（10秒以上）']},
+        {name: 'device', title: 'どのデバイスで閲覧していますか？', options: ['スマートフォン', 'タブレット', 'ノートPC', 'デスクトップPC', 'その他']},
+        {name: 'competitor_comparison', title: '競合他社と比べてこのサイトは？', options: ['かなり優れている', '優れている', '同等', 'やや劣る', 'かなり劣る']},
+        {name: 'site_impression', title: 'このサイトの印象を一言で表すと？', options: ['プロフェッショナル', '親しみやすい', 'シンプル', '情報が多い', 'わかりにくい']},
+        {name: 'contact_intention', title: 'お問い合わせしたいと思いますか？', options: ['今すぐしたい', '近いうちにしたい', '検討中', '情報収集のみ', '予定なし']},
+        {name: 'overall_rating', title: 'このサイトを5段階で評価すると？', options: ['★★★★★（とても良い）', '★★★★☆（良い）', '★★★☆☆（普通）', '★★☆☆☆（改善が必要）', '★☆☆☆☆（大幅な改善が必要）']}
+    ];
+
+    const questionsHTML = questions.map((q, index) => `
+        <div class="question ${index === 0 ? 'active' : ''}" data-question="${index + 1}">
+            <h2 class="question-title">${q.title}</h2>
+            <div class="radio-group" data-name="${q.name}">
+                ${q.options.map(opt => `
+                    <label class="radio-option">
+                        <input type="radio" name="${q.name}" value="${opt}">
+                        <span class="radio-label">${opt}</span>
+                    </label>
+                `).join('')}
+            </div>
+        </div>
+    `).join('');
+
+    container.innerHTML = `
+    <div class="modal-overlay" id="surveyModal">
+        <div class="modal-container">
+            <button class="close-modal" id="closeModal">×</button>
+            <div class="modal-survey-container" id="modalSurveyContainer">
+                <div class="survey-header">
+                    <h1 class="survey-title">WEBサイト評価アンケート</h1>
+                    <p class="survey-description">当サイトの改善のため、皆様のご意見をお聞かせください。<br>ご回答は約2-3分で完了します。</p>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-info">
+                        <span class="progress-text">進捗状況</span>
+                        <span class="progress-counter" id="progressCounter">1 / 10</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+                <div class="question-container" id="questionContainer">
+                    ${questionsHTML}
+                </div>
+                <div class="navigation">
+                    <button class="nav-btn" id="prevBtn" disabled>戻る</button>
+                    <button class="skip-survey" id="skipSurvey">今回はスキップ</button>
+                    <button class="nav-btn primary" id="nextBtn">次へ</button>
+                </div>
+                <div id="selectionMessage" style="text-align: center; margin-top: 20px; color: #00ff88; opacity: 0; transition: opacity 0.3s; font-size: 0.9rem;">
+                    ※ 選択してから次へ進んでください
+                </div>
+                <div class="completion-screen" id="completionScreen">
+                    <div class="completion-icon">✓</div>
+                    <h2 class="completion-title">アンケート完了</h2>
+                    <p class="completion-text">貴重なご意見をありがとうございました！<br>いただいたフィードバックは、サイト改善に活用させていただきます。</p>
+                </div>
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>送信中...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    `;
+}
+
 // 離脱意図検知システム
 class ExitIntentDetector {
     constructor(options = {}) {
@@ -474,11 +550,14 @@ class ModalSurveySystem {
 
 // 初期化関数
 function initModalSurvey(options = {}) {
-    // 離脱意図検知を開始
-    new ExitIntentDetector(options);
+    // アンケートモーダルHTMLを動的生成
+    createSurveyModalHTML();
 
-    // モーダル用のSurveySystem
-    new ModalSurveySystem();
+    // 少し待ってから離脱意図検知を開始（DOM生成完了を待つ）
+    setTimeout(() => {
+        new ExitIntentDetector(options);
+        new ModalSurveySystem();
+    }, 100);
 }
 
 // DOMContentLoaded時に自動初期化（オプション）
