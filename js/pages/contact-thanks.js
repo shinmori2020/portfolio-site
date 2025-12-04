@@ -9,13 +9,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const submissionDataStr = sessionStorage.getItem('contactFormSubmission');
 
     // 送信データがない場合は、お問い合わせページにリダイレクト
-    // 一時的にコメントアウト - ページ確認用
-    /*
     if (!submissionDataStr) {
         window.location.href = 'contact.html';
         return;
     }
-    */
 
     try {
         const submissionData = JSON.parse(submissionDataStr);
@@ -71,8 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } catch (error) {
         console.error('送信内容の取得に失敗しました:', error);
         // エラーの場合もお問い合わせページにリダイレクト
-        // 一時的にコメントアウト - ページ確認用
-        // window.location.href = 'contact.html';
+        window.location.href = 'contact.html';
     }
 });
 
