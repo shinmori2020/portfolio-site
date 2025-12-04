@@ -70,7 +70,7 @@ body {
 
 /* Header */
 .header {
-    background-color: #fff;
+    background-color: #2a2a2a;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     position: fixed;
     top: 0;
@@ -82,18 +82,18 @@ body {
 .header__container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 15px 0px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 70px;
+    height: 100px;
 }
 
 /* Logo */
 .header__logo {
     font-size: 24px;
     font-weight: 700; /* boldの代わりに数値で指定 */
-    color: #333;
+    color: #fff;
 }
 
 /* Desktop Navigation */
@@ -105,13 +105,13 @@ body {
 
 .header__menu-link {
     text-decoration: none;
-    color: #333;
+    color: #fff;
     font-weight: 500;
     transition: color 0.3s ease;
 }
 
 .header__menu-link:hover {
-    color: #007bff;
+    color: #00ff88;
 }
 
 /* Hamburger Button - Modern Design */
@@ -131,7 +131,7 @@ body {
     display: block;
     width: 28px;
     height: 3px;
-    background-color: #333;
+    background-color: #fff;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     border-radius: 2px;
 }
