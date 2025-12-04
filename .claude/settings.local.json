@@ -10,7 +10,10 @@
       "Bash(for file in portfolio.html lp-service.html pricing-calculator.html faq.html contact.html reservation.html contact-thanks.html)",
       "Bash(do echo \"Processing $file\")",
       "Bash(done)",
-      "Read(//c/Users/kiyos_000/Desktop/新しくポートフォリオにするプロフィールサイト/**)"
+      "Read(//c/Users/kiyos_000/Desktop/新しくポートフォリオにするプロフィールサイト/**)",
+      "Bash(findstr:*)",
+      "Bash(tree:*)",
+      "Bash(dir:*)"
     ],
     "deny": [],
     "ask": []
