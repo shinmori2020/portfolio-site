@@ -1,16 +1,7 @@
 /* portfolio.css - ポートフォリオページ固有のスタイル */
 /* リセットスタイルはdestyle.cssとbase.cssで定義済み */
 
-/* ポートフォリオページ固有のヘッダースタイル */
 /* 基本スタイルはbase.cssの.page-headerを使用 */
-.portfolio-header .page-header__title {
-    /* グラデーションテキスト効果を追加 */
-    background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
 /* コンテナスタイルはbase.cssの.page-containerを使用 */
 
 /* フィルターセクション */

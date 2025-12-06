@@ -82,7 +82,7 @@ body {
 .header__container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 15px 0px;
+    padding: 15px var(--container-padding);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -175,21 +175,47 @@ body {
         left: 0;
         width: 100vw;
         height: 100vh;
-        background: #0a0a0a;
         z-index: 999;
-        
-        /* Circular clip-path animation */
-        clip-path: circle(0% at 100% 0%);
-        transition: clip-path 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        
+
+        /* Hidden by default */
+        opacity: 0;
+        pointer-events: none;
+
         /* Center content */
         display: flex;
         align-items: center;
         justify-content: center;
     }
-    
+
     .header__nav.active {
-        clip-path: circle(150% at 100% 0%);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* Glitch Grid Container */
+    .glitch-grid {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        z-index: -1;
+    }
+
+    /* Individual Glitch Blocks */
+    .glitch-block {
+        background: #0a0a0a;
+        border: 1px solid rgba(0, 255, 136, 0.1);
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    /* Animate blocks when menu is active - reveal */
+    .header__nav.active .glitch-block {
+        animation: blockReveal 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     }
     
     /* Navigation List - Vertical Layout */
@@ -260,6 +286,22 @@ body {
     }
 }
 
+/* Block Reveal Animation - Glitch Effect (Opening) */
+@keyframes blockReveal {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1) rotate(5deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
 /* Smooth Scrolling */
 html {
     scroll-behavior: smooth;
@@ -307,7 +349,6 @@ body {
 .page-header {
     text-align: center;
     padding: 120px 20px 60px; /* header-height + spacing */
-    background: linear-gradient(135deg, rgba(0, 255, 136, 0.03) 0%, rgba(0, 255, 136, 0.01) 100%);
 }
 
 .page-header__title {

@@ -16,29 +16,8 @@ html {
 .pricing-calculator {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 var(--container-padding);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-/* pricing-calculator__header */
-.pricing-calculator__header {
-    text-align: center;
-    margin-bottom: 50px;
-    padding: 120px 20px 0;  /* ヘッダー高さ(70px) + 余白 */
-}
-
-.pricing-calculator__title {
-    font-size: 2rem;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 15px;
-}
-
-.pricing-calculator__subtitle {
-    color: #a0a0a0;
-    font-size: 1.1rem;
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.6;
 }
 
 /* pricing-calculator__content */
@@ -782,18 +761,6 @@ html {
 
 @media (max-width: 480px) {
     /* bodyスタイルはbase.cssで管理 */
-
-    .pricing-calculator__header {
-        padding: 40px 15px 0;
-    }
-
-    .pricing-calculator__title {
-        font-size: 1.5rem;
-    }
-
-    .pricing-calculator__subtitle {
-        font-size: 1rem;
-    }
 
     .pricing-calculator__option-label {
         padding: 12px 15px;

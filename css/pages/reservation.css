@@ -6,22 +6,14 @@ body.reservation-page {
 
 /* コンテナ - page-containerクラスを拡張 */
 .reservation-container {
-    padding-top: 110px; /* ヘッダーの高さ分の余白を追加 */
     padding-bottom: 40px;
 }
 
 /* ページヘッダー - base.cssのpage-headerクラスを利用 */
 .page-header--reservation {
     animation: fadeInDown 0.8s ease;
-    margin-bottom: 50px;
 }
 
-.page-header--reservation .page-header__title {
-    background: linear-gradient(135deg, #00ff88 0%, #00cc70 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
 
 /* メインコンテンツグリッド */
 .reservation-main {

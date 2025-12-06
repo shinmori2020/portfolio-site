@@ -13,6 +13,40 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let isMenuOpen = false;
 
+    // ===== GLITCH GRID GENERATION =====
+    /**
+     * Generate glitch grid blocks for menu background
+     */
+    function generateGlitchGrid() {
+        const gridContainer = document.createElement('div');
+        gridContainer.className = 'glitch-grid';
+
+        const rows = 5;
+        const cols = 5;
+        const totalBlocks = rows * cols;
+
+        for (let i = 0; i < totalBlocks; i++) {
+            const block = document.createElement('div');
+            block.className = 'glitch-block';
+            block.style.gridRow = Math.floor(i / cols) + 1;
+            block.style.gridColumn = (i % cols) + 1;
+
+            // Random delay for staggered animation
+            const delay = Math.random() * 0.3;
+            block.style.animationDelay = `${delay}s`;
+
+            gridContainer.appendChild(block);
+        }
+
+        // Insert grid before menu content
+        nav.insertBefore(gridContainer, nav.firstChild);
+    }
+
+    // Generate grid on page load
+    if (nav) {
+        generateGlitchGrid();
+    }
+
     /**
      * Toggle hamburger menu
      */
