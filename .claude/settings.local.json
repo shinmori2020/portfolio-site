@@ -13,7 +13,10 @@
       "Read(//c/Users/kiyos_000/Desktop/新しくポートフォリオにするプロフィールサイト/**)",
       "Bash(findstr:*)",
       "Bash(tree:*)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(for file in privacy.html terms.html about.html lp-service.html faq.html portfolio.html)",
+      "Bash(do echo \"=== $file ===\")",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": []

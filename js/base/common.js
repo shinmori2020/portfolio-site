@@ -31,10 +31,6 @@ document.addEventListener('DOMContentLoaded', function() {
             block.style.gridRow = Math.floor(i / cols) + 1;
             block.style.gridColumn = (i % cols) + 1;
 
-            // Random delay for staggered animation
-            const delay = Math.random() * 0.3;
-            block.style.animationDelay = `${delay}s`;
-
             gridContainer.appendChild(block);
         }
 
@@ -57,6 +53,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Prevent body scroll when menu is open
         document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+
+        // Update global state for other components (e.g., survey modal)
+        window.isHamburgerMenuOpen = isMenuOpen;
     }
 
     /**
@@ -68,6 +67,9 @@ document.addEventListener('DOMContentLoaded', function() {
             hamburger.classList.remove('active');
             nav.classList.remove('active');
             document.body.style.overflow = '';
+
+            // Update global state for other components (e.g., survey modal)
+            window.isHamburgerMenuOpen = false;
         }
     }
 

@@ -129,8 +129,6 @@
 }
 
 /* レスポンシブ対応 */
-/* 1200pxのメディアクエリは削除（page-containerで処理） */
-
 @media (max-width: 768px) {
     .faq {
         padding: 80px 30px;
@@ -179,18 +177,6 @@
 
 /* FAQページ専用のインラインスタイル */
 /* 既存のfaq.cssに追加するスタイル */
-
-/* フェードインアニメーション */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
 .faq__item {
     animation: fadeIn 0.5s ease-out;
@@ -543,8 +529,6 @@
 
 /* レスポンシブ */
 @media (max-width: 768px) {
-    /* .faq-controls のpaddingは不要（page-containerで管理） */
-
     .faq-search {
         margin-bottom: 20px;
     }

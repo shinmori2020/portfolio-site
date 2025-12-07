@@ -19,10 +19,6 @@
     z-index: 10;
 }
 
-/* Unused dropdown-open styles removed */
-
-/* Hover effects removed for contact form groups */
-
 .contact__form-group:focus-within {
     transform: translateY(-2px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
@@ -286,8 +282,6 @@
 /* Focus and validation for radio group */
 /* ラジオボタンフォーカス時のボーダー変更を無効化 */
 
-/* Responsive design for radio buttons - moved to main 768px section */
-
 .contact__button {
     background: #6c757d;
     color: #fff;
@@ -372,15 +366,11 @@
     }
 }
 
-/* 1200pxのメディアクエリはpage-containerで処理されるため削除 */
-
 @media (max-width: 768px) {
     .contact {
         padding: 60px 0;
     }
-    
-    /* .contact__container は削除済み */
-    
+
     .contact__title {
         font-size: 2rem;
     }
@@ -853,5 +843,3 @@
         width: 100%;
     }
 }
-
-/* Unused progress bar styles removed */

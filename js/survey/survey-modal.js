@@ -177,6 +177,13 @@ class ExitIntentDetector {
     showSurvey() {
         if (!this.modal) return;
 
+        // Check if hamburger menu is open - don't show survey while menu is open
+        if (window.isHamburgerMenuOpen) {
+            // Survey display will be skipped while menu is open
+            // User can still trigger survey after closing menu
+            return;
+        }
+
         this.hasShown = true;
         this.modal.classList.add('show');
         document.body.style.overflow = 'hidden';

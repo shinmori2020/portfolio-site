@@ -437,8 +437,6 @@ body.reservation-page {
 }
 
 /* アニメーション */
-/* fadeInアニメーションはbase.cssで定義済みのため削除 */
-
 @keyframes fadeInDown {
     from {
         opacity: 0;
