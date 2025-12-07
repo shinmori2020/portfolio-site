@@ -1,8 +1,6 @@
 /* ===== TERMS CONTENT ===== */
 .terms-content {
-    background: var(--background-light);
-    border: 1px solid var(--border-color);
-    padding: 60px;
+    /* Background removed to match existing pages */
 }
 
 .terms-intro {
@@ -83,10 +81,6 @@
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-    .terms-content {
-        padding: 40px 25px;
-    }
-
     .terms-intro {
         font-size: 1rem;
         margin-bottom: 40px;

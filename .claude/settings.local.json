@@ -16,7 +16,11 @@
       "Bash(dir:*)",
       "Bash(for file in privacy.html terms.html about.html lp-service.html faq.html portfolio.html)",
       "Bash(do echo \"=== $file ===\")",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(git checkout:*)",
+      "Bash(for file in portfolio.html lp-service.html faq.html contact.html reservation.html about.html terms.html privacy.html)",
+      "Bash(for file in css/components/*.css)",
+      "Bash(head:*)"
     ],
     "deny": [],
     "ask": []

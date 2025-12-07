@@ -1,28 +1,31 @@
 /* index.html専用CSSファイルの統合 */
 
-/* 背景の四角形 */
-@import url('../components/background-squares.css');
+/* 背景装飾 - 固定四角形 */
+@import url('../top-components/background-squares.css');
 
-/* コンタクトリンク */
-@import url('../components/contact-link.css');
+/* 1. ヒーローセクション - メインビジュアル（あなたの想いをカタチにするWEB制作） */
+@import url('../top-components/hero.css');
 
-/* ヒーローセクション */
-@import url('../components/hero.css');
+/* 2. スキル&専門知識セクション - フロントエンド×デザイン（タイピングアニメーション付き） */
+@import url('../top-components/innovative-approach-split.css');
 
-/* 革新的アプローチの分割レイアウト */
-@import url('./innovative-approach-split.css');
+/* 3. 選ばれる理由セクション - タイムライン形式 */
+@import url('../top-components/timeline-tabs.css');
 
-/* サービス表示 */
-@import url('../components/services.css');
+/* 4. サービスガイドセクション - タブ切り替え（制作の流れ・料金プラン・サポート） */
+@import url('../top-components/split-layout.css');
 
-/* 分割レイアウト */
-@import url('./split-layout.css');
+/* 5. サービス内容セクション - 3カラムカード（LP・WEB・WordPress） */
+@import url('../top-components/services.css');
 
-/* 証言・レビュー */
-@import url('../components/testimonials.css');
+/* 6. 制作フローセクション - 7ステップのワークフロー */
+@import url('../top-components/workflow.css');
 
-/* タイムライン */
-@import url('../components/timeline-tabs.css');
+/* 7. お客様の声セクション - カルーセル形式のレビュー */
+@import url('../top-components/testimonials.css');
 
-/* ワークフロー */
-@import url('../components/workflow.css');
+/* 8. よくある質問セクション - アコーディオン形式 */
+@import url('../top-components/faq-top.css');
+
+/* 9. お問い合わせセクション - CTA（まずはお気軽にご相談ください） */
+@import url('../top-components/contact-link.css');

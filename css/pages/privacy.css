@@ -1,8 +1,6 @@
 /* ===== PRIVACY CONTENT ===== */
 .privacy-content {
-    background: var(--background-light);
-    border: 1px solid var(--border-color);
-    padding: 60px;
+    /* Background removed to match existing pages */
 }
 
 .privacy-intro {
@@ -103,10 +101,6 @@
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-    .privacy-content {
-        padding: 40px 25px;
-    }
-
     .privacy-intro {
         font-size: 1rem;
         margin-bottom: 40px;
