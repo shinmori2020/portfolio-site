@@ -8,12 +8,6 @@
             border-bottom: none;
         }
 
-        .section-title {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
         .section-subtitle {
             font-size: 1.125rem;
             color: var(--text-gray);
