@@ -1,6 +1,6 @@
         /* ===== SECTION ===== */
         section {
-            padding: 80px 0;
+            padding: 0;
             border-bottom: 1px solid var(--border-color);
         }
 
@@ -695,7 +695,7 @@
         }
 
         .wireframe__block {
-            border: 2px dashed var(--border-color);
+            border: 2px dashed #555;
             padding: 20px;
             margin-bottom: 15px;
             text-align: center;
