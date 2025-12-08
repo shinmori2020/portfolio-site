@@ -21,7 +21,9 @@
       "Bash(for file in portfolio.html lp-service.html faq.html contact.html reservation.html about.html terms.html privacy.html)",
       "Bash(for file in css/components/*.css)",
       "Bash(head:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Read(//c/**)",
+      "Bash(for file in index.html portfolio.html lp-service.html pricing-calculator.html faq.html contact.html reservation.html about.html terms.html privacy.html)"
     ],
     "deny": [],
     "ask": []
