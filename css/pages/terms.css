@@ -1,6 +1,9 @@
 /* ===== TERMS CONTENT ===== */
 .terms-content {
-    /* Background removed to match existing pages */
+    background: #1a1a1a;
+    border: 1px solid #333;
+    padding: 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .terms-intro {
