@@ -375,6 +375,7 @@ body {
 .page-header {
     text-align: center;
     padding: 120px 20px 60px; /* header-height + spacing */
+    animation: fadeInDown 0.8s ease;
 }
 
 .page-header__title {
@@ -518,6 +519,17 @@ body {
     to { 
         opacity: 1; 
         transform: translateY(0); 
+    }
+}
+/* Fade In Down Animation */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
